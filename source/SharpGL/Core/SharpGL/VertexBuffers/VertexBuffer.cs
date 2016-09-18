@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SharpGL.VertexBuffers
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <remarks>
     /// Very useful reference for management of VBOs and VBAs:
@@ -40,7 +37,10 @@ namespace SharpGL.VertexBuffers
             gl.BindBuffer(OpenGL.GL_ARRAY_BUFFER, 0);
         }
 
-        public bool IsCreated() { return vertexBufferObject != 0; }
+        public bool IsCreated()
+        {
+            return vertexBufferObject != 0;
+        }
 
         /// <summary>
         /// Gets the vertex buffer object.

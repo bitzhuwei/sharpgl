@@ -25,7 +25,10 @@ namespace SharpGL.VertexBuffers
             gl.BindBuffer(OpenGL.GL_ELEMENT_ARRAY_BUFFER, 0);
         }
 
-        public bool IsCreated() { return bufferObject != 0; }
+        public bool IsCreated()
+        {
+            return bufferObject != 0;
+        }
 
         /// <summary>
         /// Gets the index buffer object.

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SharpGL
 {
@@ -59,9 +58,9 @@ namespace SharpGL
             gl.MakeCurrent();
 
             //  Create the font based on the face name.
-            var hFont = Win32.CreateFont(height, 0, 0, 0, Win32.FW_DONTCARE, 0, 0, 0, Win32.DEFAULT_CHARSET, 
+            var hFont = Win32.CreateFont(height, 0, 0, 0, Win32.FW_DONTCARE, 0, 0, 0, Win32.DEFAULT_CHARSET,
                 Win32.OUT_OUTLINE_PRECIS, Win32.CLIP_DEFAULT_PRECIS, Win32.CLEARTYPE_QUALITY, Win32.VARIABLE_PITCH, faceName);
-            
+
             //  Select the font handle.
             var hOldObject = Win32.SelectObject(gl.RenderContextProvider.DeviceContextHandle, hFont);
 
@@ -113,11 +112,11 @@ namespace SharpGL
 
             //  Do we have a font bitmap entry for this OpenGL instance and face name?
             var result = (from fbe in fontBitmapEntries
-                         where fbe.HDC == gl.RenderContextProvider.DeviceContextHandle
-                         && fbe.HRC == gl.RenderContextProvider.RenderContextHandle
-                         && String.Compare(fbe.FaceName, faceName, StringComparison.OrdinalIgnoreCase) == 0
-                         && fbe.Height == fontHeight
-                         select fbe).ToList();
+                          where fbe.HDC == gl.RenderContextProvider.DeviceContextHandle
+                          && fbe.HRC == gl.RenderContextProvider.RenderContextHandle
+                          && String.Compare(fbe.FaceName, faceName, StringComparison.OrdinalIgnoreCase) == 0
+                          && fbe.Height == fontHeight
+                          select fbe).ToList();
 
             //  Get the FBE or null.
             var fontBitmapEntry = result.FirstOrDefault();
@@ -128,12 +127,12 @@ namespace SharpGL
 
             double width = gl.RenderContextProvider.Width;
             double height = gl.RenderContextProvider.Height;
-            
+
             //  Create the appropriate projection matrix.
             gl.MatrixMode(OpenGL.GL_PROJECTION);
             gl.PushMatrix();
             gl.LoadIdentity();
-            
+
             int[] viewport = new int[4];
             gl.GetInteger(OpenGL.GL_VIEWPORT, viewport);
             gl.Ortho(0, width, 0, height, -1, 1);
@@ -157,12 +156,12 @@ namespace SharpGL
             gl.ListBase(fontBitmapEntry.ListBase);
 
             //  Create an array of lists for the glyphs.
-            var lists = text.Select(c => (byte) c).ToArray();
+            var lists = text.Select(c => (byte)c).ToArray();
 
             //  Call the lists for the string.
             gl.CallLists(lists.Length, lists);
             gl.Flush();
-            
+
             //  Reset the list bit.
             gl.PopAttrib();
 

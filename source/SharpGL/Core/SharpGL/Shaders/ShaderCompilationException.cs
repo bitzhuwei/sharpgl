@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SharpGL.Shaders
 {
@@ -14,16 +11,19 @@ namespace SharpGL.Shaders
         {
             this.compilerOutput = compilerOutput;
         }
+
         public ShaderCompilationException(string message, string compilerOutput)
             : base(message)
         {
             this.compilerOutput = compilerOutput;
         }
+
         public ShaderCompilationException(string message, Exception inner, string compilerOutput)
             : base(message, inner)
         {
             this.compilerOutput = compilerOutput;
         }
+
         protected ShaderCompilationException(
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context)

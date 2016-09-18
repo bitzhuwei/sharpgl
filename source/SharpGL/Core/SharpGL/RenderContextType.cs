@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SharpGL
+﻿namespace SharpGL
 {
-	/// <summary>
+    /// <summary>
     /// The render context type.
     /// </summary>
     public enum RenderContextType
@@ -18,7 +13,7 @@ namespace SharpGL
         /// <summary>
         /// A Native Window - directly render to a window, the window handle
         /// must be passed as the parameter to Create. Hardware acceleration
-        /// is supported but one can never do GDI drawing on top of the 
+        /// is supported but one can never do GDI drawing on top of the
         /// OpenGL drawing.
         /// </summary>
         NativeWindow,
@@ -28,9 +23,9 @@ namespace SharpGL
         /// </summary>
         HiddenWindow,
 
-		/// <summary>
-		///	A Framebuffer Object - accelerated but may not be supported on some cards.
-		/// </summary>
-		FBO
-	};
+        /// <summary>
+        ///	A Framebuffer Object - accelerated but may not be supported on some cards.
+        /// </summary>
+        FBO
+    };
 }

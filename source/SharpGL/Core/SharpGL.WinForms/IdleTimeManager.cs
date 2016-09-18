@@ -12,7 +12,7 @@ namespace SharpGL.WinForms
             Application.Idle += Application_Idle;
         }
 
-        static void Application_Idle(object sender, EventArgs e)
+        private static void Application_Idle(object sender, EventArgs e)
         {
             //  Single instance of the args and a single reference to the event for performance reasons.
             var args = new EventArgs();

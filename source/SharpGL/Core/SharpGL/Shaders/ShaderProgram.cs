@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SharpGL.Shaders
@@ -19,7 +18,7 @@ namespace SharpGL.Shaders
         /// <param name="attributeLocations">The attribute locations. This is an optional array of
         /// uint attribute locations to their names.</param>
         /// <exception cref="ShaderCompilationException"></exception>
-        public void Create(OpenGL gl, string vertexShaderSource, string fragmentShaderSource, 
+        public void Create(OpenGL gl, string vertexShaderSource, string fragmentShaderSource,
             Dictionary<uint, string> attributeLocations)
         {
             //  Create the shaders.
@@ -132,7 +131,7 @@ namespace SharpGL.Shaders
 
         public int GetUniformLocation(OpenGL gl, string uniformName)
         {
-            //  If we don't have the uniform name in the dictionary, get it's 
+            //  If we don't have the uniform name in the dictionary, get it's
             //  location and add it.
             if (uniformNamesToLocations.ContainsKey(uniformName) == false)
             {
@@ -158,7 +157,7 @@ namespace SharpGL.Shaders
         private uint shaderProgramObject;
 
         /// <summary>
-        /// A mapping of uniform names to locations. This allows us to very easily specify 
+        /// A mapping of uniform names to locations. This allows us to very easily specify
         /// uniform data by name, quickly looking up the location first if needed.
         /// </summary>
         private readonly Dictionary<string, int> uniformNamesToLocations = new Dictionary<string, int>();

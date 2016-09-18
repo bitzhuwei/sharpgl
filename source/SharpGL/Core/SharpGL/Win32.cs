@@ -1,14 +1,13 @@
 using System;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
 
 namespace SharpGL
 {
     /// <summary>
     /// Useful functions imported from the Win32 SDK.
     /// </summary>
-	public static class Win32
-	{
+    public static class Win32
+    {
         /// <summary>
         /// Initializes the <see cref="Win32"/> class.
         /// </summary>
@@ -17,20 +16,21 @@ namespace SharpGL
             //  Load the openGL library - without this wgl calls will fail.
             IntPtr glLibrary = Win32.LoadLibrary(OpenGL32);
         }
-        		
+
         //  The names of the libraries we're importing.
-		public const string Kernel32 = "kernel32.dll";
-		public const string OpenGL32 = "opengl32.dll";
-		public const string Glu32 = "Glu32.dll";
-		public const string Gdi32 = "gdi32.dll";
-		public const string User32 = "user32.dll";
+        public const string Kernel32 = "kernel32.dll";
+
+        public const string OpenGL32 = "opengl32.dll";
+        public const string Glu32 = "Glu32.dll";
+        public const string Gdi32 = "gdi32.dll";
+        public const string User32 = "user32.dll";
 
         #region Kernel32 Functions
 
         [DllImport(Kernel32, SetLastError = true)]
         public static extern IntPtr LoadLibrary(string lpFileName);
 
-        #endregion
+        #endregion Kernel32 Functions
 
         #region WGL Functions
 
@@ -106,129 +106,153 @@ namespace SharpGL
         /// </summary>
         /// <param name="hrc1">The first context.</param>
         /// <param name="hrc2">The second context.</param>
-        /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE. 
+        /// <returns>If the function succeeds, the return value is TRUE. If the function fails, the return value is FALSE.
         /// To get extended error information, call GetLastError.</returns>
         [DllImport(OpenGL32, SetLastError = true)]
         public static extern bool wglShareLists(IntPtr hrc1, IntPtr hrc2);
 
-        #endregion
-        
+        #endregion WGL Functions
+
         #region PixelFormatDescriptor structure and flags.
 
         [StructLayout(LayoutKind.Explicit)]
-		public class PIXELFORMATDESCRIPTOR
-		{
-			[FieldOffset(0)]
-			public UInt16 nSize;
-			[FieldOffset(2)]
-			public UInt16 nVersion;
-			[FieldOffset(4)]
-			public UInt32 dwFlags;
-			[FieldOffset(8)]
-			public Byte iPixelType;
-			[FieldOffset(9)]
-			public Byte cColorBits;
-			[FieldOffset(10)]
-			public Byte cRedBits;
-			[FieldOffset(11)]
-			public Byte cRedShift;
-			[FieldOffset(12)]
-			public Byte cGreenBits;
-			[FieldOffset(13)]
-			public Byte cGreenShift;
-			[FieldOffset(14)]
-			public Byte cBlueBits;
-			[FieldOffset(15)]
-			public Byte cBlueShift;
-			[FieldOffset(16)]
-			public Byte cAlphaBits;
-			[FieldOffset(17)]
-			public Byte cAlphaShift;
-			[FieldOffset(18)]
-			public Byte cAccumBits;
-			[FieldOffset(19)]
-			public Byte cAccumRedBits;
-			[FieldOffset(20)]
-			public Byte cAccumGreenBits;
-			[FieldOffset(21)]
-			public Byte cAccumBlueBits;
-			[FieldOffset(22)]
-			public Byte cAccumAlphaBits;
-			[FieldOffset(23)]
-			public Byte cDepthBits;
-			[FieldOffset(24)]
-			public Byte cStencilBits;
-			[FieldOffset(25)]
-			public Byte cAuxBuffers;
-			[FieldOffset(26)]
-			public SByte iLayerType;
-			[FieldOffset(27)]
-			public Byte bReserved;
-			[FieldOffset(28)]
-			public UInt32 dwLayerMask;
-			[FieldOffset(32)]
-			public UInt32 dwVisibleMask;
-			[FieldOffset(36)]
-			public UInt32 dwDamageMask;
+        public class PIXELFORMATDESCRIPTOR
+        {
+            [FieldOffset(0)]
+            public UInt16 nSize;
 
+            [FieldOffset(2)]
+            public UInt16 nVersion;
+
+            [FieldOffset(4)]
+            public UInt32 dwFlags;
+
+            [FieldOffset(8)]
+            public Byte iPixelType;
+
+            [FieldOffset(9)]
+            public Byte cColorBits;
+
+            [FieldOffset(10)]
+            public Byte cRedBits;
+
+            [FieldOffset(11)]
+            public Byte cRedShift;
+
+            [FieldOffset(12)]
+            public Byte cGreenBits;
+
+            [FieldOffset(13)]
+            public Byte cGreenShift;
+
+            [FieldOffset(14)]
+            public Byte cBlueBits;
+
+            [FieldOffset(15)]
+            public Byte cBlueShift;
+
+            [FieldOffset(16)]
+            public Byte cAlphaBits;
+
+            [FieldOffset(17)]
+            public Byte cAlphaShift;
+
+            [FieldOffset(18)]
+            public Byte cAccumBits;
+
+            [FieldOffset(19)]
+            public Byte cAccumRedBits;
+
+            [FieldOffset(20)]
+            public Byte cAccumGreenBits;
+
+            [FieldOffset(21)]
+            public Byte cAccumBlueBits;
+
+            [FieldOffset(22)]
+            public Byte cAccumAlphaBits;
+
+            [FieldOffset(23)]
+            public Byte cDepthBits;
+
+            [FieldOffset(24)]
+            public Byte cStencilBits;
+
+            [FieldOffset(25)]
+            public Byte cAuxBuffers;
+
+            [FieldOffset(26)]
+            public SByte iLayerType;
+
+            [FieldOffset(27)]
+            public Byte bReserved;
+
+            [FieldOffset(28)]
+            public UInt32 dwLayerMask;
+
+            [FieldOffset(32)]
+            public UInt32 dwVisibleMask;
+
+            [FieldOffset(36)]
+            public UInt32 dwDamageMask;
 
             public void Init()
             {
                 nSize = (ushort)Marshal.SizeOf(this);
             }
-		}
+        }
 
-		public struct PixelFormatDescriptor
-		{
-			public ushort nSize;
-			public ushort nVersion;
-			public uint   dwFlags;
-			public byte   iPixelType;
-			public byte   cColorBits;
-			public byte   cRedBits;
-			public byte   cRedShift;
-			public byte   cGreenBits;
-			public byte   cGreenShift;
-			public byte   cBlueBits;
-			public byte   cBlueShift;
-			public byte   cAlphaBits;
-			public byte   cAlphaShift;
-			public byte   cAccumBits;
-			public byte   cAccumRedBits;
-			public byte   cAccumGreenBits;
-			public byte   cAccumBlueBits;
-			public byte   cAccumAlphaBits;
-			public byte   cDepthBits;
-			public byte   cStencilBits;
-			public byte   cAuxBuffers;
-			public sbyte  iLayerType;
-			public byte   bReserved;
-			public uint   dwLayerMask;
-			public uint   dwVisibleMask;
-			public uint   dwDamageMask;
-		}
-        
-        public const byte PFD_TYPE_RGBA			= 0;
-		public const byte PFD_TYPE_COLORINDEX		= 1;
+        public struct PixelFormatDescriptor
+        {
+            public ushort nSize;
+            public ushort nVersion;
+            public uint dwFlags;
+            public byte iPixelType;
+            public byte cColorBits;
+            public byte cRedBits;
+            public byte cRedShift;
+            public byte cGreenBits;
+            public byte cGreenShift;
+            public byte cBlueBits;
+            public byte cBlueShift;
+            public byte cAlphaBits;
+            public byte cAlphaShift;
+            public byte cAccumBits;
+            public byte cAccumRedBits;
+            public byte cAccumGreenBits;
+            public byte cAccumBlueBits;
+            public byte cAccumAlphaBits;
+            public byte cDepthBits;
+            public byte cStencilBits;
+            public byte cAuxBuffers;
+            public sbyte iLayerType;
+            public byte bReserved;
+            public uint dwLayerMask;
+            public uint dwVisibleMask;
+            public uint dwDamageMask;
+        }
 
-		public const uint PFD_DOUBLEBUFFER			= 1;
-		public const uint PFD_STEREO				= 2;
-		public const uint PFD_DRAW_TO_WINDOW		= 4;
-		public const uint PFD_DRAW_TO_BITMAP		= 8;
-		public const uint PFD_SUPPORT_GDI			= 16;
-		public const uint PFD_SUPPORT_OPENGL		= 32;
-		public const uint PFD_GENERIC_FORMAT		= 64;
-		public const uint PFD_NEED_PALETTE			= 128;
-		public const uint PFD_NEED_SYSTEM_PALETTE	= 256;
-		public const uint PFD_SWAP_EXCHANGE		    = 512;
-		public const uint PFD_SWAP_COPY			    = 1024;
-		public const uint PFD_SWAP_LAYER_BUFFERS	= 2048;
-		public const uint PFD_GENERIC_ACCELERATED	= 4096;
-		public const uint PFD_SUPPORT_DIRECTDRAW	= 8192;
+        public const byte PFD_TYPE_RGBA = 0;
+        public const byte PFD_TYPE_COLORINDEX = 1;
 
-		public const sbyte PFD_MAIN_PLANE			= 0;
-		public const sbyte PFD_OVERLAY_PLANE		= 1;
-		public const sbyte PFD_UNDERLAY_PLANE		= -1;
+        public const uint PFD_DOUBLEBUFFER = 1;
+        public const uint PFD_STEREO = 2;
+        public const uint PFD_DRAW_TO_WINDOW = 4;
+        public const uint PFD_DRAW_TO_BITMAP = 8;
+        public const uint PFD_SUPPORT_GDI = 16;
+        public const uint PFD_SUPPORT_OPENGL = 32;
+        public const uint PFD_GENERIC_FORMAT = 64;
+        public const uint PFD_NEED_PALETTE = 128;
+        public const uint PFD_NEED_SYSTEM_PALETTE = 256;
+        public const uint PFD_SWAP_EXCHANGE = 512;
+        public const uint PFD_SWAP_COPY = 1024;
+        public const uint PFD_SWAP_LAYER_BUFFERS = 2048;
+        public const uint PFD_GENERIC_ACCELERATED = 4096;
+        public const uint PFD_SUPPORT_DIRECTDRAW = 8192;
+
+        public const sbyte PFD_MAIN_PLANE = 0;
+        public const sbyte PFD_OVERLAY_PLANE = 1;
+        public const sbyte PFD_UNDERLAY_PLANE = -1;
 
         public delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
@@ -257,107 +281,132 @@ namespace SharpGL
             /// Specifies that a window created with this style accepts drag-drop files.
             /// </summary>
             WS_EX_ACCEPTFILES = 0x00000010,
+
             /// <summary>
             /// Forces a top-level window onto the taskbar when the window is visible.
             /// </summary>
             WS_EX_APPWINDOW = 0x00040000,
+
             /// <summary>
             /// Specifies that a window has a border with a sunken edge.
             /// </summary>
             WS_EX_CLIENTEDGE = 0x00000200,
+
             /// <summary>
-            /// Windows XP: Paints all descendants of a window in bottom-to-top painting order using double-buffering. For more information, see Remarks. This cannot be used if the window has a class style of either CS_OWNDC or CS_CLASSDC. 
+            /// Windows XP: Paints all descendants of a window in bottom-to-top painting order using double-buffering. For more information, see Remarks. This cannot be used if the window has a class style of either CS_OWNDC or CS_CLASSDC.
             /// </summary>
             WS_EX_COMPOSITED = 0x02000000,
+
             /// <summary>
             /// Includes a question mark in the title bar of the window. When the user clicks the question mark, the cursor changes to a question mark with a pointer. If the user then clicks a child window, the child receives a WM_HELP message. The child window should pass the message to the parent window procedure, which should call the WinHelp function using the HELP_WM_HELP command. The Help application displays a pop-up window that typically contains help for the child window.
             /// WS_EX_CONTEXTHELP cannot be used with the WS_MAXIMIZEBOX or WS_MINIMIZEBOX styles.
             /// </summary>
             WS_EX_CONTEXTHELP = 0x00000400,
+
             /// <summary>
             /// The window itself contains child windows that should take part in dialog box navigation. If this style is specified, the dialog manager recurses into children of this window when performing navigation operations such as handling the TAB key, an arrow key, or a keyboard mnemonic.
             /// </summary>
             WS_EX_CONTROLPARENT = 0x00010000,
+
             /// <summary>
             /// Creates a window that has a double border; the window can, optionally, be created with a title bar by specifying the WS_CAPTION style in the dwStyle parameter.
             /// </summary>
             WS_EX_DLGMODALFRAME = 0x00000001,
+
             /// <summary>
-            /// Windows 2000/XP: Creates a layered window. Note that this cannot be used for child windows. Also, this cannot be used if the window has a class style of either CS_OWNDC or CS_CLASSDC. 
+            /// Windows 2000/XP: Creates a layered window. Note that this cannot be used for child windows. Also, this cannot be used if the window has a class style of either CS_OWNDC or CS_CLASSDC.
             /// </summary>
             WS_EX_LAYERED = 0x00080000,
+
             /// <summary>
-            /// Arabic and Hebrew versions of Windows 98/Me, Windows 2000/XP: Creates a window whose horizontal origin is on the right edge. Increasing horizontal values advance to the left. 
+            /// Arabic and Hebrew versions of Windows 98/Me, Windows 2000/XP: Creates a window whose horizontal origin is on the right edge. Increasing horizontal values advance to the left.
             /// </summary>
             WS_EX_LAYOUTRTL = 0x00400000,
+
             /// <summary>
             /// Creates a window that has generic left-aligned properties. This is the default.
             /// </summary>
             WS_EX_LEFT = 0x00000000,
+
             /// <summary>
             /// If the shell language is Hebrew, Arabic, or another language that supports reading order alignment, the vertical scroll bar (if present) is to the left of the client area. For other languages, the style is ignored.
             /// </summary>
             WS_EX_LEFTSCROLLBAR = 0x00004000,
+
             /// <summary>
             /// The window text is displayed using left-to-right reading-order properties. This is the default.
             /// </summary>
             WS_EX_LTRREADING = 0x00000000,
+
             /// <summary>
             /// Creates a multiple-document interface (MDI) child window.
             /// </summary>
             WS_EX_MDICHILD = 0x00000040,
+
             /// <summary>
-            /// Windows 2000/XP: A top-level window created with this style does not become the foreground window when the user clicks it. The system does not bring this window to the foreground when the user minimizes or closes the foreground window. 
+            /// Windows 2000/XP: A top-level window created with this style does not become the foreground window when the user clicks it. The system does not bring this window to the foreground when the user minimizes or closes the foreground window.
             /// To activate the window, use the SetActiveWindow or SetForegroundWindow function.
             /// The window does not appear on the taskbar by default. To force the window to appear on the taskbar, use the WS_EX_APPWINDOW style.
             /// </summary>
             WS_EX_NOACTIVATE = 0x08000000,
+
             /// <summary>
             /// Windows 2000/XP: A window created with this style does not pass its window layout to its child windows.
             /// </summary>
             WS_EX_NOINHERITLAYOUT = 0x00100000,
+
             /// <summary>
             /// Specifies that a child window created with this style does not send the WM_PARENTNOTIFY message to its parent window when it is created or destroyed.
             /// </summary>
             WS_EX_NOPARENTNOTIFY = 0x00000004,
+
             /// <summary>
             /// Combines the WS_EX_CLIENTEDGE and WS_EX_WINDOWEDGE styles.
             /// </summary>
             WS_EX_OVERLAPPEDWINDOW = WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE,
+
             /// <summary>
             /// Combines the WS_EX_WINDOWEDGE, WS_EX_TOOLWINDOW, and WS_EX_TOPMOST styles.
             /// </summary>
             WS_EX_PALETTEWINDOW = WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST,
+
             /// <summary>
             /// The window has generic "right-aligned" properties. This depends on the window class. This style has an effect only if the shell language is Hebrew, Arabic, or another language that supports reading-order alignment; otherwise, the style is ignored.
             /// Using the WS_EX_RIGHT style for static or edit controls has the same effect as using the SS_RIGHT or ES_RIGHT style, respectively. Using this style with button controls has the same effect as using BS_RIGHT and BS_RIGHTBUTTON styles.
             /// </summary>
             WS_EX_RIGHT = 0x00001000,
+
             /// <summary>
             /// Vertical scroll bar (if present) is to the right of the client area. This is the default.
             /// </summary>
             WS_EX_RIGHTSCROLLBAR = 0x00000000,
+
             /// <summary>
             /// If the shell language is Hebrew, Arabic, or another language that supports reading-order alignment, the window text is displayed using right-to-left reading-order properties. For other languages, the style is ignored.
             /// </summary>
             WS_EX_RTLREADING = 0x00002000,
+
             /// <summary>
             /// Creates a window with a three-dimensional border style intended to be used for items that do not accept user input.
             /// </summary>
             WS_EX_STATICEDGE = 0x00020000,
+
             /// <summary>
-            /// Creates a tool window; that is, a window intended to be used as a floating toolbar. A tool window has a title bar that is shorter than a normal title bar, and the window title is drawn using a smaller font. A tool window does not appear in the taskbar or in the dialog that appears when the user presses ALT+TAB. If a tool window has a system menu, its icon is not displayed on the title bar. However, you can display the system menu by right-clicking or by typing ALT+SPACE. 
+            /// Creates a tool window; that is, a window intended to be used as a floating toolbar. A tool window has a title bar that is shorter than a normal title bar, and the window title is drawn using a smaller font. A tool window does not appear in the taskbar or in the dialog that appears when the user presses ALT+TAB. If a tool window has a system menu, its icon is not displayed on the title bar. However, you can display the system menu by right-clicking or by typing ALT+SPACE.
             /// </summary>
             WS_EX_TOOLWINDOW = 0x00000080,
+
             /// <summary>
             /// Specifies that a window created with this style should be placed above all non-topmost windows and should stay above them, even when the window is deactivated. To add or remove this style, use the SetWindowPos function.
             /// </summary>
             WS_EX_TOPMOST = 0x00000008,
+
             /// <summary>
             /// Specifies that a window created with this style should not be painted until siblings beneath the window (that were created by the same thread) have been painted. The window appears transparent because the bits of underlying sibling windows have already been painted.
             /// To achieve transparency without these restrictions, use the SetWindowRgn function.
             /// </summary>
             WS_EX_TRANSPARENT = 0x00000020,
+
             /// <summary>
             /// Specifies that a window has a border with a raised edge.
             /// </summary>
@@ -401,10 +450,10 @@ namespace SharpGL
             /// <summary>The window has a horizontal scroll bar.</summary>
             WS_HSCROLL = 0x100000,
 
-            /// <summary>The window is initially maximized.</summary> 
+            /// <summary>The window is initially maximized.</summary>
             WS_MAXIMIZE = 0x1000000,
 
-            /// <summary>The window has a maximize button. Cannot be combined with the WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.</summary> 
+            /// <summary>The window has a maximize button. Cannot be combined with the WS_EX_CONTEXTHELP style. The WS_SYSMENU style must also be specified.</summary>
             WS_MAXIMIZEBOX = 0x10000,
 
             /// <summary>The window is initially minimized.</summary>
@@ -433,7 +482,7 @@ namespace SharpGL
 
             /// <summary>
             /// The window is a control that can receive the keyboard focus when the user presses the TAB key.
-            /// Pressing the TAB key changes the keyboard focus to the next control with the WS_TABSTOP style.  
+            /// Pressing the TAB key changes the keyboard focus to the next control with the WS_TABSTOP style.
             /// You can turn this style on and off to change dialog box navigation. To change this style after a window has been created, use the SetWindowLong function.
             /// For user-created windows and modeless dialogs to work with tab stops, alter the message loop to call the IsDialogMessage function.
             /// </summary>
@@ -446,7 +495,6 @@ namespace SharpGL
             WS_VSCROLL = 0x200000
         }
 
-        
         [Flags]
         public enum ClassStyles : uint
         {
@@ -469,8 +517,10 @@ namespace SharpGL
         {
             public uint cbSize;
             public ClassStyles style;
+
             [MarshalAs(UnmanagedType.FunctionPtr)]
             public WndProc lpfnWndProc;
+
             public int cbClsExtra;
             public int cbWndExtra;
             public IntPtr hInstance;
@@ -507,31 +557,29 @@ namespace SharpGL
                 biSize = Marshal.SizeOf(this);
             }
         }
-        
-		#endregion
-    
+
+        #endregion PixelFormatDescriptor structure and flags.
+
         #region Win32 Function Definitions.
 
+        //	Unmanaged functions from the Win32 graphics library.
+        [DllImport(Gdi32, SetLastError = true)]
+        public unsafe static extern int ChoosePixelFormat(IntPtr hDC,
+            [In, MarshalAs(UnmanagedType.LPStruct)] PIXELFORMATDESCRIPTOR ppfd);
 
-
-		//	Unmanaged functions from the Win32 graphics library.
-		[DllImport(Gdi32, SetLastError = true)] 
-		public unsafe static extern int ChoosePixelFormat(IntPtr hDC, 
-			[In, MarshalAs(UnmanagedType.LPStruct)] PIXELFORMATDESCRIPTOR ppfd);
-
-		[DllImport(Gdi32, SetLastError = true)] 
-		public unsafe static extern int SetPixelFormat(IntPtr hDC, int iPixelFormat, 
-			[In, MarshalAs(UnmanagedType.LPStruct)] PIXELFORMATDESCRIPTOR ppfd );
+        [DllImport(Gdi32, SetLastError = true)]
+        public unsafe static extern int SetPixelFormat(IntPtr hDC, int iPixelFormat,
+            [In, MarshalAs(UnmanagedType.LPStruct)] PIXELFORMATDESCRIPTOR ppfd);
 
         [DllImport(Gdi32, SetLastError = true)]
         public static extern IntPtr GetStockObject(uint fnObject);
 
-		[DllImport(Gdi32, SetLastError = true)] 
-		public static extern int SwapBuffers(IntPtr hDC);
+        [DllImport(Gdi32, SetLastError = true)]
+        public static extern int SwapBuffers(IntPtr hDC);
 
-		[DllImport(Gdi32, SetLastError = true)] 
-		public static extern bool BitBlt(IntPtr hDC, int x, int y, int width, 
-			int height, IntPtr hDCSource, int sourceX, int sourceY, uint type);
+        [DllImport(Gdi32, SetLastError = true)]
+        public static extern bool BitBlt(IntPtr hDC, int x, int y, int width,
+            int height, IntPtr hDCSource, int sourceX, int sourceY, uint type);
 
         [DllImport(Gdi32, SetLastError = true)]
         public static extern IntPtr CreateDIBSection(IntPtr hdc, [In] ref BITMAPINFO pbmi,
@@ -556,14 +604,14 @@ namespace SharpGL
            fdwStrikeOut, uint fdwCharSet, uint fdwOutputPrecision, uint
            fdwClipPrecision, uint fdwQuality, uint fdwPitchAndFamily, string lpszFace);
 
-        #endregion
+        #endregion Win32 Function Definitions.
 
         #region User32 Functions
 
         [DllImport(User32, SetLastError = true)]
         public static extern IntPtr GetDC(IntPtr hWnd);
 
-		[DllImport(User32, SetLastError = true)]
+        [DllImport(User32, SetLastError = true)]
         public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
 
         [DllImport(User32, SetLastError = true)]
@@ -578,8 +626,8 @@ namespace SharpGL
         [return: MarshalAs(UnmanagedType.U2)]
         public static extern short RegisterClassEx([In] ref WNDCLASSEX lpwcx);
 
-        #endregion
-        
+        #endregion User32 Functions
+
         [Flags]
         public enum SetWindowPosFlags : uint
         {
@@ -599,7 +647,7 @@ namespace SharpGL
             SWP_NOZORDER = 0x0004,
             SWP_SHOWWINDOW = 0x0040,
         }
-        
+
         #region Windows Messages
 
         public const int WM_ACTIVATE = 0x0006;
@@ -809,102 +857,102 @@ namespace SharpGL
         public const int WM_XBUTTONDOWN = 0x020B;
         public const int WM_XBUTTONUP = 0x020C;
 
-        #endregion
+        #endregion Windows Messages
 
-        public const uint WHITE_BRUSH     = 0;
-        public const uint LTGRAY_BRUSH    = 1;
-        public const uint GRAY_BRUSH      = 2;
-        public const uint DKGRAY_BRUSH    = 3;
-        public const uint BLACK_BRUSH     = 4;
-        public const uint NULL_BRUSH      = 5;
-        public const uint HOLLOW_BRUSH    = NULL_BRUSH;
-        public const uint WHITE_PEN       = 6;
-        public const uint BLACK_PEN       = 7;
-        public const uint NULL_PEN    = 8;
-        public const uint OEM_FIXED_FONT  = 10;
+        public const uint WHITE_BRUSH = 0;
+        public const uint LTGRAY_BRUSH = 1;
+        public const uint GRAY_BRUSH = 2;
+        public const uint DKGRAY_BRUSH = 3;
+        public const uint BLACK_BRUSH = 4;
+        public const uint NULL_BRUSH = 5;
+        public const uint HOLLOW_BRUSH = NULL_BRUSH;
+        public const uint WHITE_PEN = 6;
+        public const uint BLACK_PEN = 7;
+        public const uint NULL_PEN = 8;
+        public const uint OEM_FIXED_FONT = 10;
         public const uint ANSI_FIXED_FONT = 11;
-        public const uint ANSI_VAR_FONT   = 12;
-        public const uint SYSTEM_FONT     = 13;
+        public const uint ANSI_VAR_FONT = 12;
+        public const uint SYSTEM_FONT = 13;
         public const uint DEVICE_DEFAULT_FONT = 14;
-        public const uint DEFAULT_PALETTE     = 15;
-        public const uint SYSTEM_FIXED_FONT   = 16;
-        public const uint DEFAULT_GUI_FONT    = 17;
-        public const uint DC_BRUSH    = 18;
-        public const uint DC_PEN      = 19;
-        
-        public const uint DEFAULT_PITCH           = 0;
-		public const uint FIXED_PITCH             = 1;
-        public const uint VARIABLE_PITCH = 2;
-        
-        public const uint DEFAULT_QUALITY                = 0;
-        public const uint DRAFT_QUALITY                  = 1;
-        public const uint PROOF_QUALITY                  = 2;
-        public const uint NONANTIALIASED_QUALITY         = 3;
-        public const uint ANTIALIASED_QUALITY            = 4;
-        public const uint CLEARTYPE_QUALITY              = 5;
-        public const uint CLEARTYPE_NATURAL_QUALITY      = 6;
+        public const uint DEFAULT_PALETTE = 15;
+        public const uint SYSTEM_FIXED_FONT = 16;
+        public const uint DEFAULT_GUI_FONT = 17;
+        public const uint DC_BRUSH = 18;
+        public const uint DC_PEN = 19;
 
-        public const uint CLIP_DEFAULT_PRECIS     = 0;
-        public const uint CLIP_CHARACTER_PRECIS   = 1;
-        public const uint CLIP_STROKE_PRECIS      = 2;
+        public const uint DEFAULT_PITCH = 0;
+        public const uint FIXED_PITCH = 1;
+        public const uint VARIABLE_PITCH = 2;
+
+        public const uint DEFAULT_QUALITY = 0;
+        public const uint DRAFT_QUALITY = 1;
+        public const uint PROOF_QUALITY = 2;
+        public const uint NONANTIALIASED_QUALITY = 3;
+        public const uint ANTIALIASED_QUALITY = 4;
+        public const uint CLEARTYPE_QUALITY = 5;
+        public const uint CLEARTYPE_NATURAL_QUALITY = 6;
+
+        public const uint CLIP_DEFAULT_PRECIS = 0;
+        public const uint CLIP_CHARACTER_PRECIS = 1;
+        public const uint CLIP_STROKE_PRECIS = 2;
         public const uint CLIP_MASK = 0xf;
 
-        public const uint OUT_DEFAULT_PRECIS          = 0;
-        public const uint OUT_STRING_PRECIS           = 1;
-        public const uint OUT_CHARACTER_PRECIS        = 2;
-        public const uint OUT_STROKE_PRECIS           = 3;
-        public const uint OUT_TT_PRECIS               = 4;
-        public const uint OUT_DEVICE_PRECIS           = 5;
-        public const uint OUT_RASTER_PRECIS           = 6;
-        public const uint OUT_TT_ONLY_PRECIS          = 7;
-        public const uint OUT_OUTLINE_PRECIS          = 8;
-        public const uint OUT_SCREEN_OUTLINE_PRECIS   = 9;
+        public const uint OUT_DEFAULT_PRECIS = 0;
+        public const uint OUT_STRING_PRECIS = 1;
+        public const uint OUT_CHARACTER_PRECIS = 2;
+        public const uint OUT_STROKE_PRECIS = 3;
+        public const uint OUT_TT_PRECIS = 4;
+        public const uint OUT_DEVICE_PRECIS = 5;
+        public const uint OUT_RASTER_PRECIS = 6;
+        public const uint OUT_TT_ONLY_PRECIS = 7;
+        public const uint OUT_OUTLINE_PRECIS = 8;
+        public const uint OUT_SCREEN_OUTLINE_PRECIS = 9;
         public const uint OUT_PS_ONLY_PRECIS = 10;
-        
-        public const uint ANSI_CHARSET            = 0;
-        public const uint DEFAULT_CHARSET         = 1;
+
+        public const uint ANSI_CHARSET = 0;
+        public const uint DEFAULT_CHARSET = 1;
         public const uint SYMBOL_CHARSET = 2;
 
-        public const uint FW_DONTCARE         = 0;
-        public const uint FW_THIN             = 100;
-        public const uint FW_EXTRALIGHT       = 200;
-        public const uint FW_LIGHT            = 300;
-        public const uint FW_NORMAL           = 400;
-        public const uint FW_MEDIUM           = 500;
-        public const uint FW_SEMIBOLD         = 600;
-        public const uint FW_BOLD             = 700;
-        public const uint FW_EXTRABOLD        = 800;
-        public const uint FW_HEAVY            = 900;
-            
-        public const uint SRCCOPY		= 0x00CC0020;	// dest = source                   
-		public const uint SRCPAINT		= 0x00EE0086;	// dest = source OR dest           
-		public const uint SRCAND		= 0x008800C6;	// dest = source AND dest          
-		public const uint SRCINVERT	    = 0x00660046;	// dest = source XOR dest          
-		public const uint SRCERASE		= 0x00440328;	// dest = source AND (NOT dest )   
-		public const uint NOTSRCCOPY	= 0x00330008;	// dest = (NOT source)             
-		public const uint NOTSRCERASE	= 0x001100A6;	// dest = (NOT src) AND (NOT dest) 
-		public const uint MERGECOPY	    = 0x00C000CA;	// dest = (source AND pattern)     
-		public const uint MERGEPAINT	= 0x00BB0226;	// dest = (NOT source) OR dest     
-		public const uint PATCOPY		= 0x00F00021;	// dest = pattern                  
-		public const uint PATPAINT		= 0x00FB0A09;	// dest = DPSnoo                   
-		public const uint PATINVERT	    = 0x005A0049;	// dest = pattern XOR dest         
-		public const uint DSTINVERT	    = 0x00550009;	// dest = (NOT dest)               
-		public const uint BLACKNESS	    = 0x00000042;	// dest = BLACK                    
-		public const uint WHITENESS	    = 0x00FF0062;	// dest = WHITE     
-        
+        public const uint FW_DONTCARE = 0;
+        public const uint FW_THIN = 100;
+        public const uint FW_EXTRALIGHT = 200;
+        public const uint FW_LIGHT = 300;
+        public const uint FW_NORMAL = 400;
+        public const uint FW_MEDIUM = 500;
+        public const uint FW_SEMIBOLD = 600;
+        public const uint FW_BOLD = 700;
+        public const uint FW_EXTRABOLD = 800;
+        public const uint FW_HEAVY = 900;
+
+        public const uint SRCCOPY = 0x00CC0020;	// dest = source
+        public const uint SRCPAINT = 0x00EE0086;	// dest = source OR dest
+        public const uint SRCAND = 0x008800C6;	// dest = source AND dest
+        public const uint SRCINVERT = 0x00660046;	// dest = source XOR dest
+        public const uint SRCERASE = 0x00440328;	// dest = source AND (NOT dest )
+        public const uint NOTSRCCOPY = 0x00330008;	// dest = (NOT source)
+        public const uint NOTSRCERASE = 0x001100A6;	// dest = (NOT src) AND (NOT dest)
+        public const uint MERGECOPY = 0x00C000CA;	// dest = (source AND pattern)
+        public const uint MERGEPAINT = 0x00BB0226;	// dest = (NOT source) OR dest
+        public const uint PATCOPY = 0x00F00021;	// dest = pattern
+        public const uint PATPAINT = 0x00FB0A09;	// dest = DPSnoo
+        public const uint PATINVERT = 0x005A0049;	// dest = pattern XOR dest
+        public const uint DSTINVERT = 0x00550009;	// dest = (NOT dest)
+        public const uint BLACKNESS = 0x00000042;	// dest = BLACK
+        public const uint WHITENESS = 0x00FF0062;	// dest = WHITE
+
         public const uint DIB_RGB_COLORS = 0;
-        public const uint DIB_PAL_COLORS = 1;     
-        
-        public const uint CS_VREDRAW           = 0x0001;
-        public const uint CS_HREDRAW           = 0x0002;
-        public const uint CS_DBLCLKS           = 0x0008;
-        public const uint CS_OWNDC             = 0x0020;
-        public const uint CS_CLASSDC           = 0x0040;
-        public const uint CS_PARENTDC          = 0x0080;
-        public const uint CS_NOCLOSE           = 0x0200;
-        public const uint CS_SAVEBITS          = 0x0800;
-        public const uint CS_BYTEALIGNCLIENT   = 0x1000;
-        public const uint CS_BYTEALIGNWINDOW   = 0x2000;
-        public const uint CS_GLOBALCLASS       = 0x4000; 
-	}
+        public const uint DIB_PAL_COLORS = 1;
+
+        public const uint CS_VREDRAW = 0x0001;
+        public const uint CS_HREDRAW = 0x0002;
+        public const uint CS_DBLCLKS = 0x0008;
+        public const uint CS_OWNDC = 0x0020;
+        public const uint CS_CLASSDC = 0x0040;
+        public const uint CS_PARENTDC = 0x0080;
+        public const uint CS_NOCLOSE = 0x0200;
+        public const uint CS_SAVEBITS = 0x0800;
+        public const uint CS_BYTEALIGNCLIENT = 0x1000;
+        public const uint CS_BYTEALIGNWINDOW = 0x2000;
+        public const uint CS_GLOBALCLASS = 0x4000;
+    }
 }

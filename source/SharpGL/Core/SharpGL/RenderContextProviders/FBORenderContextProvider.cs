@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.Version;
+﻿using SharpGL.Version;
+using System;
 
 namespace SharpGL.RenderContextProviders
 {
@@ -31,7 +28,7 @@ namespace SharpGL.RenderContextProviders
         {
             this.gl = gl;
 
-            //  Call the base class. 	        
+            //  Call the base class.
             base.Create(openGLVersion, gl, width, height, bitDepth, parameter);
 
             uint[] ids = new uint[1];
@@ -41,11 +38,11 @@ namespace SharpGL.RenderContextProviders
             gl.GenFramebuffersEXT(1, ids);
             frameBufferID = ids[0];
             gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBufferID);
-                        
-		    //	Create the colour render buffer and bind it, then allocate storage for it.
-		    gl.GenRenderbuffersEXT(1, ids);
+
+            //	Create the colour render buffer and bind it, then allocate storage for it.
+            gl.GenRenderbuffersEXT(1, ids);
             colourRenderBufferID = ids[0];
-		    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER_EXT, colourRenderBufferID);
+            gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER_EXT, colourRenderBufferID);
             gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER_EXT, OpenGL.GL_RGBA, width, height);
 
             //	Create the depth render buffer and bind it, then allocate storage for it.
@@ -61,12 +58,12 @@ namespace SharpGL.RenderContextProviders
                 OpenGL.GL_RENDERBUFFER_EXT, depthRenderBufferID);
 
             dibSectionDeviceContext = Win32.CreateCompatibleDC(deviceContextHandle);
-		
+
             //  Create the DIB section.
             dibSection.Create(dibSectionDeviceContext, width, height, bitDepth);
-            
+
             return true;
-	    }
+        }
 
         private void DestroyFramebuffers()
         {
@@ -90,21 +87,21 @@ namespace SharpGL.RenderContextProviders
             //  Destroy the internal dc.
             Win32.DeleteDC(dibSectionDeviceContext);
 
-		    //	Call the base, which will delete the render context handle and window.
+            //	Call the base, which will delete the render context handle and window.
             base.Destroy();
-	    }
+        }
 
         public override void SetDimensions(int width, int height)
         {
             //  Call the base.
             base.SetDimensions(width, height);
 
-		    //	Resize dib section.
-		    dibSection.Resize(width, height, BitDepth);
+            //	Resize dib section.
+            dibSection.Resize(width, height, BitDepth);
 
             DestroyFramebuffers();
 
-            //  TODO: We should be able to just use the code below - however we 
+            //  TODO: We should be able to just use the code below - however we
             //  get invalid dimension issues at the moment, so recreate for now.
 
             /*
@@ -150,14 +147,14 @@ namespace SharpGL.RenderContextProviders
                 //  Set the read buffer.
                 gl.ReadBuffer(OpenGL.GL_COLOR_ATTACHMENT0_EXT);
 
-			    //	Read the pixels into the DIB section.
-			    gl.ReadPixels(0, 0, Width, Height, OpenGL.GL_BGRA, 
+                //	Read the pixels into the DIB section.
+                gl.ReadPixels(0, 0, Width, Height, OpenGL.GL_BGRA,
                     OpenGL.GL_UNSIGNED_BYTE, dibSection.Bits);
 
-			    //	Blit the DC (containing the DIB section) to the target DC.
-			    Win32.BitBlt(hdc, 0, 0, Width, Height,
+                //	Blit the DC (containing the DIB section) to the target DC.
+                Win32.BitBlt(hdc, 0, 0, Width, Height,
                     dibSectionDeviceContext, 0, 0, Win32.SRCCOPY);
-		    }
+            }
         }
 
         protected uint colourRenderBufferID = 0;

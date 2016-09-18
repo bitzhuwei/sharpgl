@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.Version;
+﻿using SharpGL.Version;
+using System;
 
 namespace SharpGL.RenderContextProviders
 {
@@ -20,7 +17,7 @@ namespace SharpGL.RenderContextProviders
         /// <returns></returns>
         public virtual bool Create(OpenGLVersion openGLVersion, OpenGL gl, int width, int height, int bitDepth, object parameter)
         {
-	        //  Set the width, height and bit depth.
+            //  Set the width, height and bit depth.
             Width = width;
             Height = height;
             BitDepth = bitDepth;
@@ -38,7 +35,7 @@ namespace SharpGL.RenderContextProviders
         public virtual void Destroy()
         {
             //  If we have a render context, destroy it.
-            if(renderContextHandle != IntPtr.Zero)
+            if (renderContextHandle != IntPtr.Zero)
             {
                 Win32.wglDeleteContext(renderContextHandle);
                 renderContextHandle = IntPtr.Zero;
@@ -93,13 +90,13 @@ namespace SharpGL.RenderContextProviders
                 return;
             }
 
-            //  Now the none-trivial case. We must use the WGL_ARB_create_context extension to 
+            //  Now the none-trivial case. We must use the WGL_ARB_create_context extension to
             //  attempt to create a 3.0+ context.
             try
             {
-                int[] attributes = 
+                int[] attributes =
                 {
-                    OpenGL.WGL_CONTEXT_MAJOR_VERSION_ARB, requestedVersionNumber.Major,  
+                    OpenGL.WGL_CONTEXT_MAJOR_VERSION_ARB, requestedVersionNumber.Major,
                     OpenGL.WGL_CONTEXT_MINOR_VERSION_ARB, requestedVersionNumber.Minor,
                     OpenGL.WGL_CONTEXT_FLAGS_ARB, OpenGL.WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB,
                     0
@@ -108,9 +105,9 @@ namespace SharpGL.RenderContextProviders
                 Win32.wglMakeCurrent(IntPtr.Zero, IntPtr.Zero);
                 Win32.wglDeleteContext(renderContextHandle);
                 Win32.wglMakeCurrent(deviceContextHandle, hrc);
-                renderContextHandle = hrc; 
+                renderContextHandle = hrc;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //  TODO: can we actually get the real version?
                 createdOpenGLVersion = OpenGLVersion.OpenGL2_1;
@@ -142,7 +139,7 @@ namespace SharpGL.RenderContextProviders
         public int Width
         {
             get { return width; }
-            protected set { width = value; } 
+            protected set { width = value; }
         }
 
         /// <summary>
@@ -152,7 +149,7 @@ namespace SharpGL.RenderContextProviders
         public int Height
         {
             get { return height; }
-            protected set { height = value; } 
+            protected set { height = value; }
         }
 
         /// <summary>
@@ -162,7 +159,7 @@ namespace SharpGL.RenderContextProviders
         public int BitDepth
         {
             get { return bitDepth; }
-            protected set { bitDepth = value; } 
+            protected set { bitDepth = value; }
         }
 
         /// <summary>
@@ -230,6 +227,5 @@ namespace SharpGL.RenderContextProviders
         /// The actual version of OpenGL that is supported by the render context.
         /// </summary>
         protected OpenGLVersion createdOpenGLVersion;
-
     }
 }

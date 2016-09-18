@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SharpGL
 {
@@ -126,7 +125,8 @@ namespace SharpGL
         /// </value>
         public GLYPHMETRICSFLOAT[] GlyphMetrics
         {
-            get; set;
+            get;
+            set;
         }
     }
 
@@ -155,18 +155,22 @@ namespace SharpGL
         /// Specifies the width of the smallest rectangle (the glyph's black box) that completely encloses the glyph..
         /// </summary>
         public float gmfBlackBoxX;
+
         /// <summary>
         /// Specifies the height of the smallest rectangle (the glyph's black box) that completely encloses the glyph.
         /// </summary>
         public float gmfBlackBoxY;
+
         /// <summary>
         /// Specifies the x and y coordinates of the upper-left corner of the smallest rectangle that completely encloses the glyph.
         /// </summary>
         public POINTFLOAT gmfptGlyphOrigin;
+
         /// <summary>
         /// Specifies the horizontal distance from the origin of the current character cell to the origin of the next character cell.
         /// </summary>
         public float gmfCellIncX;
+
         /// <summary>
         /// Specifies the vertical distance from the origin of the current character cell to the origin of the next character cell.
         /// </summary>
@@ -187,7 +191,6 @@ namespace SharpGL
         /// The y coord value.
         /// </summary>
         public float y;
-
     }
 
     /// <summary>
@@ -203,12 +206,12 @@ namespace SharpGL
             gl.MakeCurrent();
 
             //  Create the font based on the face name.
-            var hFont = Win32.CreateFont(height, 0, 0, 0, Win32.FW_DONTCARE, 0, 0, 0, Win32.DEFAULT_CHARSET, 
+            var hFont = Win32.CreateFont(height, 0, 0, 0, Win32.FW_DONTCARE, 0, 0, 0, Win32.DEFAULT_CHARSET,
                 Win32.OUT_OUTLINE_PRECIS, Win32.CLIP_DEFAULT_PRECIS, Win32.CLEARTYPE_QUALITY, Win32.VARIABLE_PITCH, faceName);
-            
+
             //  Select the font handle.
             var hOldObject = Win32.SelectObject(gl.RenderContextProvider.DeviceContextHandle, hFont);
-            
+
             //  Create the list base.
             var listBase = gl.GenLists(1);
 
@@ -255,7 +258,7 @@ namespace SharpGL
         /// <param name="deviation">The deviation.</param>
         /// <param name="extrusion">The extrusion.</param>
         /// <param name="text">The text.</param>
-        public void DrawText(OpenGL gl, string faceName, float fontSize, 
+        public void DrawText(OpenGL gl, string faceName, float fontSize,
                              float deviation, float extrusion, string text)
         {
             //  Pass to the glyph metrics version of the function.
@@ -281,13 +284,13 @@ namespace SharpGL
 
             //  Do we have a font bitmap entry for this OpenGL instance and face name?
             var result = (from fbe in fontOutlineEntries
-                         where fbe.HDC == gl.RenderContextProvider.DeviceContextHandle
-                         && fbe.HRC == gl.RenderContextProvider.RenderContextHandle
-                         && String.Compare(fbe.FaceName, faceName, StringComparison.OrdinalIgnoreCase) == 0
-                         && fbe.Height == fontHeight
-                         && fbe.Deviation == deviation
-                         && fbe.Extrusion == extrusion
-                         select fbe).ToList();
+                          where fbe.HDC == gl.RenderContextProvider.DeviceContextHandle
+                          && fbe.HRC == gl.RenderContextProvider.RenderContextHandle
+                          && String.Compare(fbe.FaceName, faceName, StringComparison.OrdinalIgnoreCase) == 0
+                          && fbe.Height == fontHeight
+                          && fbe.Deviation == deviation
+                          && fbe.Extrusion == extrusion
+                          select fbe).ToList();
 
             //  Get the FBE or null.
             var fontOutlineEntry = result.FirstOrDefault();
@@ -300,7 +303,7 @@ namespace SharpGL
             gl.ListBase(fontOutlineEntry.ListBase);
 
             //  Create an array of lists for the glyphs.
-            var lists = text.Select(c => (byte) c).ToArray();
+            var lists = text.Select(c => (byte)c).ToArray();
 
             //  Call the lists for the string.
             gl.CallLists(lists.Length, lists);

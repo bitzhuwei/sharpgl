@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SharpGL.Shaders
@@ -71,6 +69,4 @@ namespace SharpGL.Shaders
             get { return shaderObject; }
         }
     }
-
-    
 }
