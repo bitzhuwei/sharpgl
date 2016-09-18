@@ -1,5 +1,9 @@
-﻿using System;
+﻿using SharpGL.SceneGraph;
+using SharpGL.SceneGraph.Cameras;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,11 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SharpGL.SceneGraph;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Threading;
-using SharpGL.SceneGraph.Cameras;
 
 namespace SharpGL.WPF
 {
@@ -40,7 +40,7 @@ namespace SharpGL.WPF
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.SizeChangedEventArgs"/> instance containing the event data.</param>
-        void SceneView_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void SceneView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             //  If we don't have a scene, we're done.
             if (Scene == null)
@@ -60,7 +60,7 @@ namespace SharpGL.WPF
         }
 
         /// <summary>
-        /// When overridden in a derived class, is invoked whenever application code or 
+        /// When overridden in a derived class, is invoked whenever application code or
         /// internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.
         /// </summary>
         public override void OnApplyTemplate()
@@ -77,7 +77,7 @@ namespace SharpGL.WPF
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             //  If we don't have a scene, we're done.
             if (Scene == null)
@@ -91,7 +91,7 @@ namespace SharpGL.WPF
 
                 //  Draw the scene.
                 Scene.Draw(Camera);
-                
+
                 //  Draw the FPS.
                 if (DrawFPS)
                 {
@@ -103,7 +103,7 @@ namespace SharpGL.WPF
                 {
                     RenderContextProviders.DIBSectionRenderContextProvider provider = Scene.OpenGL.RenderContextProvider as RenderContextProviders.DIBSectionRenderContextProvider;
 
-                    //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0 
+                    //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0
                     //  meaning the drawing comes out transparent.
                     FormatConvertedBitmap newFormatedBitmapSource = new FormatConvertedBitmap();
                     newFormatedBitmapSource.BeginInit();
@@ -118,7 +118,7 @@ namespace SharpGL.WPF
                 {
                     RenderContextProviders.FBORenderContextProvider provider = Scene.OpenGL.RenderContextProvider as RenderContextProviders.FBORenderContextProvider;
 
-                    //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0 
+                    //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0
                     //  meaning the drawing comes out transparent.
                     FormatConvertedBitmap newFormatedBitmapSource = new FormatConvertedBitmap();
                     newFormatedBitmapSource.BeginInit();
@@ -157,7 +157,7 @@ namespace SharpGL.WPF
             //  Start the timer.
             me.timer.Start();
         }
-        
+
         /// <summary>
         /// The dispatcher timer.
         /// </summary>
@@ -172,7 +172,7 @@ namespace SharpGL.WPF
         /// The last frame time in milliseconds.
         /// </summary>
         private double frameTime = 0;
-        
+
         /// <summary>
         /// The frame rate dependency property.
         /// </summary>
@@ -189,7 +189,7 @@ namespace SharpGL.WPF
             get { return (double)GetValue(FrameRateProperty); }
             set { SetValue(FrameRateProperty, value); }
         }
-        
+
         /// <summary>
         /// The DrawFPS property.
         /// </summary>
@@ -208,7 +208,6 @@ namespace SharpGL.WPF
             get { return (bool)GetValue(DrawFPSProperty); }
             set { SetValue(DrawFPSProperty, value); }
         }
-
 
         /// <summary>
         /// The Scene Dependency Property.
@@ -240,7 +239,6 @@ namespace SharpGL.WPF
             SceneView me = o as SceneView;
         }
 
-
         /// <summary>
         /// The camera dependency property.
         /// </summary>
@@ -269,7 +267,5 @@ namespace SharpGL.WPF
         {
             SceneView me = o as SceneView;
         }
-                
-                
     }
 }

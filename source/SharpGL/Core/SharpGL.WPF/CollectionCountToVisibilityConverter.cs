@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Data;
 using System.Collections;
-using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Data;
 
 namespace SharpGL.WPF
 {
@@ -28,7 +24,7 @@ namespace SharpGL.WPF
         {
             //  Get the collection.
             ICollection collection = value as ICollection;
-            
+
             //  Check the value.
             if (collection == null)
                 throw new Exception("CollectionCountToVisibiltyConverter is only compatible with objects that implement ICollection.");

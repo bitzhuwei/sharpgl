@@ -1,33 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Media.Imaging;
-using System.Windows;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace SharpGL.WPF
 {
-  /// <summary>
-  /// This class handles conversion to and from various bitmap types.
-  /// </summary>
+    /// <summary>
+    /// This class handles conversion to and from various bitmap types.
+    /// </summary>
     public static class BitmapConversion
     {
-      /// <summary>
-      /// Converts an HBitmap the bitmap to a bitmap source.
-      /// </summary>
-      /// <param name="hBitmap">The hbitmap.</param>
-      /// <returns>A BitmapSource.</returns>
+        /// <summary>
+        /// Converts an HBitmap the bitmap to a bitmap source.
+        /// </summary>
+        /// <param name="hBitmap">The hbitmap.</param>
+        /// <returns>A BitmapSource.</returns>
         public static BitmapSource HBitmapToBitmapSource(IntPtr hBitmap)
         {
             BitmapSource bitSrc = null;
-            
+
             try
             {
                 if (hBitmap != IntPtr.Zero)
                 {
-
                     bitSrc = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(
                         hBitmap,
                         IntPtr.Zero,

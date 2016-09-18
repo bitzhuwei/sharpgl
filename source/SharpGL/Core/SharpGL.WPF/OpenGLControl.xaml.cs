@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SharpGL.RenderContextProviders;
+using SharpGL.SceneGraph;
+using SharpGL.Version;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows;
@@ -6,9 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using SharpGL.RenderContextProviders;
-using SharpGL.SceneGraph;
-using SharpGL.Version;
 
 namespace SharpGL.WPF
 {
@@ -64,7 +64,7 @@ namespace SharpGL.WPF
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.SizeChangedEventArgs"/> Instance containing the event data.</param>
-        void OpenGLControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void OpenGLControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             UpdateOpenGLControl((int)e.NewSize.Width, (int)e.NewSize.Height);
         }
@@ -108,7 +108,7 @@ namespace SharpGL.WPF
         }
 
         /// <summary>
-        /// When overridden in a derived class, is invoked whenever application code or 
+        /// When overridden in a derived class, is invoked whenever application code or
         /// internal processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.
         /// </summary>
         public override void OnApplyTemplate()
@@ -147,7 +147,7 @@ namespace SharpGL.WPF
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             //  Lock on OpenGL.
             lock (gl)
@@ -191,10 +191,13 @@ namespace SharpGL.WPF
                             }
                         }
                         break;
+
                     case RenderContextType.NativeWindow:
                         break;
+
                     case RenderContextType.HiddenWindow:
                         break;
+
                     case RenderContextType.FBO:
                         {
                             var provider = gl.RenderContextProvider as FBORenderContextProvider;
@@ -209,6 +212,7 @@ namespace SharpGL.WPF
                             }
                         }
                         break;
+
                     default:
                         break;
                 }
@@ -222,14 +226,14 @@ namespace SharpGL.WPF
         }
 
         /// <summary>
-        /// This method converts the output from the OpenGL render context provider to a 
+        /// This method converts the output from the OpenGL render context provider to a
         /// FormatConvertedBitmap in order to show it in the image.
         /// </summary>
         /// <param name="hBitmap">The handle of the bitmap from the OpenGL render context.</param>
         /// <returns>Returns the new format converted bitmap.</returns>
         private static FormatConvertedBitmap GetFormatedBitmapSource(IntPtr hBitmap)
         {
-            //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0 
+            //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0
             //  meaning the drawing comes out transparent.
 
             FormatConvertedBitmap newFormatedBitmapSource = new FormatConvertedBitmap();
@@ -278,7 +282,7 @@ namespace SharpGL.WPF
         /// <summary>
         /// The dispatcher timer.
         /// </summary>
-        DispatcherTimer timer = null;
+        private DispatcherTimer timer = null;
 
         /// <summary>
         /// A stopwatch used for timing rendering.
