@@ -39,7 +39,7 @@ namespace SharpGL.WPF
         {
             SizeChanged += OpenGLControl_SizeChanged;
 
-            UpdateOpenGLControl((int) RenderSize.Width, (int) RenderSize.Height);
+            UpdateOpenGLControl((int)RenderSize.Width, (int)RenderSize.Height);
 
             //  DispatcherTimer setup
             timer.Tick += new EventHandler(timer_Tick);
@@ -66,7 +66,7 @@ namespace SharpGL.WPF
         /// <param name="e">The <see cref="System.Windows.SizeChangedEventArgs"/> Instance containing the event data.</param>
         void OpenGLControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            UpdateOpenGLControl((int) e.NewSize.Width, (int) e.NewSize.Height);
+            UpdateOpenGLControl((int)e.NewSize.Width, (int)e.NewSize.Height);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace SharpGL.WPF
         /// <param name="height">The height of the OpenGL drawing area.</param>
         private void UpdateOpenGLControl(int width, int height)
         {
-            SizeChangedEventArgs e;
+            //SizeChangedEventArgs e;
             // Lock on OpenGL.
             lock (gl)
             {
@@ -98,7 +98,7 @@ namespace SharpGL.WPF
                         gl.LoadIdentity();
 
                         // Calculate The Aspect Ratio Of The Window
-                        gl.Perspective(45.0f, (float) width/(float) height, 0.1f, 100.0f);
+                        gl.Perspective(45.0f, (float)width / (float)height, 0.1f, 100.0f);
 
                         gl.MatrixMode(OpenGL.GL_MODELVIEW);
                         gl.LoadIdentity();
@@ -168,7 +168,7 @@ namespace SharpGL.WPF
                 //  Draw the FPS.
                 if (DrawFPS)
                 {
-                    gl.DrawText(5, 5, 1.0f, 0.0f, 0.0f, "Courier New", 12.0f,  string.Format("Draw Time: {0:0.0000} ms ~ {1:0.0} FPS", frameTime, 1000.0 / frameTime));
+                    gl.DrawText(5, 5, 1.0f, 0.0f, 0.0f, "Courier New", 12.0f, string.Format("Draw Time: {0:0.0000} ms ~ {1:0.0} FPS", frameTime, 1000.0 / frameTime));
                     gl.Flush();
                 }
 
@@ -217,7 +217,7 @@ namespace SharpGL.WPF
                 stopwatch.Stop();
 
                 //  Store the frame time.
-                frameTime = stopwatch.Elapsed.TotalMilliseconds;      
+                frameTime = stopwatch.Elapsed.TotalMilliseconds;
             }
         }
 
@@ -274,7 +274,7 @@ namespace SharpGL.WPF
         /// The OpenGL instance.
         /// </summary>
         private OpenGL gl = new OpenGL();
-        
+
         /// <summary>
         /// The dispatcher timer.
         /// </summary>
@@ -307,7 +307,7 @@ namespace SharpGL.WPF
         /// </summary>
         [Description("Called when the control is resized - you can use this to do custom viewport projections."), Category("SharpGL")]
         public event OpenGLEventHandler Resized;
-        
+
         /// <summary>
         /// The frame rate dependency property.
         /// </summary>
