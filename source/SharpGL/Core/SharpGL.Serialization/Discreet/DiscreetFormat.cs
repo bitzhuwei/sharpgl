@@ -1,20 +1,16 @@
-using System;
-using System.IO;
-using System.Collections.Generic;
-
 using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Collections;
+using System;
 using System.ComponentModel.Composition;
+using System.IO;
 
 namespace SharpGL.Serialization.Discreet
 {
     [Export(typeof(IFileFormat))]
-	public class Discreet3dsFormat : IFileFormat
-	{
+    public class Discreet3dsFormat : IFileFormat
+    {
         /*
 		protected override object LoadData(Stream stream)
 		{
-			
 		}
 
 		protected override bool SaveData(object data, Stream stream)
@@ -25,18 +21,17 @@ namespace SharpGL.Serialization.Discreet
 
 		public override string[] FileTypes
 		{
-			
 		}
 
 		public override string Filter
 		{
-			
 		}
 
 		public override Type[] DataTypes
 		{
 			get {return new Type[] {typeof(Scene)};}
 		}*/
+
         public Scene LoadData(string path)
         {
             //  Create a null scene.
@@ -58,7 +53,7 @@ namespace SharpGL.Serialization.Discreet
                     MainChunk main = new MainChunk();
                     main.Read(scene, reader);
                 }
-            }            
+            }
 
             //  Return the scene.
             return scene;

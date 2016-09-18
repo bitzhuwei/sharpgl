@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph;
-using System.IO;
-using System.ComponentModel.Composition;
-using SharpGL.SceneGraph.Primitives;
-using SharpGL.SceneGraph.Core;
+﻿using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Assets;
+using SharpGL.SceneGraph.Primitives;
+using System;
+using System.ComponentModel.Composition;
+using System.IO;
+using System.Linq;
 
 namespace SharpGL.Serialization.Wavefront
 {
     [Export(typeof(IFileFormat))]
     public class ObjFileFormat : IFileFormat
     {
-
         private System.Drawing.Color ReadMaterialColor(string line, float alpha)
         {
             string[] lineParts = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -58,7 +53,6 @@ namespace SharpGL.Serialization.Wavefront
 
         private void LoadMaterials(string path, Scene scene)
         {
-
             //  Create a stream reader.
             using (StreamReader reader = new StreamReader(path))
             {
@@ -104,7 +98,7 @@ namespace SharpGL.Serialization.Wavefront
                             line.StartsWith("map_Kd") ||
                             line.StartsWith("map_Ks"))
                         {
-                            // Get texture map.                    		
+                            // Get texture map.
                             string textureFile = ReadMaterialValue(line);
 
                             // Check for existing textures.  Create if does not exist.
@@ -122,7 +116,7 @@ namespace SharpGL.Serialization.Wavefront
                                     textureFile = Path.Combine(Path.GetDirectoryName(path),
                                         Path.GetFileName(textureFile));
                                 }
-                                
+
                                 // Create/load texture.
                                 theTexture = new Texture();
                                 theTexture.Create(scene.OpenGL, textureFile);
@@ -136,10 +130,9 @@ namespace SharpGL.Serialization.Wavefront
                             alpha = Convert.ToSingle(ReadMaterialValue(line));
                             SetAlphaForMaterial(mtl, alpha);
                         }
-                        // TODO: Handle illumination mode (illum)                    	                    
+                        // TODO: Handle illumination mode (illum)
                     }
                 }
-
             }
         }
 
@@ -239,8 +232,6 @@ namespace SharpGL.Serialization.Wavefront
                                 (parts.Length > 2 && parts[2].Length > 0) ? int.Parse(parts[2]) - 1 : -1));
                         }
 
-
-
                         //  Add the face.
                         polygon.Faces.Add(face);
 
@@ -267,7 +258,6 @@ namespace SharpGL.Serialization.Wavefront
             return scene;
         }
 
-
         public bool SaveData(Scene scene, string path)
         {
             throw new NotImplementedException("The SaveData method has not been implemented for .obj files.");
@@ -281,9 +271,9 @@ namespace SharpGL.Serialization.Wavefront
         //        		if (element.Name != currentObjectName)
         //	        	{
         //        			currentObjectName = element.Name;
-        //        			writer.WriteLine("g {0}", currentObjectName);        			
+        //        			writer.WriteLine("g {0}", currentObjectName);
         //	        	}
-        //        	
+        //
         //        	// If material name different than for last element processed, write a usemtl statement.
         //        	if (element is IHasMaterial)
         //        	{
@@ -296,7 +286,7 @@ namespace SharpGL.Serialization.Wavefront
         //        				writer.WriteLine("usemtl {0}", currentMaterialName);
         //        			}
         //        	}
-        //        	
+        //
         //        	// Write out this element.
         //        	if (element is Polygon)
         //        	{
@@ -311,7 +301,7 @@ namespace SharpGL.Serialization.Wavefront
         //		        				currentMaterialName = face.Material.Name;
         //		        				writer.WriteLine("usemtl {0}", currentMaterialName);
         //		        			}
-        //        			
+        //
         //		        	// Write out the vertices.
         //		        	foreach (Index i in face.Indices)
         //		        	{
@@ -321,8 +311,8 @@ namespace SharpGL.Serialization.Wavefront
         //        		}
         //        	}
         //			// TODO: Handle shapes other than polygons.
-        //        	
-        //        	
+        //
+        //
         //        	// Write out any child elements.
         //        	foreach (SceneElement child in element.Children)
         //        		WriteSceneElement(writer, child, ref currentObjectName, ref currentMaterialName);
@@ -343,25 +333,25 @@ namespace SharpGL.Serialization.Wavefront
         //        		WriteSceneElement(writer, element, ref objName, ref mtlName);
         //	        	writer.Flush();
         //	        	writer.Close();
-        //        	}        	
-        //        	return true;        	
+        //        	}
+        //        	return true;
         //        }
         //
-        //        
+        //
         //        private void WriteMaterialColor(StreamWriter writer, string name, System.Drawing.Color color)
         //        {
         //        	float r = Convert.ToSingle(color.R) / 255F;
         //        	float g = Convert.ToSingle(color.G) / 255F;
         //        	float b = Convert.ToSingle(color.B) / 255F;
-        //        	writer.WriteLine("{0} {1} {2} {3}", name, r, g, b);        	
+        //        	writer.WriteLine("{0} {1} {2} {3}", name, r, g, b);
         //        }
         //
-        //                
+        //
         //        private void WriteMaterialValue(StreamWriter writer, string name, string value)
         //        {
-        //        	writer.WriteLine("{0} {1}", name, value);        	
+        //        	writer.WriteLine("{0} {1}", name, value);
         //        }
-        //        
+        //
         //        private void SaveMaterials(string path, Scene scene)
         //        {
         //        	using (StreamWriter writer = new StreamWriter(path))
@@ -369,16 +359,16 @@ namespace SharpGL.Serialization.Wavefront
         //	        	foreach (Material mtl in scene.Assets)
         //	        	{
         //	        		if (mtl == null) continue;
-        //	        		
+        //
         //	        		writer.WriteLine("newmtl {0}", mtl.Name);
         //	        		WriteMaterialColor(writer, "Ka", mtl.Ambient);
         //	        		WriteMaterialColor(writer, "Kd", mtl.Diffuse);
         //	        		WriteMaterialColor(writer, "Ks", mtl.Specular);
-        //					// TODO: Shininess	        		
+        //					// TODO: Shininess
         //	        		WriteMaterialValue(writer, "Tr", (Convert.ToSingle(mtl.Diffuse.A) / 255).ToString());
         //	        		// TODO: Illumination model
         //	        		// TODO: Textures
-        //	        		
+        //
         //	        		writer.WriteLine();
         //	        	}
         //	        	writer.Flush();

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using SharpGL.SceneGraph;
+﻿using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
-using SharpGL.SceneGraph.Core;
+using System.IO;
 
 namespace SharpGL.Serialization.Caligari
 {
@@ -41,7 +36,7 @@ namespace SharpGL.Serialization.Caligari
             //	Read number of verticies.
             int verticesCount = reader.ReadInt32();
 
-            //	Get them all 
+            //	Get them all
             for (int i = 0; i < verticesCount; i++)
             {
                 //	Read a vertex.

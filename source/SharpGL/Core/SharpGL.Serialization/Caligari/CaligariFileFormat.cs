@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel.Composition;
-using SharpGL.SceneGraph;
-using System.IO;
+﻿using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
+using System;
+using System.ComponentModel.Composition;
+using System.IO;
 
 namespace SharpGL.Serialization.Caligari
 {
@@ -27,7 +24,6 @@ namespace SharpGL.Serialization.Caligari
             //	Return the type.
             return header.chunkType;
         }
-
 
         public Scene LoadData(string path)
         {
@@ -78,11 +74,10 @@ namespace SharpGL.Serialization.Caligari
                             CaligariChunk chunk = new CaligariChunk();
                             chunk.Read(reader);
                         }
-
                     }
                 }
             }
-            
+
             //  Return the scene.
             return scene;
         }

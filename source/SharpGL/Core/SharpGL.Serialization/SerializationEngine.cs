@@ -1,12 +1,10 @@
-using System;
-using System.IO;
-using System.Linq;
-
 using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Collections;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace SharpGL.Serialization
 {

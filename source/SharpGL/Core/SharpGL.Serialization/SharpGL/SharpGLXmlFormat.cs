@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SharpGL.SceneGraph;
+using System;
+using System.ComponentModel.Composition;
 using System.IO;
 using System.Xml.Serialization;
-using SharpGL.SceneGraph;
-using System.ComponentModel.Composition;
 
 namespace SharpGL.Serialization.SharpGL
 {
@@ -68,10 +65,10 @@ namespace SharpGL.Serialization.SharpGL
             {
                 throw new Exception("Failed to load Scene from XML data.", e);
             }
-               
+
             return true;
         }
-        
+
         /// <summary>
         /// This property returns an array of file types that can be used with this
         /// format, e.g the CaligariFormat would return "cob", "scn".

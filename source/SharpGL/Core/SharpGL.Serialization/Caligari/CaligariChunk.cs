@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SharpGL.SceneGraph.Core;
 using System.IO;
-using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Core;
 
 namespace SharpGL.Serialization.Caligari
 {
@@ -32,7 +27,6 @@ namespace SharpGL.Serialization.Caligari
         /// <param name="sceneObject">The object to write.</param>
         public virtual void Write(BinaryWriter writer, SceneElement sceneObject)
         {
-
         }
 
         /// <summary>
@@ -53,7 +47,6 @@ namespace SharpGL.Serialization.Caligari
         /// <param name="sceneObject">The scene object.</param>
         protected virtual void WriteData(BinaryWriter writer, SceneElement sceneObject)
         {
-
         }
 
         public CaligariChunkHeader header = new CaligariChunkHeader();

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph;
-using System.IO;
-using SharpGL.SceneGraph.Collections;
+﻿using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
-using SharpGL.SceneGraph.Core;
+using System.Collections.Generic;
+using System.IO;
 
 namespace SharpGL.Serialization.Discreet
 {
@@ -110,7 +105,7 @@ namespace SharpGL.Serialization.Discreet
         }
 
         public MAXChunkHeader chunkHeader = new MAXChunkHeader();
-        long startPosition = 0;
+        private long startPosition = 0;
     }
 
     internal class MainChunk : MAXChunk
@@ -134,7 +129,6 @@ namespace SharpGL.Serialization.Discreet
                     MAXChunk chunk = new MAXChunk();
                     chunk.Read(scene, stream);
                 }
-
             } while (MoreChunks(stream));
         }
     }
@@ -160,7 +154,6 @@ namespace SharpGL.Serialization.Discreet
                     MAXChunk chunk = new MAXChunk();
                     chunk.Read(scene, stream);
                 }
-
             } while (MoreChunks(stream));
         }
     }
@@ -186,7 +179,6 @@ namespace SharpGL.Serialization.Discreet
                     MAXChunk chunk = new MAXChunk();
                     chunk.Read(scene, stream);
                 }
-
             } while (MoreChunks(stream));
         }
     }
@@ -245,7 +237,6 @@ namespace SharpGL.Serialization.Discreet
                     MAXChunk chunk = new MAXChunk();
                     chunk.Read(scene, stream);
                 }
-
             } while (MoreChunks(stream));
 
             //	Now we multiply each vertex by the matrix.
@@ -336,12 +327,12 @@ namespace SharpGL.Serialization.Discreet
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 4; j++)
-                    matrix[i,j] = stream.ReadSingle();
+                    matrix[i, j] = stream.ReadSingle();
             }
 
             matrix.Transpose();
         }
 
-        public Matrix matrix = new Matrix(4,4);
+        public Matrix matrix = new Matrix(4, 4);
     }
 }
