@@ -1,7 +1,7 @@
 ﻿namespace SharpGL
 {
     /// <summary>
-    /// The RenderingMode - specifies how and when rendering 
+    /// The RenderingMode - specifies how and when rendering
     /// will occur in an OpenGL control.
     /// </summary>
     public enum RenderTrigger
