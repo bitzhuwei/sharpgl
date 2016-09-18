@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
-using SharpGL.SceneGraph.Feedback;
 
 namespace SharpGL.SceneGraph.Feedback
 {
@@ -36,18 +32,22 @@ namespace SharpGL.SceneGraph.Feedback
                     case (int)OpenGL.GL_PASS_THROUGH_TOKEN:
                         count--;
                         break;
+
                     case (int)OpenGL.GL_POINT_TOKEN:
                         //	We use only polygons, skip this single vertex (11 floats).
                         count -= 11;
                         break;
+
                     case (int)OpenGL.GL_LINE_TOKEN:
                         //	We use only polygons, skip this vertex pair (22 floats).
                         count -= 22;
                         break;
+
                     case (int)OpenGL.GL_LINE_RESET_TOKEN:
                         //	We use only polygons, skip this vertex pair (22 floats).
                         count -= 22;
                         break;
+
                     case (int)OpenGL.GL_POLYGON_TOKEN:
 
                         //	Get the number of vertices.
@@ -86,11 +86,13 @@ namespace SharpGL.SceneGraph.Feedback
         protected Polygon triangle;
 
         #region Properties
+
         public Polygon Triangle
         {
             get { return triangle; }
             set { triangle = value; }
         }
-        #endregion
+
+        #endregion Properties
     }
 }

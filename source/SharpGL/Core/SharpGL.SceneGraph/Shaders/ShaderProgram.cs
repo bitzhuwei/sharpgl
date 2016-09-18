@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Effects;
-using SharpGL.SceneGraph.Core;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace SharpGL.SceneGraph.Shaders
@@ -12,7 +11,7 @@ namespace SharpGL.SceneGraph.Shaders
     /// <summary>
     /// The Shader base class.
     /// </summary>
-    public class ShaderProgram : 
+    public class ShaderProgram :
         Effect,
         IHasOpenGLContext
     {
@@ -148,6 +147,7 @@ namespace SharpGL.SceneGraph.Shaders
                         case 1:
                             vertexShader += line + Environment.NewLine;
                             break;
+
                         case 2:
                             fragmentShader += line + Environment.NewLine;
                             break;
@@ -177,7 +177,7 @@ namespace SharpGL.SceneGraph.Shaders
         {
             CurrentOpenGLContext.Uniform1(
         }*/
-        
+
         /// <summary>
         /// <summary>
         /// The set of attached shaders.

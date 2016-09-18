@@ -1,16 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph.Primitives;
+﻿using SharpGL.SceneGraph.Transformations;
 using System.ComponentModel;
-using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Transformations;
 
 namespace SharpGL.SceneGraph.Effects
 {
-
     /// <summary>
     /// A Linear Transformation is an effect that pushes a linear transformation (translate, scale, rotate)
     /// onto the stack.

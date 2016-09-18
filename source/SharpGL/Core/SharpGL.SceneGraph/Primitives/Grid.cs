@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph.Core;
+﻿using SharpGL.SceneGraph.Core;
 using System.Xml.Serialization;
 
 namespace SharpGL.SceneGraph.Primitives
@@ -45,10 +41,10 @@ namespace SharpGL.SceneGraph.Primitives
         /// </summary>
         private void CreateDisplayList(OpenGL gl)
         {
-            //  Create the display list. 
+            //  Create the display list.
             displayList = new DisplayList();
 
-            //  Generate the display list and 
+            //  Generate the display list and
             displayList.Generate(gl);
             displayList.New(gl, DisplayList.DisplayListMode.CompileAndExecute);
 

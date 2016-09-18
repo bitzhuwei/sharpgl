@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Effects;
-using SharpGL.SceneGraph.Core;
+using System;
 using System.ComponentModel;
-using System.Xml.Serialization;
 using System.IO;
+using System.Text;
+using System.Xml.Serialization;
 
 namespace SharpGL.SceneGraph.Shaders
 {
     /// <summary>
     /// The Shader base class.
     /// </summary>
-    public abstract class Shader : 
+    public abstract class Shader :
         Effect,
         IHasOpenGLContext
     {
@@ -24,7 +22,6 @@ namespace SharpGL.SceneGraph.Shaders
         /// <param name="parentElement">The parent element.</param>
         public override void Pop(OpenGL gl, SceneElement parentElement)
         {
-            
         }
 
         /// <summary>

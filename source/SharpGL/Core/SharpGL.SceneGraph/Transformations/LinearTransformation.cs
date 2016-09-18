@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace SharpGL.SceneGraph.Transformations
@@ -44,11 +40,13 @@ namespace SharpGL.SceneGraph.Transformations
                     gl.Rotate(rotateX, rotateY, rotateZ);
                     gl.Scale(scaleX, scaleY, scaleZ);
                     break;
+
                 case LinearTransformationOrder.RotateTranslateScale:
                     gl.Rotate(rotateX, rotateY, rotateZ);
                     gl.Translate(translateX, translateY, translateZ);
                     gl.Scale(scaleX, scaleY, scaleZ);
                     break;
+
                 default:
                     break;
             }
@@ -112,6 +110,7 @@ namespace SharpGL.SceneGraph.Transformations
         /// X Component of the Scale.
         /// </summary>
         private float scaleX = 1;
+
         /// <summary>
         /// Y Component of the Scale.
         /// </summary>

@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SharpGL.Enumerations;
 using SharpGL.SceneGraph.Cameras;
-using SharpGL.SceneGraph.Core;
+using SharpGL.SceneGraph.Effects;
 using SharpGL.SceneGraph.Lighting;
 using SharpGL.SceneGraph.Primitives;
-using SharpGL.SceneGraph.Effects;
-using SharpGL.Enumerations;
 
 namespace SharpGL.SceneGraph.Helpers
 {
-
     /// <summary>
-    /// The scene helper can be used to create scene presets, 
+    /// The scene helper can be used to create scene presets,
     /// such as designer, application, etc
     /// </summary>
     public class SceneHelper
@@ -47,7 +41,7 @@ namespace SharpGL.SceneGraph.Helpers
             //  Create some lights.
             Light light1 = new Light()
             {
-                Name="Light 1",
+                Name = "Light 1",
                 On = true,
                 Position = new Vertex(-9, -9, 11),
                 GLCode = OpenGL.GL_LIGHT0

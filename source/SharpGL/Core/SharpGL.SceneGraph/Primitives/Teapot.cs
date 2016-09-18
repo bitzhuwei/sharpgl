@@ -1,15 +1,15 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Assets;
+using System;
+using System.Runtime.InteropServices;
 
 namespace SharpGL.SceneGraph.Primitives
 {
     /// <summary>
     /// The standard OpenGL teapot.
     /// </summary>
-    public class Teapot : 
-        SceneElement, 
+    public class Teapot :
+        SceneElement,
         IRenderable,
         IHasMaterial
     {
@@ -66,21 +66,21 @@ namespace SharpGL.SceneGraph.Primitives
                     {
                         for (int l = 0; l < 3; l++)
                         {
-                            p[j,k,l] = cpdata[patchdata[i,(j * 4 + k)],l];
-                            q[j,k,l] = cpdata[patchdata[i,(j * 4 + (3 - k))],l];
+                            p[j, k, l] = cpdata[patchdata[i, (j * 4 + k)], l];
+                            q[j, k, l] = cpdata[patchdata[i, (j * 4 + (3 - k))], l];
                             if (l == 1)
-                                q[j,k,l] *= -1.0f;
+                                q[j, k, l] *= -1.0f;
                             if (i < 6)
                             {
-                                r[j,k,l] =
-                                  cpdata[patchdata[i,(j * 4 + (3 - k))],l];
+                                r[j, k, l] =
+                                  cpdata[patchdata[i, (j * 4 + (3 - k))], l];
                                 if (l == 0)
-                                    r[j,k,l] *= -1.0f;
-                                s[j,k,l] = cpdata[patchdata[i,(j * 4 + k)],l];
+                                    r[j, k, l] *= -1.0f;
+                                s[j, k, l] = cpdata[patchdata[i, (j * 4 + k)], l];
                                 if (l == 0)
-                                    s[j,k,l] *= -1.0f;
+                                    s[j, k, l] *= -1.0f;
                                 if (l == 1)
-                                    s[j,k,l] *= -1.0f;
+                                    s[j, k, l] *= -1.0f;
                             }
                         }
                     }
@@ -105,12 +105,11 @@ namespace SharpGL.SceneGraph.Primitives
                 }
             }
 
-
             gl.PopMatrix();
             gl.PopAttrib();
         }
 
-        int[,] patchdata =
+        private int[,] patchdata =
   {
       /* rim */
     {102, 103, 104, 105, 4, 5, 6, 7, 8, 9, 10, 11,
@@ -140,7 +139,7 @@ namespace SharpGL.SceneGraph.Primitives
       92, 93, 94, 95}
   };
 
-        float[,] cpdata = 
+        private float[,] cpdata =
   {
       {0.2f, 0f, 2.7f}, {0.2f, -0.112f, 2.7f}, {0.112f, -0.2f, 2.7f}, {0f,
       -0.2f, 2.7f}, {1.3375f, 0f, 2.53125f}, {1.3375f, -0.749f, 2.53125f},
@@ -185,7 +184,7 @@ namespace SharpGL.SceneGraph.Primitives
       {0.84f, -1.5f, 0.075f}
   };
 
-        float[, ,] tex = 
+        private float[, ,] tex =
       {
         { {0.0f, 0.0f},
           {1.0f, 0.0f}},
@@ -235,10 +234,10 @@ namespace SharpGL.SceneGraph.Primitives
         /// <value>
         /// The material.
         /// </value>
-        public Material Material 
-        { 
-            get; 
-            set; 
+        public Material Material
+        {
+            get;
+            set;
         }
     }
 
@@ -246,14 +245,14 @@ namespace SharpGL.SceneGraph.Primitives
     /// Extensions for Array type.
     /// </summary>
     public static class ArrayExtensions
-{
-  /// <summary>
-  /// Flattens the specified array.
-  /// </summary>
-  /// <typeparam name="T">The array type.</typeparam>
-  /// <param name="array">The array.</param>
-  /// <returns>The flattened array.</returns>
-        public static T[] Flatten<T>(this T[,,] array)
+    {
+        /// <summary>
+        /// Flattens the specified array.
+        /// </summary>
+        /// <typeparam name="T">The array type.</typeparam>
+        /// <param name="array">The array.</param>
+        /// <returns>The flattened array.</returns>
+        public static T[] Flatten<T>(this T[, ,] array)
   where T : struct
         {
             int size = Marshal.SizeOf(array[0, 0, 0]);
@@ -262,5 +261,5 @@ namespace SharpGL.SceneGraph.Primitives
             Buffer.BlockCopy(array, 0, result, 0, totalSize);
             return result;
         }
-}
+    }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
@@ -18,13 +15,25 @@ namespace SharpGL.SceneGraph
         /// </summary>
         public Index()
         {
-
         }
+
         //	Constructors.
         public Index(Index index) { vertex = index.vertex; uv = index.uv; }
-        public Index(int vertex) { this.vertex = vertex; }
-        public Index(int vertex, int uv) { this.vertex = vertex; this.uv = uv; }
-        public Index(int vertex, int uv, int normal) { this.vertex = vertex; this.uv = uv; this.normal = normal; }
+
+        public Index(int vertex)
+        {
+            this.vertex = vertex;
+        }
+
+        public Index(int vertex, int uv)
+        {
+            this.vertex = vertex; this.uv = uv;
+        }
+
+        public Index(int vertex, int uv, int normal)
+        {
+            this.vertex = vertex; this.uv = uv; this.normal = normal;
+        }
 
         /// <summary>
         /// This is the vertex in the polygon vertex array that the index refers to.

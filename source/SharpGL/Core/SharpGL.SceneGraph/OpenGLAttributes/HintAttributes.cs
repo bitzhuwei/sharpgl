@@ -1,19 +1,16 @@
-using System;
-using System.Drawing;
-using System.ComponentModel;
-
-using SharpGL.SceneGraph;
 using SharpGL.Enumerations;
+using System;
+using System.ComponentModel;
 
 namespace SharpGL.OpenGLAttributes
 {
-	/// <summary>
-	/// This class has all the settings you can edit for hints.
-	/// </summary>
-	[TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
-	[Serializable()]
+    /// <summary>
+    /// This class has all the settings you can edit for hints.
+    /// </summary>
+    [TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
+    [Serializable()]
     public class HintAttributes : OpenGLAttributeGroup
-	{
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="HintAttributes"/> class.
         /// </summary>
@@ -121,5 +118,5 @@ namespace SharpGL.OpenGLAttributes
             get { return fogHint; }
             set { fogHint = value; }
         }
-	}
+    }
 }

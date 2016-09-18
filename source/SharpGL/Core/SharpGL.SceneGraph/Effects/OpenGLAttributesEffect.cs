@@ -1,17 +1,12 @@
-using System;
-using System.Drawing;
-using System.ComponentModel;
-using System.Linq;
-
-using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Core;
-using SharpGL.OpenGLAttributes;
 using SharpGL.Enumerations;
+using SharpGL.OpenGLAttributes;
+using SharpGL.SceneGraph.Core;
+using System.ComponentModel;
 
 namespace SharpGL.SceneGraph.Effects
 {
     /// <summary>
-    /// The OpenGLAttributes are an effect that can set 
+    /// The OpenGLAttributes are an effect that can set
     /// any OpenGL attributes.
     /// </summary>
     public class OpenGLAttributesEffect : Effect
@@ -67,7 +62,7 @@ namespace SharpGL.SceneGraph.Effects
             lightingAttributes.SetAttributes(gl);
             lineAttributes.SetAttributes(gl);
             pointAttributes.SetAttributes(gl);
-            polygonAttributes.SetAttributes(gl);            
+            polygonAttributes.SetAttributes(gl);
             evalAttributes.SetAttributes(gl);
             hintAttributes.SetAttributes(gl);
             listAttributes.SetAttributes(gl);
@@ -78,7 +73,6 @@ namespace SharpGL.SceneGraph.Effects
             textureAttributes.SetAttributes(gl);
             transformAttributes.SetAttributes(gl);
             viewportAttributes.SetAttributes(gl);
-
         }
 
         /// <summary>
@@ -357,7 +351,5 @@ namespace SharpGL.SceneGraph.Effects
             get { return polygonAttributes; }
             set { polygonAttributes = value; }
         }
-
-        
     }
 }

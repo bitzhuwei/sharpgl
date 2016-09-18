@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SharpGL.SceneGraph.Shaders
+﻿namespace SharpGL.SceneGraph.Shaders
 {
     /// <summary>
     /// The Vertex Shader object.

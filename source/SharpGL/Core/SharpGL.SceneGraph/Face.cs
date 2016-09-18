@@ -1,15 +1,8 @@
-using System;
-using System.ComponentModel;
-using System.Collections;
-using System.Collections.Generic;
-
-using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Collections;
-using SharpGL.SceneGraph.NETDesignSurface.Converters;
+using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
+using System.Collections.Generic;
 using System.Xml.Serialization;
-using SharpGL.SceneGraph.Assets;
 
 namespace SharpGL.SceneGraph
 {
@@ -21,7 +14,7 @@ namespace SharpGL.SceneGraph
         /// <summary>
         /// Initializes a new instance of the <see cref="Face"/> class.
         /// </summary>
-        public Face() 
+        public Face()
         {
         }
 
@@ -124,7 +117,6 @@ namespace SharpGL.SceneGraph
         {
             return "Face, " + indices.Count + " indices";
         }
-
 
         /// <summary>
         /// The indices.

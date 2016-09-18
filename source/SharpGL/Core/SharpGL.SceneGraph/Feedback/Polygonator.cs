@@ -1,8 +1,6 @@
-using System;
-using System.Collections;
+using SharpGL.SceneGraph.Cameras;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
-using SharpGL.SceneGraph.Cameras;
 
 namespace SharpGL.SceneGraph.Feedback
 {

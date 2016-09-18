@@ -1,19 +1,16 @@
-using System;
-using System.Drawing;
-using System.ComponentModel;
-
-using SharpGL.SceneGraph;
 using SharpGL.Enumerations;
+using System;
+using System.ComponentModel;
 
 namespace SharpGL.OpenGLAttributes
 {
-	/// <summary>
-	/// This class has all the settings you can edit for fog.
-	/// </summary>
-	[TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
-	[Serializable()]
+    /// <summary>
+    /// This class has all the settings you can edit for fog.
+    /// </summary>
+    [TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
+    [Serializable()]
     public class EvalAttributes : OpenGLAttributeGroup
-	{
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="EvalAttributes"/> class.
         /// </summary>
@@ -22,7 +19,7 @@ namespace SharpGL.OpenGLAttributes
             AttributeFlags = AttributeMask.Eval;
 
             /*
-             * 
+             *
              * GL_MAP1_x enable bits, where x is a map type
 
 GL_MAP2_x enable bits, where x is a map type
@@ -56,11 +53,11 @@ GL_AUTO_NORMAL enable bit*/
 
         private bool? enableAutoNormal;
 
-		[Description("."), Category("Eval")]
+        [Description("."), Category("Eval")]
         public bool? EnableAutoNormal
-		{
+        {
             get { return enableAutoNormal; }
             set { enableAutoNormal = value; }
-		}
-	}
+        }
+    }
 }

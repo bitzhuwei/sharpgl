@@ -1,6 +1,6 @@
+using SharpGL.SceneGraph.Core;
 using System;
 using System.ComponentModel;
-using SharpGL.SceneGraph.Core;
 
 namespace SharpGL.SceneGraph.Quadrics
 {
@@ -13,8 +13,8 @@ namespace SharpGL.SceneGraph.Quadrics
         /// <summary>
         /// Initializes a new instance of the <see cref="Disk"/> class.
         /// </summary>
-        public Disk() 
-        { 
+        public Disk()
+        {
             Name = "Disk";
         }
 
@@ -34,12 +34,13 @@ namespace SharpGL.SceneGraph.Quadrics
         }
 
         //	Sphere data.
-        double innerRadius = 0.0;
-        double outerRadius = 2.0;
-        double startAngle = 0.0;
-        double sweepAngle = 360.0;
-        int slices = 16;
-        int loops = 20;
+        private double innerRadius = 0.0;
+
+        private double outerRadius = 2.0;
+        private double startAngle = 0.0;
+        private double sweepAngle = 360.0;
+        private int slices = 16;
+        private int loops = 20;
 
         /// <summary>
         /// Gets or sets the inner radius.

@@ -1,10 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SharpGL.SceneGraph.Transformations
+﻿namespace SharpGL.SceneGraph.Transformations
 {
     /// <summary>
     /// Base class for transformations.

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SharpGL.SceneGraph.Helpers
+﻿namespace SharpGL.SceneGraph.Helpers
 {
     /// <summary>
     /// The OpenGL Helper is a class that provides some helper functions for working with OpenGL.

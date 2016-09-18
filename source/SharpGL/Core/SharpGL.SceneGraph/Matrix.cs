@@ -1,13 +1,5 @@
 using System;
-using System.ComponentModel;
-using System.Collections;
 using System.Collections.Generic;
-
-using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Collections;
-using SharpGL.SceneGraph.NETDesignSurface.Converters;
-using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Primitives;
 
 namespace SharpGL.SceneGraph
 {
@@ -15,60 +7,72 @@ namespace SharpGL.SceneGraph
     /// A 4x4 matrix.
     /// </summary>
     [Serializable()]
+
     #region "Exception in the Library"
-    class MatrixLibraryExceptions : ApplicationException
-    { public MatrixLibraryExceptions(string message) : base(message) { } }
+
+    internal class MatrixLibraryExceptions : ApplicationException
+    {
+        public MatrixLibraryExceptions(string message)
+            : base(message)
+        {
+        }
+    }
 
     // The Exceptions in this Class
-    class MatrixNullException : ApplicationException
+    internal class MatrixNullException : ApplicationException
     {
         public MatrixNullException() :
             base("To do this operation, matrix can not be null") { }
     }
-    class MatrixDimensionException : ApplicationException
+
+    internal class MatrixDimensionException : ApplicationException
     {
         public MatrixDimensionException() :
             base("Dimension of the two matrices not suitable for this operation !") { }
     }
-    class MatrixNotSquare : ApplicationException
+
+    internal class MatrixNotSquare : ApplicationException
     {
         public MatrixNotSquare() :
             base("To do this operation, matrix must be a square matrix !") { }
     }
-    class MatrixDeterminentZero : ApplicationException
+
+    internal class MatrixDeterminentZero : ApplicationException
     {
         public MatrixDeterminentZero() :
             base("Determinent of matrix equals zero, inverse can't be found !") { }
     }
-    class VectorDimensionException : ApplicationException
+
+    internal class VectorDimensionException : ApplicationException
     {
         public VectorDimensionException() :
             base("Dimension of matrix must be [3 , 1] to do this operation !") { }
     }
-    class MatrixSingularException : ApplicationException
+
+    internal class MatrixSingularException : ApplicationException
     {
         public MatrixSingularException() :
             base("Matrix is singular this operation cannot continue !") { }
     }
-    #endregion
+
+    #endregion "Exception in the Library"
 
     /// <summary>
     /// Matrix Library .Net v2.0 By Anas Abidi, 2004.
-    /// 
-    /// The Matrix Library contains Class Matrix which provides many 
+    ///
+    /// The Matrix Library contains Class Matrix which provides many
     /// static methods for making various matrix operations on objects
-    /// derived from the class or on arrays defined as double. The 
+    /// derived from the class or on arrays defined as double. The
     /// '+','-','*' operators are overloaded to work with the objects
     /// derived from the matrix class.
     /// </summary>
     public class Matrix
     {
-
         /// <summary>
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -181,6 +185,7 @@ namespace SharpGL.SceneGraph
         }
 
         #region "Public Properties"
+
         /// <summary>
         /// Set or get the no. of rows in the matrix.
         /// Warning: Setting this property will delete all of
@@ -219,12 +224,12 @@ namespace SharpGL.SceneGraph
             get
             {
                 //  Storage for the array.
-                List<double> ar = new List<double>();    
-                
+                List<double> ar = new List<double>();
+
                 //  Create the array.
                 for (int i = 0; i < Rows; i++)
                     for (int j = 0; j < Columns; j++)
-                        ar.Add(this[i,j]);
+                        ar.Add(this[i, j]);
 
                 //  Return the array.
                 return ar.ToArray();
@@ -291,19 +296,19 @@ namespace SharpGL.SceneGraph
             }
         }
 
-        #endregion
+        #endregion "Public Properties"
 
         #region copy
 
         public float TempSVD()
         {
-        // this is a simple svd.
-        // Not complete but fast and reasonable.
-        // See comment in Matrix3d.
+            // this is a simple svd.
+            // Not complete but fast and reasonable.
+            // See comment in Matrix3d.
             return (float)Math.Sqrt(
-                (float)((this[0,0] * this[0,0]) + (this[0,1] * this[0,1]) + (this[0,2] * this[0,2]) + 
-                (this[1,0] * this[1,0]) + (this[1,1] * this[1,1]) + (this[1,2] * this[1,2]) +
-                (this[2,0] * this[2,0]) + (this[2,1] * this[2,1]) + (this[2,2] * this[2,2]) ) / 3.0f );                
+                (float)((this[0, 0] * this[0, 0]) + (this[0, 1] * this[0, 1]) + (this[0, 2] * this[0, 2]) +
+                (this[1, 0] * this[1, 0]) + (this[1, 1] * this[1, 1]) + (this[1, 2] * this[1, 2]) +
+                (this[2, 0] * this[2, 0]) + (this[2, 1] * this[2, 1]) + (this[2, 2] * this[2, 2])) / 3.0f);
         }
 
         public void Multiply(float value, int rows, int cols)
@@ -332,10 +337,10 @@ namespace SharpGL.SceneGraph
             }
         }
 
-        #endregion
-
+        #endregion copy
 
         #region "Find Rows and Columns in a Matrix"
+
         private static void Find_R_C(double[] Mat, out int Row)
         {
             Row = Mat.GetUpperBound(0);
@@ -346,17 +351,18 @@ namespace SharpGL.SceneGraph
             Row = Mat.GetUpperBound(0);
             Col = Mat.GetUpperBound(1);
         }
-        #endregion
+
+        #endregion "Find Rows and Columns in a Matrix"
 
         #region "Change 1D array ([n]) to/from 2D array [n,1]"
 
         /// <summary>
         /// Returns the 2D form of a 1D array. i.e. array with
-        /// dimension[n] is returned as an array with dimension [n,1]. 
+        /// dimension[n] is returned as an array with dimension [n,1].
         /// In case of an error the error is raised as an exception.
         /// </summary>
-        /// <param name="Mat"> 
-        /// the array to convert, with dimesion [n] 
+        /// <param name="Mat">
+        /// the array to convert, with dimesion [n]
         /// </param>
         /// <returns> the same array but with [n,1] dimension </returns>
         public static double[,] OneD_2_TwoD(double[] Mat)
@@ -378,11 +384,11 @@ namespace SharpGL.SceneGraph
 
         /// <summary>
         /// Returns the 1D form of a 2D array. i.e. array with
-        /// dimension[n,1] is returned as an array with dimension [n]. 
+        /// dimension[n,1] is returned as an array with dimension [n].
         /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">
-        /// the array to convert, with dimesions [n,1] 
+        /// the array to convert, with dimesions [n,1]
         /// </param>
         /// <returns>the same array but with [n] dimension</returns>
         public static double[] TwoD_2_OneD(double[,] Mat)
@@ -403,7 +409,8 @@ namespace SharpGL.SceneGraph
             }
             return Sol;
         }
-        #endregion
+
+        #endregion "Change 1D array ([n]) to/from 2D array [n,1]"
 
         #region "Identity Matrix"
 
@@ -420,7 +427,7 @@ namespace SharpGL.SceneGraph
             //  Set the identity.
             for (int i = 0; i < Rows; i++)
                 for (int j = 0; j < Columns; j++)
-                    this[i, j] = i==j? 1 : 0;
+                    this[i, j] = i == j ? 1 : 0;
         }
 
         /// <summary>
@@ -435,11 +442,12 @@ namespace SharpGL.SceneGraph
             return temp;
         }
 
-        #endregion
+        #endregion "Identity Matrix"
 
         #region "Add Matrices"
+
         /// <summary>
-        /// Returns the summation of two matrices with compatible 
+        /// Returns the summation of two matrices with compatible
         /// dimensions.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -478,7 +486,7 @@ namespace SharpGL.SceneGraph
         }
 
         /// <summary>
-        /// Returns the summation of two matrices with compatible 
+        /// Returns the summation of two matrices with compatible
         /// dimensions.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -489,7 +497,7 @@ namespace SharpGL.SceneGraph
         { return new Matrix(Add(Mat1.in_Mat, Mat2.in_Mat)); }
 
         /// <summary>
-        /// Returns the summation of two matrices with compatible 
+        /// Returns the summation of two matrices with compatible
         /// dimensions.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -498,12 +506,13 @@ namespace SharpGL.SceneGraph
         /// <returns>Sum of Mat1 and Mat2 as a Matrix object</returns>
         public static Matrix operator +(Matrix Mat1, Matrix Mat2)
         { return new Matrix(Add(Mat1.in_Mat, Mat2.in_Mat)); }
-        #endregion
+
+        #endregion "Add Matrices"
 
         #region "Subtract Matrices"
 
         /// <summary>
-        /// Returns the difference of two matrices with compatible 
+        /// Returns the difference of two matrices with compatible
         /// dimensions.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -542,7 +551,7 @@ namespace SharpGL.SceneGraph
         }
 
         /// <summary>
-        /// Returns the difference of two matrices with compatible 
+        /// Returns the difference of two matrices with compatible
         /// dimensions.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -553,7 +562,7 @@ namespace SharpGL.SceneGraph
         { return new Matrix(Subtract(Mat1.in_Mat, Mat2.in_Mat)); }
 
         /// <summary>
-        /// Returns the difference of two matrices with compatible 
+        /// Returns the difference of two matrices with compatible
         /// dimensions.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -562,14 +571,15 @@ namespace SharpGL.SceneGraph
         /// <returns>Difference of Mat1 and Mat2 as a Matrix object</returns>
         public static Matrix operator -(Matrix Mat1, Matrix Mat2)
         { return new Matrix(Subtract(Mat1.in_Mat, Mat2.in_Mat)); }
-        #endregion
+
+        #endregion "Subtract Matrices"
 
         #region "Multiply Matrices"
 
         /// <summary>
-        /// Returns the multiplication of two matrices with compatible 
+        /// Returns the multiplication of two matrices with compatible
         /// dimensions.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat1">First array in multiplication</param>
         /// <param name="Mat2">Second array in multiplication</param>
@@ -608,16 +618,16 @@ namespace SharpGL.SceneGraph
         }
 
         /// <summary>
-        /// Returns the multiplication of two matrices with compatible 
+        /// Returns the multiplication of two matrices with compatible
         /// dimensions OR the cross-product of two vectors.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat1">
-        /// First matrix or vector (i.e: dimension [3,1]) object in 
+        /// First matrix or vector (i.e: dimension [3,1]) object in
         /// multiplication
         /// </param>
         /// <param name="Mat2">
-        /// Second matrix or vector (i.e: dimension [3,1]) object in 
+        /// Second matrix or vector (i.e: dimension [3,1]) object in
         /// multiplication
         /// </param>
         /// <returns>Mat1 multiplied by Mat2 as a Matrix object</returns>
@@ -631,16 +641,16 @@ namespace SharpGL.SceneGraph
         }
 
         /// <summary>
-        /// Returns the multiplication of two matrices with compatible 
+        /// Returns the multiplication of two matrices with compatible
         /// dimensions OR the cross-product of two vectors.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat1">
-        /// First matrix or vector (i.e: dimension [3,1]) object in 
+        /// First matrix or vector (i.e: dimension [3,1]) object in
         /// multiplication
         /// </param>
         /// <param name="Mat2">
-        /// Second matrix or vector (i.e: dimension [3,1]) object in 
+        /// Second matrix or vector (i.e: dimension [3,1]) object in
         /// multiplication
         /// </param>
         /// <returns>Mat1 multiplied by Mat2 as a Matrix object</returns>
@@ -656,12 +666,14 @@ namespace SharpGL.SceneGraph
                 return new Matrix(Multiply(Mat1.in_Mat, Mat2.in_Mat));
             }
         }
-        #endregion
+
+        #endregion "Multiply Matrices"
 
         #region "Determinant of a Matrix"
+
         /// <summary>
         /// Returns the determinant of a matrix with [n,n] dimension.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">
         /// Array with [n,n] dimension whose determinant is to be found
@@ -721,7 +733,7 @@ namespace SharpGL.SceneGraph
 
         /// <summary>
         /// Returns the determinant of a matrix with [n,n] dimension.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">
         /// Matrix object with [n,n] dimension whose determinant is to be found
@@ -729,13 +741,15 @@ namespace SharpGL.SceneGraph
         /// <returns>Determinant of the Matrix object</returns>
         public static double Det(Matrix Mat)
         { return Det(Mat.in_Mat); }
-        #endregion
+
+        #endregion "Determinant of a Matrix"
 
         #region "Inverse of a Matrix"
+
         /// <summary>
-        /// Returns the inverse of a matrix with [n,n] dimension 
+        /// Returns the inverse of a matrix with [n,n] dimension
         /// and whose determinant is not zero.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">
         /// Array with [n,n] dimension whose inverse is to be found
@@ -808,9 +822,9 @@ namespace SharpGL.SceneGraph
         }
 
         /// <summary>
-        /// Returns the inverse of a matrix with [n,n] dimension 
+        /// Returns the inverse of a matrix with [n,n] dimension
         /// and whose determinant is not zero.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">
         /// Matrix object with [n,n] dimension whose inverse is to be found
@@ -818,7 +832,8 @@ namespace SharpGL.SceneGraph
         /// <returns>Inverse of the matrix as a Matrix object</returns>
         public static Matrix Inverse(Matrix Mat)
         { return new Matrix(Inverse(Mat.in_Mat)); }
-        #endregion
+
+        #endregion "Inverse of a Matrix"
 
         #region "Transpose of a Matrix"
 
@@ -829,7 +844,7 @@ namespace SharpGL.SceneGraph
 
         /// <summary>
         /// Returns the transpose of a matrix.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">Array whose transpose is to be found</param>
         /// <returns>Transpose of the array as an array</returns>
@@ -851,24 +866,26 @@ namespace SharpGL.SceneGraph
 
         /// <summary>
         /// Returns the transpose of a matrix.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">Matrix object whose transpose is to be found</param>
         /// <returns>Transpose of the Matrix object as a Matrix object</returns>
         public static Matrix Transpose(Matrix Mat)
         { return new Matrix(Transpose(Mat.in_Mat)); }
-        #endregion
+
+        #endregion "Transpose of a Matrix"
 
         #region "Singula Value Decomposition of a Matrix"
+
         /// <summary>
-        /// Evaluates the Singular Value Decomposition of a matrix, 
+        /// Evaluates the Singular Value Decomposition of a matrix,
         /// returns the  matrices S, U and V. Such that a given
         /// Matrix = U x S x V'.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// Note: This method is based on the 'Singular Value Decomposition'
         /// section of Numerical Recipes in C by William H. Press,
         /// Saul A. Teukolsky, William T. Vetterling and Brian P. Flannery,
-        /// University of Cambridge Press 1992.  
+        /// University of Cambridge Press 1992.
         /// </summary>
         /// <param name="Mat_">Array whose SVD is to be computed</param>
         /// <param name="S_">An array where the S matrix is returned</param>
@@ -1180,10 +1197,10 @@ namespace SharpGL.SceneGraph
         }
 
         /// <summary>
-        /// Evaluates the Singular Value Decomposition of a matrix, 
+        /// Evaluates the Singular Value Decomposition of a matrix,
         /// returns the  matrices S, U and V. Such that a given
         /// Matrix = U x S x V'.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// Note: This method is based on the 'Singular Value Decomposition'
         /// section of Numerical Recipes in C by William H. Press,
         /// Saul A. Teukolsky, William T. Vetterling and Brian P. Flannery,
@@ -1201,11 +1218,13 @@ namespace SharpGL.SceneGraph
             U = new Matrix(u);
             V = new Matrix(v);
         }
-        #endregion
+
+        #endregion "Singula Value Decomposition of a Matrix"
 
         #region "LU Decomposition of a matrix"
+
         /// <summary>
-        /// Returns the LU Decomposition of a matrix. 
+        /// Returns the LU Decomposition of a matrix.
         /// the output is: lower triangular matrix L, upper
         /// triangular matrix U, and permutation matrix P so that
         ///	P*X = L*U.
@@ -1213,7 +1232,7 @@ namespace SharpGL.SceneGraph
         /// Note: This method is based on the 'LU Decomposition and Its Applications'
         /// section of Numerical Recipes in C by William H. Press,
         /// Saul A. Teukolsky, William T. Vetterling and Brian P. Flannery,
-        /// University of Cambridge Press 1992.  
+        /// University of Cambridge Press 1992.
         /// </summary>
         /// <param name="Mat">Array which will be LU Decomposed</param>
         /// <param name="L">An array where the lower traingular matrix is returned</param>
@@ -1298,7 +1317,6 @@ namespace SharpGL.SceneGraph
                     Dum = 1.0 / A[j, j];
                     for (i = j + 1; i <= N; i++)
                         A[i, j] = A[i, j] * Dum;
-
                 }
             }
 
@@ -1342,15 +1360,15 @@ namespace SharpGL.SceneGraph
         }
 
         /// <summary>
-        /// Returns the LU Decomposition of a matrix. 
+        /// Returns the LU Decomposition of a matrix.
         /// the output is: lower triangular matrix L, upper
         /// triangular matrix U, and permutation matrix P so that
         ///	P*X = L*U.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// Note: This method is based on the 'LU Decomposition and Its Applications'
         /// section of Numerical Recipes in C by William H. Press,
         /// Saul A. Teukolsky, William T. Vetterling and Brian P. Flannery,
-        /// University of Cambridge Press 1992.  
+        /// University of Cambridge Press 1992.
         /// </summary>
         /// <param name="Mat">Matrix object which will be LU Decomposed</param>
         /// <param name="L">A Matrix object where the lower traingular matrix is returned</param>
@@ -1364,15 +1382,17 @@ namespace SharpGL.SceneGraph
             U = new Matrix(u);
             P = new Matrix(p);
         }
-        #endregion
+
+        #endregion "LU Decomposition of a matrix"
 
         #region "Solve system of linear equations"
+
         /// <summary>
         /// Solves a set of n linear equations A.X = B, and returns
-        /// X, where A is [n,n] and B is [n,1]. 
+        /// X, where A is [n,n] and B is [n,1].
         /// In the same manner if you need to compute: inverse(A).B, it is
-        /// better to use this method instead, as it is much faster.  
-        /// In case of an error the error is raised as an exception. 
+        /// better to use this method instead, as it is much faster.
+        /// In case of an error the error is raised as an exception.
         /// Note: This method is based on the 'LU Decomposition and Its Applications'
         /// section of Numerical Recipes in C by William H. Press,
         /// Saul A. Teukolsky, William T. Vetterling and Brian P. Flannery,
@@ -1389,6 +1409,7 @@ namespace SharpGL.SceneGraph
             int i, ii, j, k, ll, Rows, Cols;
 
             #region "LU Decompose"
+
             try
             {
                 A = (double[,])MatA.Clone();
@@ -1466,11 +1487,11 @@ namespace SharpGL.SceneGraph
                     Dum = 1.0 / A[j, j];
                     for (i = j + 1; i <= N; i++)
                         A[i, j] = A[i, j] * Dum;
-
                 }
             }
             if (A[N, N] == 0.0) A[N, N] = TINY;
-            #endregion
+
+            #endregion "LU Decompose"
 
             ii = -1;
             for (i = 0; i <= N; i++)
@@ -1499,10 +1520,10 @@ namespace SharpGL.SceneGraph
 
         /// <summary>
         /// Solves a set of n linear equations A.X = B, and returns
-        /// X, where A is [n,n] and B is [n,1]. 
+        /// X, where A is [n,n] and B is [n,1].
         /// In the same manner if you need to compute: inverse(A).B, it is
-        /// better to use this method instead, as it is much faster.  
-        /// In case of an error the error is raised as an exception. 
+        /// better to use this method instead, as it is much faster.
+        /// In case of an error the error is raised as an exception.
         /// Note: This method is based on the 'LU Decomposition and Its Applications'
         /// section of Numerical Recipes in C by William H. Press,
         /// Saul A. Teukolsky, William T. Vetterling and Brian P. Flannery,
@@ -1513,12 +1534,14 @@ namespace SharpGL.SceneGraph
         /// <returns>Matrix object 'X' in the system of equations A.X = B</returns>
         public static Matrix SolveLinear(Matrix MatA, Matrix MatB)
         { return new Matrix(Matrix.SolveLinear(MatA.in_Mat, MatB.in_Mat)); }
-        #endregion
+
+        #endregion "Solve system of linear equations"
 
         #region "Rank of a matrix"
+
         /// <summary>
         /// Returns the rank of a matrix.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">An array whose rank is to be found</param>
         /// <returns>The rank of the array</returns>
@@ -1543,15 +1566,17 @@ namespace SharpGL.SceneGraph
 
         /// <summary>
         /// Returns the rank of a matrix.
-        /// In case of an error the error is raised as an exception. 
+        /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">a Matrix object whose rank is to be found</param>
         /// <returns>The rank of the Matrix object</returns>
         public static int Rank(Matrix Mat)
         { return Rank(Mat.in_Mat); }
-        #endregion
+
+        #endregion "Rank of a matrix"
 
         #region "Pseudoinverse of a matrix"
+
         /// <summary>
         /// Returns the pseudoinverse of a matrix, such that
         /// X = PINV(A) produces a matrix 'X' of the same dimensions
@@ -1636,12 +1661,14 @@ namespace SharpGL.SceneGraph
         /// <returns>The pseudoinverse of the Matrix object as a Matrix Object</returns>
         public static Matrix PINV(Matrix Mat)
         { return new Matrix(PINV(Mat.in_Mat)); }
-        #endregion
+
+        #endregion "Pseudoinverse of a matrix"
 
         #region "Eigen Values and Vactors of Symmetric Matrix"
+
         /// <summary>
         /// Returns the Eigenvalues and Eigenvectors of a real symmetric
-        /// matrix, which is of dimensions [n,n]. 
+        /// matrix, which is of dimensions [n,n].
         /// In case of an error the error is raised as an exception.
         /// Note: This method is based on the 'Eigenvalues and Eigenvectors of a TridiagonalMatrix'
         /// section of Numerical Recipes in C by William H. Press,
@@ -1655,7 +1682,6 @@ namespace SharpGL.SceneGraph
         /// <param name="v">An array where the eigenvectors are returned</param>
         public static void Eigen(double[,] Mat, out double[,] d, out double[,] v)
         {
-
             double[,] a;
             int Rows, Cols;
             try
@@ -1792,11 +1818,13 @@ namespace SharpGL.SceneGraph
             d = new Matrix(D);
             v = new Matrix(V);
         }
-        #endregion
+
+        #endregion "Eigen Values and Vactors of Symmetric Matrix"
 
         #region "Multiply a matrix or a vector with a scalar quantity"
+
         /// <summary>
-        /// Returns the multiplication of a matrix or a vector (i.e 
+        /// Returns the multiplication of a matrix or a vector (i.e
         /// dimension [3,1]) with a scalar quantity.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -1820,7 +1848,7 @@ namespace SharpGL.SceneGraph
         }
 
         /// <summary>
-        /// Returns the multiplication of a matrix or a vector (i.e 
+        /// Returns the multiplication of a matrix or a vector (i.e
         /// dimension [3,1]) with a scalar quantity.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -1831,37 +1859,39 @@ namespace SharpGL.SceneGraph
         { return new Matrix(ScalarMultiply(Value, Mat.in_Mat)); }
 
         /// <summary>
-        /// Returns the multiplication of a matrix or a vector (i.e 
+        /// Returns the multiplication of a matrix or a vector (i.e
         /// dimension [3,1]) with a scalar quantity.
         /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Mat">Matrix object which is to be multiplied by a scalar</param>
         /// <param name="Value">The scalar value to multiply the Matrix object</param>
         /// <returns>
-        /// The multiplication of the scalar and the Matrix object as a 
+        /// The multiplication of the scalar and the Matrix object as a
         /// Matrix object
         /// </returns>
         public static Matrix operator *(Matrix Mat, double Value)
         { return new Matrix(ScalarMultiply(Value, Mat.in_Mat)); }
 
         /// <summary>
-        /// Returns the multiplication of a matrix or a vector (i.e 
+        /// Returns the multiplication of a matrix or a vector (i.e
         /// dimension [3,1]) with a scalar quantity.
         /// In case of an error the error is raised as an exception.
         /// </summary>
         /// <param name="Value">The scalar value to multiply the Matrix object</param>
         /// <param name="Mat">Matrix object which is to be multiplied by a scalar</param>
         /// <returns>
-        /// The multiplication of the scalar and the Matrix object as a 
+        /// The multiplication of the scalar and the Matrix object as a
         /// Matrix object
         /// </returns>
         public static Matrix operator *(double Value, Matrix Mat)
         { return new Matrix(ScalarMultiply(Value, Mat.in_Mat)); }
-        #endregion
+
+        #endregion "Multiply a matrix or a vector with a scalar quantity"
 
         #region "Divide a matrix or a vector with a scalar quantity"
+
         /// <summary>
-        /// Returns the division of a matrix or a vector (i.e 
+        /// Returns the division of a matrix or a vector (i.e
         /// dimension [3,1]) by a scalar quantity.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -1886,7 +1916,7 @@ namespace SharpGL.SceneGraph
         }
 
         /// <summary>
-        /// Returns the division of a matrix or a vector (i.e 
+        /// Returns the division of a matrix or a vector (i.e
         /// dimension [3,1]) by a scalar quantity.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -1897,7 +1927,7 @@ namespace SharpGL.SceneGraph
         { return new Matrix(ScalarDivide(Value, Mat.in_Mat)); }
 
         /// <summary>
-        /// Returns the division of a matrix or a vector (i.e 
+        /// Returns the division of a matrix or a vector (i.e
         /// dimension [3,1]) by a scalar quantity.
         /// In case of an error the error is raised as an exception.
         /// </summary>
@@ -1908,9 +1938,11 @@ namespace SharpGL.SceneGraph
         /// </returns>
         public static Matrix operator /(Matrix Mat, double Value)
         { return new Matrix(ScalarDivide(Value, Mat.in_Mat)); }
-        #endregion
+
+        #endregion "Divide a matrix or a vector with a scalar quantity"
 
         #region "Vectors Cross Product"
+
         /// <summary>
         /// Returns the cross product of two vectors whose
         /// dimensions should be [3] or [3,1].
@@ -1991,9 +2023,11 @@ namespace SharpGL.SceneGraph
         /// <returns>Cross product of V1 and V2 as a matrix (dimension [3,1])</returns>
         public static Matrix CrossProduct(Matrix V1, Matrix V2)
         { return (new Matrix((CrossProduct(V1.in_Mat, V2.in_Mat)))); }
-        #endregion
+
+        #endregion "Vectors Cross Product"
 
         #region "Vectors Dot Product"
+
         /// <summary>
         /// Returns the dot product of two vectors whose
         /// dimensions should be [3] or [3,1].
@@ -2058,9 +2092,11 @@ namespace SharpGL.SceneGraph
         /// <returns>Dot product of V1 and V2</returns>
         public static double DotProduct(Matrix V1, Matrix V2)
         { return (DotProduct(V1.in_Mat, V2.in_Mat)); }
-        #endregion
+
+        #endregion "Vectors Dot Product"
 
         #region "Magnitude of a Vector"
+
         /// <summary>
         ///  Returns the magnitude of a vector whose dimension is [3] or [3,1].
         ///  In case of an error the error is raised as an exception.
@@ -2105,9 +2141,11 @@ namespace SharpGL.SceneGraph
         /// <returns>The magnitude of the Matrix object</returns>
         public static double VectorMagnitude(Matrix V)
         { return (VectorMagnitude(V.in_Mat)); }
-        #endregion
+
+        #endregion "Magnitude of a Vector"
 
         #region "Two Matrices are equal or not"
+
         /// <summary>
         /// Checks if two Arrays of equal dimensions are equal or not.
         /// In case of an error the error is raised as an exception.
@@ -2184,9 +2222,11 @@ namespace SharpGL.SceneGraph
             try { return (bool)(this == (Matrix)obj); }
             catch { return false; }
         }
-        #endregion
+
+        #endregion "Two Matrices are equal or not"
 
         #region "Print Matrix"
+
         /// <summary>
         /// Returns a matrix as a string, so it can be viewed
         /// in a multi-text textbox or in a richtextBox (preferred).
@@ -2286,6 +2326,6 @@ namespace SharpGL.SceneGraph
         public override string ToString()
         { return (PrintMat(this.in_Mat)); }
 
-        #endregion
+        #endregion "Print Matrix"
     }
 }

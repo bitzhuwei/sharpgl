@@ -1,7 +1,7 @@
-using System;
-using System.ComponentModel;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Helpers;
+using System;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace SharpGL.SceneGraph.Quadrics
@@ -15,8 +15,8 @@ namespace SharpGL.SceneGraph.Quadrics
         /// <summary>
         /// Initializes a new instance of the <see cref="Sphere"/> class.
         /// </summary>
-        public Sphere() 
-        { 
+        public Sphere()
+        {
             //  Set the name.
             Name = "Sphere";
 

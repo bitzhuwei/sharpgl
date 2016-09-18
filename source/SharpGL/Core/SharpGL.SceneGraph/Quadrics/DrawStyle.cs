@@ -1,7 +1,3 @@
-using System;
-using System.ComponentModel;
-using SharpGL.SceneGraph.Core;
-
 namespace SharpGL.SceneGraph.Quadrics
 {
     /// <summary>

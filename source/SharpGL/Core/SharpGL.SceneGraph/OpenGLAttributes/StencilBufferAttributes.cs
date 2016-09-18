@@ -1,19 +1,16 @@
-using System;
-using System.Drawing;
-using System.ComponentModel;
-
-using SharpGL.SceneGraph;
 using SharpGL.Enumerations;
+using System;
+using System.ComponentModel;
 
 namespace SharpGL.OpenGLAttributes
 {
-	/// <summary>
-	/// This class has all the settings you can edit for fog.
-	/// </summary>
-	[TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
-	[Serializable()]
+    /// <summary>
+    /// This class has all the settings you can edit for fog.
+    /// </summary>
+    [TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
+    [Serializable()]
     public class StencilBufferAttributes : OpenGLAttributeGroup
-	{
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="StencilBufferAttributes"/> class.
         /// </summary>
@@ -29,13 +26,12 @@ namespace SharpGL.OpenGLAttributes
         public override void SetAttributes(OpenGL gl)
         {
             if (enableStencilTest.HasValue) gl.EnableIf(OpenGL.GL_STENCIL_TEST, enableStencilTest.Value);
-            if (stencilFunction.HasValue && stencilReference.HasValue && stencilMask.HasValue) 
+            if (stencilFunction.HasValue && stencilReference.HasValue && stencilMask.HasValue)
                 gl.StencilFunc(stencilFunction.Value, stencilReference.Value, stencilMask.Value);
             if (stencilClearIndex.HasValue) gl.ClearStencil(stencilClearIndex.Value);
             if (stencilWriteMask.HasValue) gl.StencilMask(stencilWriteMask.Value);
             if (operationFail.HasValue && operationDepthFail.HasValue && operationDepthPass.HasValue)
                 gl.StencilOp(operationFail.Value, operationDepthFail.Value, operationDepthPass.Value);
-            
         }
 
         /// <summary>
@@ -74,9 +70,9 @@ namespace SharpGL.OpenGLAttributes
         /// <value>
         /// The enable stencil test.
         /// </value>
-		[Description("."), Category("Stencil Buffer")]
+        [Description("."), Category("Stencil Buffer")]
         public bool? EnableStencilTest
-		{
+        {
             get { return enableStencilTest; }
             set { enableStencilTest = value; }
         }
@@ -184,5 +180,5 @@ namespace SharpGL.OpenGLAttributes
             get { return operationDepthPass; }
             set { operationDepthPass = value; }
         }
-	}
+    }
 }

@@ -1,7 +1,4 @@
 using System;
-using System.ComponentModel;
-using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Lighting;
 
 namespace SharpGL.SceneGraph.Core
 {
@@ -23,7 +20,7 @@ namespace SharpGL.SceneGraph.Core
         }
 
         /// <summary>
-        /// This is the class' main function, to override this function and perform a 
+        /// This is the class' main function, to override this function and perform a
         /// perspective transformation.
         /// </summary>
         public void TransformMatrix(OpenGL gl)
@@ -143,10 +140,10 @@ namespace SharpGL.SceneGraph.Core
         private Vertex startVector = new Vertex(0, 0, 0);
         private Vertex currentVector = new Vertex(0, 0, 0);
 
-        Matrix transformMatrix = new Matrix(4, 4);
+        private Matrix transformMatrix = new Matrix(4, 4);
 
-        Matrix lastRotationMatrix = new Matrix(3, 3);
+        private Matrix lastRotationMatrix = new Matrix(3, 3);
 
-        Matrix thisRotationMatrix = new Matrix(3, 3);
+        private Matrix thisRotationMatrix = new Matrix(3, 3);
     }
 }

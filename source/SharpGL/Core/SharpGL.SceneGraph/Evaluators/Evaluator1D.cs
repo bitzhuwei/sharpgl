@@ -1,43 +1,39 @@
-using System;
-using System.Collections;
-using System.ComponentModel;
-
-using SharpGL.SceneGraph.Collections;
-using System.Collections.Generic;
 using SharpGL.SceneGraph.Core;
+using System;
+using System.ComponentModel;
 
 namespace SharpGL.SceneGraph.Evaluators
 {
-	/// <summary>
-	/// This is a 1D evaluator, i.e a bezier curve.
-	/// </summary>
-	[Serializable()]
-	public class Evaluator1D : Evaluator
-	{
+    /// <summary>
+    /// This is a 1D evaluator, i.e a bezier curve.
+    /// </summary>
+    [Serializable()]
+    public class Evaluator1D : Evaluator
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="Evaluator1D"/> class.
         /// </summary>
-		public Evaluator1D()
-		{
-			//	Create a single line of points.
-			ControlPoints.CreateGrid(4, 1);
+        public Evaluator1D()
+        {
+            //	Create a single line of points.
+            ControlPoints.CreateGrid(4, 1);
 
-			Transformation.RotateX = 180;
+            Transformation.RotateX = 180;
 
-			Name = "1D Evaluator (Bezier Curve)";
-		}
+            Name = "1D Evaluator (Bezier Curve)";
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Evaluator1D"/> class.
         /// </summary>
         /// <param name="points">The points.</param>
-		public Evaluator1D(int points)
-		{
-			//	Create a single line of points.
-			ControlPoints.CreateGrid(points, 1);
-			Name = "1D Evaluator (Bezier Curve)";
+        public Evaluator1D(int points)
+        {
+            //	Create a single line of points.
+            ControlPoints.CreateGrid(points, 1);
+            Name = "1D Evaluator (Bezier Curve)";
             Transformation.RotateX = 180;
-		}
+        }
 
         /// <summary>
         /// Render to the provided instance of OpenGL.
@@ -73,7 +69,7 @@ namespace SharpGL.SceneGraph.Evaluators
         /// <summary>
         /// The segments.
         /// </summary>
-		private int segments = 30;
+        private int segments = 30;
 
         /// <summary>
         /// Gets or sets the segments.
@@ -83,9 +79,9 @@ namespace SharpGL.SceneGraph.Evaluators
         /// </value>
         [Description("The number of segments."), Category("Evaluator")]
         public int Segments
-		{
-			get {return segments;}
-			set {segments = value; }
-		}
-	}
+        {
+            get { return segments; }
+            set { segments = value; }
+        }
+    }
 }

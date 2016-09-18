@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SharpGL.SceneGraph.Core
+﻿namespace SharpGL.SceneGraph.Core
 {
     /// <summary>
     /// The RenderMode enumeration is used to identify what kind

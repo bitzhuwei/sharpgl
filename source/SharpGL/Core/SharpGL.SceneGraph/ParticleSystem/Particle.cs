@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-
-using SharpGL.SceneGraph.Collections;
-using SharpGL.SceneGraph.Core;
 
 namespace SharpGL.SceneGraph.ParticleSystems
 {
@@ -153,7 +149,7 @@ namespace SharpGL.SceneGraph.ParticleSystems
         /// </summary>
         protected bool dieForever = false;
 
-        #endregion
+        #endregion Member Data
 
         #region Properties
 
@@ -162,53 +158,62 @@ namespace SharpGL.SceneGraph.ParticleSystems
             get { return position; }
             set { position = value; }
         }
+
         public Vertex Velocity
         {
             get { return velocity; }
             set { velocity = value; }
         }
+
         public Vertex Direction
         {
             get { return direction; }
             set { direction = value; }
         }
+
         public Vertex DirectionRandomise
         {
             get { return directionRandomise; }
             set { directionRandomise = value; }
         }
+
         public Vertex Gravity
         {
             get { return gravity; }
             set { gravity = value; }
         }
+
         public GLColor Color
         {
             get { return color; }
             set { color = value; }
         }
+
         public GLColor ColorRandomise
         {
             get { return colorRandomise; }
             set { colorRandomise = value; }
         }
+
         public float Life
         {
             get { return life; }
             set { life = value; }
         }
+
         public float LifeSpan
         {
             get { return lifespan; }
             set { lifespan = value; }
         }
+
         public bool DieForever
         {
             get { return dieForever; }
             set { dieForever = value; }
         }
 
-        #endregion
+        #endregion Properties
     }
 
     /// <summary>

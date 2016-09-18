@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SharpGL.SceneGraph
 {
-  /// <summary>
-  /// A plane.
-  /// </summary>
+    /// <summary>
+    /// A plane.
+    /// </summary>
     [Serializable()]
     public class Plane
     {
-      /// <summary>
-      /// Initializes a new instance of the <see cref="Plane"/> class.
-      /// </summary>
-        public Plane() 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Plane"/> class.
+        /// </summary>
+        public Plane()
         {
         }
 
@@ -41,11 +38,11 @@ namespace SharpGL.SceneGraph
         /// <summary>
         /// The normal.
         /// </summary>
-      public Vertex normal = new Vertex(0, 0, 0);
+        public Vertex normal = new Vertex(0, 0, 0);
 
-      /// <summary>
-      /// The equation.
-      /// </summary>
+        /// <summary>
+        /// The equation.
+        /// </summary>
         public float[] equation; // ax + by + cz + d = 0.
     }
 }

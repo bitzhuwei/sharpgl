@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SharpGL.SceneGraph.Core
+﻿namespace SharpGL.SceneGraph.Core
 {
     /// <summary>
     /// An object that is Bindable is able to set itself into
     /// the current OpenGL instance. This can be lights, materials,
     /// attributes and so on.
     /// Bindable objects must be able to be used without interfering
-    /// with later rendering, so as well as simply being bound directly, 
+    /// with later rendering, so as well as simply being bound directly,
     /// they must be able to be pushed and popped.
     /// </summary>
     public interface IBindable

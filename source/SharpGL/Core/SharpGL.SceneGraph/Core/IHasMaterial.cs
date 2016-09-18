@@ -1,5 +1,4 @@
-﻿using System;
-using SharpGL.SceneGraph.Assets;
+﻿using SharpGL.SceneGraph.Assets;
 
 namespace SharpGL.SceneGraph.Core
 {
@@ -7,18 +6,18 @@ namespace SharpGL.SceneGraph.Core
     /// The IHasMaterial interface can be implemented by any scene object
     /// to allow a material to be associated with the object.
     /// </summary>
-	public interface IHasMaterial
-	{
+    public interface IHasMaterial
+    {
         /// <summary>
         /// Gets or sets the material.
         /// </summary>
         /// <value>
         /// The material.
         /// </value>
-	    Material Material 
-        { 
-            get; 
-            set; 
+        Material Material
+        {
+            get;
+            set;
         }
-	}
+    }
 }

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace SharpGL.SceneGraph.Assets
 {
     /// <summary>
-    /// An Asset is something which is used in the scene, but is not in the scene 
+    /// An Asset is something which is used in the scene, but is not in the scene
     /// tree. An example of an asset is a material, which there may be one instance
     /// of which is shared between many objects.
     /// </summary>

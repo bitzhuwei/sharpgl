@@ -1,10 +1,10 @@
-using System;
-using System.ComponentModel;
+using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Helpers;
-using SharpGL.SceneGraph.Assets;
-using System.Xml.Serialization;
 using SharpGL.SceneGraph.Transformations;
+using System;
+using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace SharpGL.SceneGraph.Quadrics
 {
@@ -13,7 +13,7 @@ namespace SharpGL.SceneGraph.Quadrics
     /// It can be interacted with and it can be rendered.
     /// </summary>
     [Serializable()]
-    public abstract class Quadric : 
+    public abstract class Quadric :
         SceneElement,
         IHasObjectSpace,
         IHasOpenGLContext,
@@ -91,6 +91,7 @@ namespace SharpGL.SceneGraph.Quadrics
         /// The draw style, can be filled, line, silouhette or points.
         /// </summary>
         protected DrawStyle drawStyle = DrawStyle.Fill;
+
         protected Orientation orientation = Orientation.Outside;
         protected Normals normals = Normals.Smooth;
         protected bool textureCoords = false;
@@ -179,10 +180,10 @@ namespace SharpGL.SceneGraph.Quadrics
         /// The material.
         /// </value>
         [XmlIgnore]
-        public Material Material 
-        { 
-            get; 
-            set; 
+        public Material Material
+        {
+            get;
+            set;
         }
     }
 }

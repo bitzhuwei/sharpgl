@@ -1,19 +1,16 @@
-using System;
-using System.Drawing;
-using System.ComponentModel;
-
-using SharpGL.SceneGraph;
 using SharpGL.Enumerations;
+using System;
+using System.ComponentModel;
 
 namespace SharpGL.OpenGLAttributes
 {
-	/// <summary>
-	/// This class has all the settings you can edit for fog.
-	/// </summary>
-	[TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
-	[Serializable()]
+    /// <summary>
+    /// This class has all the settings you can edit for fog.
+    /// </summary>
+    [TypeConverter(typeof(System.ComponentModel.ExpandableObjectConverter))]
+    [Serializable()]
     public class PixelModeAttributes : OpenGLAttributeGroup
-	{
+    {
         /// <summary>
         /// Initializes a new instance of the <see cref="PixelModeAttributes"/> class.
         /// </summary>
@@ -33,7 +30,6 @@ GL_ALPHA_BIAS and GL_ALPHA_SCALE
 GL_DEPTH_BIAS and GL_DEPTH_SCALE
 
 GL_INDEX_OFFSET and GL_INDEX_SHIFT values
-
 
 GL_ZOOM_X and GL_ZOOM_Y factors
 
@@ -71,7 +67,7 @@ GL_READ_BUFFER setting*/
         public override bool AreAnyAttributesSet()
         {
             return
-                mapColor.HasValue || 
+                mapColor.HasValue ||
                 mapStencil.HasValue;
         }
 
@@ -89,7 +85,6 @@ GL_READ_BUFFER setting*/
         private float? blueBias;
         private float? alphaBias;
         private float? depthBias;
-
 
         /// <summary>
         /// Gets or sets the color of the map.
@@ -272,5 +267,5 @@ GL_READ_BUFFER setting*/
             get { return depthBias; }
             set { depthBias = value; }
         }
-	}
+    }
 }

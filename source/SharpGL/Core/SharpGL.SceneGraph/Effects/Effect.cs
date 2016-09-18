@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph.Core;
+﻿using SharpGL.SceneGraph.Core;
 
 namespace SharpGL.SceneGraph.Effects
 {
     /// <summary>
-    /// An effect is something that can be applied to a scene element which 
+    /// An effect is something that can be applied to a scene element which
     /// then changes everything in the tree below it. It can be pushed, to apply it
     /// and popped, to restore OpenGL back to the state without the effect.
     /// </summary>

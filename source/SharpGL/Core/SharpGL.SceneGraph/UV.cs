@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace SharpGL.SceneGraph
 {
-
     /// <summary>
     /// A texture coordinate.
     /// </summary>
@@ -17,10 +12,10 @@ namespace SharpGL.SceneGraph
         /// </summary>
         /// <param name="u">The u.</param>
         /// <param name="v">The v.</param>
-        public UV(float u, float v) 
-        { 
-            this.u = u; 
-            this.v = v; 
+        public UV(float u, float v)
+        {
+            this.u = u;
+            this.v = v;
         }
 
         /// <summary>

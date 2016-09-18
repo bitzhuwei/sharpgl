@@ -1,8 +1,3 @@
-using System;
-using System.Collections;
-using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Primitives;
-
 namespace SharpGL.SceneGraph.Feedback
 {
     /// <summary>

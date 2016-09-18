@@ -1,17 +1,10 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph.Primitives;
+﻿using SharpGL.SceneGraph.Core;
 using System.ComponentModel;
-using SharpGL.SceneGraph.Core;
 
 namespace SharpGL.SceneGraph.Effects
 {
-
     /// <summary>
-    /// An ArcBall is an effect that pushes an arcball transformation 
+    /// An ArcBall is an effect that pushes an arcball transformation
     /// onto the stack.
     /// </summary>
     public class ArcBallEffect : Effect

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SharpGL.SceneGraph.Raytracing
+﻿namespace SharpGL.SceneGraph.Raytracing
 {
     /// <summary>
     /// A SceneElement can implement IRayTracable to allow it to

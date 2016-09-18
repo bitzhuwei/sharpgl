@@ -1,9 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace SharpGL.SceneGraph
 {
@@ -46,7 +41,7 @@ namespace SharpGL.SceneGraph
             double[] z = new double[1];
             gl.Project(vertex.X, vertex.Y, vertex.Z,
                 modelview, projection, viewport, x, y, z);
-            
+
             return new Vertex((float)x[0], (float)y[0], (float)z[0]);
         }
 
@@ -57,10 +52,10 @@ namespace SharpGL.SceneGraph
         /// <returns></returns>
         public static Matrix GetModelViewMatrix(this OpenGL gl)
         {
-                //  Get the matrix.
-                double[] matrix = new double[16];
-                gl.GetDouble(OpenGL.GL_MODELVIEW_MATRIX, matrix);
-                return Matrix.FromColumnMajorArray(matrix, 4, 4);
+            //  Get the matrix.
+            double[] matrix = new double[16];
+            gl.GetDouble(OpenGL.GL_MODELVIEW_MATRIX, matrix);
+            return Matrix.FromColumnMajorArray(matrix, 4, 4);
         }
 
         /// <summary>
@@ -70,10 +65,10 @@ namespace SharpGL.SceneGraph
         /// <returns></returns>
         public static Matrix GetProjectionMatrix(this OpenGL gl)
         {
-                //  Get the matrix.
-                double[] matrix = new double[16];
-                gl.GetDouble(OpenGL.GL_PROJECTION_MATRIX, matrix);
-                return Matrix.FromColumnMajorArray(matrix, 4, 4);
+            //  Get the matrix.
+            double[] matrix = new double[16];
+            gl.GetDouble(OpenGL.GL_PROJECTION_MATRIX, matrix);
+            return Matrix.FromColumnMajorArray(matrix, 4, 4);
         }
 
         /// <summary>
@@ -83,10 +78,10 @@ namespace SharpGL.SceneGraph
         /// <returns></returns>
         public static Matrix GetTextureMatrix(this OpenGL gl)
         {
-                //  Get the matrix.
-                double[] matrix = new double[16];
-                gl.GetDouble(OpenGL.GL_TEXTURE_MATRIX, matrix);
-                return Matrix.FromColumnMajorArray(matrix, 4, 4);
+            //  Get the matrix.
+            double[] matrix = new double[16];
+            gl.GetDouble(OpenGL.GL_TEXTURE_MATRIX, matrix);
+            return Matrix.FromColumnMajorArray(matrix, 4, 4);
         }
 
         /// <summary>

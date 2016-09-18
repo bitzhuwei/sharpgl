@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph.Effects;
+﻿using SharpGL.SceneGraph.Effects;
+using SharpGL.SceneGraph.Primitives;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Xml.Serialization;
-using SharpGL.SceneGraph.Primitives;
 
 namespace SharpGL.SceneGraph.Core
 {
@@ -14,7 +11,7 @@ namespace SharpGL.SceneGraph.Core
     /// The base class for all elements in a scene. Anything in
     /// the scene tree is a Scene Element. Scene elements can
     /// have children but are very lacking in functionality -
-    /// implement 
+    /// implement
     /// </summary>
     [XmlInclude(typeof(Folder))]
     [XmlInclude(typeof(Primitives.Polygon))]
@@ -64,7 +61,7 @@ namespace SharpGL.SceneGraph.Core
                 OpenGL gl = TraverseToRootElement().ParentScene.OpenGL;
 
                 //  If we don't exist in this context, create in this context.
-                if(contextChild.CurrentOpenGLContext != gl)
+                if (contextChild.CurrentOpenGLContext != gl)
                     contextChild.CreateInContext(gl);
             }
         }
@@ -74,12 +71,12 @@ namespace SharpGL.SceneGraph.Core
         /// </summary>
         /// <param name="child">The child scene element.</param>
         public void RemoveChild(SceneElement child)
-        {       
+        {
             //  If the child has OpenGL context which is not the current one, we must destroy it.
             if (child is IHasOpenGLContext)
-                if(((IHasOpenGLContext)child).CurrentOpenGLContext != TraverseToRootElement().ParentScene.OpenGL)
+                if (((IHasOpenGLContext)child).CurrentOpenGLContext != TraverseToRootElement().ParentScene.OpenGL)
                     ((IHasOpenGLContext)child).DestroyInContext(TraverseToRootElement().ParentScene.OpenGL);
-  
+
             //  Throw an exception if the child is not a child of this element..
             if (child.Parent != this)
                 throw new Exception("Cannot remove the child element '" + child.Name +

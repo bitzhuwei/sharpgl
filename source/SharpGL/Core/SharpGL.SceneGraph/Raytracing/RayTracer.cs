@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using SharpGL.SceneGraph.Cameras;
 using System.Drawing;
-using SharpGL.SceneGraph.Cameras;
-using SharpGL.SceneGraph.Core;
 
 namespace SharpGL.SceneGraph.Raytracing
 {
@@ -92,8 +87,6 @@ namespace SharpGL.SceneGraph.Raytracing
                 }
                 bmp.SetPixel(pix.x, pix.y, pix.ray.light);
                 pixelcounter++;
-
-
             }
 
             //  Return the ray traced imag.
