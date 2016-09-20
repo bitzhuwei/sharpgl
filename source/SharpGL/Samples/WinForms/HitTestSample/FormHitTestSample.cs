@@ -1,19 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Text;
-using System.Windows.Forms;
-
-using SharpGL;
-using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Cameras;
-using SharpGL.SceneGraph.Collections;
 using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Lighting;
 using SharpGL.SceneGraph.Primitives;
+using System;
+using System.Windows.Forms;
 
 namespace HitTestSample
 {
@@ -103,10 +91,10 @@ namespace HitTestSample
             var itemsHit = sceneControl1.Scene.DoHitTest(e.X, e.Y);
             foreach (var item in itemsHit)
                 listBox1.Items.Add(item);
-            if (listBox1.Items.Count >0)
+            if (listBox1.Items.Count > 0)
             {
                 listBox1.SetSelected(0, true);
-               // listBox1_SelectedIndexChanged(this, null);
+                // listBox1_SelectedIndexChanged(this, null);
             }
         }
 

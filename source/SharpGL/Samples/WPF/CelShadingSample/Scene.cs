@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using GlmNet;
+﻿using GlmNet;
 using SharpGL;
 using SharpGL.Enumerations;
 using SharpGL.Shaders;
+using System;
+using System.Collections.Generic;
 
 namespace CelShadingSample
 {
@@ -18,7 +18,7 @@ namespace CelShadingSample
         /// <param name="gl">The OpenGL instance.</param>
         public void Initialise(OpenGL gl)
         {
-            //  We're going to specify the attribute locations for the position and normal, 
+            //  We're going to specify the attribute locations for the position and normal,
             //  so that we can force both shaders to explicitly have the same locations.
             const uint positionAttribute = 0;
             const uint normalAttribute = 1;
@@ -30,16 +30,16 @@ namespace CelShadingSample
 
             //  Create the per pixel shader.
             shaderPerPixel = new ShaderProgram();
-            shaderPerPixel.Create(gl, 
+            shaderPerPixel.Create(gl,
                 ManifestResourceLoader.LoadTextFile(@"Shaders\PerPixel.vert"),
                 ManifestResourceLoader.LoadTextFile(@"Shaders\PerPixel.frag"), attributeLocations);
-            
+
             //  Create the toon shader.
             shaderToon = new ShaderProgram();
             shaderToon.Create(gl,
                 ManifestResourceLoader.LoadTextFile(@"Shaders\Toon.vert"),
                 ManifestResourceLoader.LoadTextFile(@"Shaders\Toon.frag"), attributeLocations);
-            
+
             //  Generate the geometry and it's buffers.
             trefoilKnot.GenerateGeometry(gl, positionAttribute, normalAttribute);
         }
@@ -72,7 +72,7 @@ namespace CelShadingSample
         public void CreateModelviewAndNormalMatrix(float rotationAngle)
         {
             //  Create the modelview and normal matrix. We'll also rotate the scene
-            //  by the provided rotation angle, which means things that draw it 
+            //  by the provided rotation angle, which means things that draw it
             //  can make the scene rotate easily.
             mat4 rotation = glm.rotate(mat4.identity(), rotationAngle, new vec3(0, 1, 0));
             mat4 translation = glm.translate(mat4.identity(), new vec3(0, 0, -4));
@@ -90,7 +90,7 @@ namespace CelShadingSample
             gl.MatrixMode(OpenGL.GL_MODELVIEW);
             gl.LoadIdentity();
             gl.MultMatrix(modelviewMatrix.to_array());
-            
+
             //  Push the polygon attributes and set line mode.
             gl.PushAttrib(OpenGL.GL_POLYGON_BIT);
             gl.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Lines);
@@ -135,20 +135,22 @@ namespace CelShadingSample
 
             //  Bind the vertex buffer array.
             trefoilKnot.VertexBufferArray.Bind(gl);
-                        
+
             //  Draw the elements.
             gl.DrawElements(OpenGL.GL_TRIANGLES, trefoilKnot.Indices.Length, OpenGL.GL_UNSIGNED_SHORT, IntPtr.Zero);
 
             //  Unbind the shader.
             shader.Unbind(gl);
         }
-        
+
         //  The shaders we use.
         private ShaderProgram shaderPerPixel;
+
         private ShaderProgram shaderToon;
-        
+
         //  The modelview, projection and normal matrices.
         private mat4 modelviewMatrix = mat4.identity();
+
         private mat4 projectionMatrix = mat4.identity();
         private mat3 normalMatrix = mat3.identity();
 

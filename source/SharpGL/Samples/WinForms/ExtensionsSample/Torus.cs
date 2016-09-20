@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph;
+﻿using SharpGL.SceneGraph;
+
 namespace ExtensionsSample
 {
     /// <summary>
@@ -17,7 +14,7 @@ namespace ExtensionsSample
         {
             InitialiseTorus();
         }
-        
+
         /// <summary>
         /// Initialises the torus.
         /// </summary>
@@ -25,9 +22,9 @@ namespace ExtensionsSample
         private bool InitialiseTorus()
         {
             //  Calculate the number of vertices and indices.
-            numVertices=(torusPrecision+1)*(torusPrecision+1);
-            numIndices=2*torusPrecision*torusPrecision*3;
-        
+            numVertices = (torusPrecision + 1) * (torusPrecision + 1);
+            numIndices = 2 * torusPrecision * torusPrecision * 3;
+
             //  Create the vertices and indices.
             vertices = new TorusVertex[numVertices];
             indices = new uint[numIndices];
@@ -45,7 +42,7 @@ namespace ExtensionsSample
             }
 
             //  Rotate the first ring to get the other rings
-            for(uint ring=1; ring<torusPrecision+1; ring++)
+            for (uint ring = 1; ring < torusPrecision + 1; ring++)
             {
                 for (uint i = 0; i < torusPrecision + 1; i++)
                 {
@@ -77,7 +74,7 @@ namespace ExtensionsSample
                     indices[((ring * torusPrecision + i) * 2 + 1) * 3 + 2] = (ring + 1) * (torusPrecision + 1) + i + 1;
                 }
             }
-            
+
             //  OK, that's the torus done!
             return true;
         }
@@ -86,7 +83,7 @@ namespace ExtensionsSample
         /// The number of vertices.
         /// </summary>
         private uint numVertices = 0;
-        
+
         /// <summary>
         /// The number of indices.
         /// </summary>
@@ -103,7 +100,7 @@ namespace ExtensionsSample
         private TorusVertex[] vertices;
 
         /// <summary>
-        /// We define our torus to have a precision of 48. 
+        /// We define our torus to have a precision of 48.
         /// This means that there are 48 vertices per ring when we construct it.
         /// </summary>
         private const uint torusPrecision = 48;

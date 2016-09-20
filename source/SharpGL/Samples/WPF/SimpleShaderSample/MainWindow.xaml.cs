@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SharpGL;
+﻿using SharpGL;
+using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
 using SharpGL.SceneGraph.Shaders;
-using SharpGL.SceneGraph;
+using System;
+using System.Windows;
 
 namespace SimpleShaderSample
 {
@@ -30,11 +19,11 @@ namespace SimpleShaderSample
 
         private void OpenGLControl_OpenGLDraw(object sender, OpenGLEventArgs args)
         {
-            OpenGL gl = args.OpenGL;	
-            
+            OpenGL gl = args.OpenGL;
+
             // Clear The Screen And The Depth Buffer
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-            
+
             // Move Left And Into The Screen
             gl.LoadIdentity();
             gl.Translate(0.0f, 0.0f, -6.0f);
@@ -49,7 +38,7 @@ namespace SimpleShaderSample
             program.Pop(gl, null);
         }
 
-        float rotation = 0;
+        private float rotation = 0;
 
         private void OpenGLControl_OpenGLInitialized(object sender, OpenGLEventArgs args)
         {
@@ -74,7 +63,7 @@ namespace SimpleShaderSample
             gl.Enable(OpenGL.GL_LIGHTING);
             gl.Enable(OpenGL.GL_LIGHT0);
 
-            gl.ShadeModel(OpenGL.GL_SMOOTH);		
+            gl.ShadeModel(OpenGL.GL_SMOOTH);
 
             //  Create a vertex shader.
             VertexShader vertexShader = new VertexShader();
@@ -107,6 +96,6 @@ namespace SimpleShaderSample
             program.Link();
         }
 
-        ShaderProgram program = new ShaderProgram();
+        private ShaderProgram program = new ShaderProgram();
     }
 }

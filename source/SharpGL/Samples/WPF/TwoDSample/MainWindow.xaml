@@ -9,7 +9,7 @@
                     <Button Content="Randomise!" Click="Button_Click" />
                 </ToolBar>
             </ToolBarPanel>
-        <my:OpenGLControl Name="openGLControl1" OpenGLDraw="openGLControl1_OpenGLDraw" 
+            <my:OpenGLControl Name="openGLControl1" OpenGLDraw="openGLControl1_OpenGLDraw"
                           Resized="openGLControl1_Resized" />
         </DockPanel>
     </Grid>

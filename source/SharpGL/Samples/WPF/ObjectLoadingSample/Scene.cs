@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using FileFormatWavefront.Model;
+﻿using FileFormatWavefront.Model;
 using GlmNet;
 using SharpGL;
-using SharpGL.Enumerations;
 using SharpGL.Shaders;
 using SharpGL.Textures;
 using SharpGL.VertexBuffers;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace ObjectLoadingSample
 {
@@ -28,12 +27,12 @@ namespace ObjectLoadingSample
         {
             //  Create the per pixel shader.
             shaderPerPixel = new ShaderProgram();
-            shaderPerPixel.Create(gl, 
+            shaderPerPixel.Create(gl,
                 ManifestResourceLoader.LoadTextFile(@"Shaders\PerPixel.vert"),
                 ManifestResourceLoader.LoadTextFile(@"Shaders\PerPixel.frag"), null);
             shaderPerPixel.BindAttributeLocation(gl, VertexAttributes.Position, "Position");
             shaderPerPixel.BindAttributeLocation(gl, VertexAttributes.Normal, "Normal");
-            gl.ClearColor(0f,0f, 0f, 1f);
+            gl.ClearColor(0f, 0f, 0f, 1f);
 
             //  Immediate mode only features!
             gl.Enable(OpenGL.GL_TEXTURE_2D);
@@ -59,7 +58,7 @@ namespace ObjectLoadingSample
         public void CreateModelviewAndNormalMatrix(float rotationAngle)
         {
             //  Create the modelview and normal matrix. We'll also rotate the scene
-            //  by the provided rotation angle, which means things that draw it 
+            //  by the provided rotation angle, which means things that draw it
             //  can make the scene rotate easily.
             mat4 rotation = glm.rotate(mat4.identity(), rotationAngle, new vec3(0, 1, 0));
             mat4 translation = glm.translate(mat4.identity(), new vec3(0, 0, -40));
@@ -83,28 +82,28 @@ namespace ObjectLoadingSample
             foreach (var mesh in meshes)
             {
                 var texture = meshTextures.ContainsKey(mesh) ? meshTextures[mesh] : null;
-                if(texture != null)
+                if (texture != null)
                     texture.Bind(gl);
 
                 uint mode = OpenGL.GL_TRIANGLES;
                 if (mesh.indicesPerFace == 4)
                     mode = OpenGL.GL_QUADS;
-                else if(mesh.indicesPerFace > 4)
+                else if (mesh.indicesPerFace > 4)
                     mode = OpenGL.GL_POLYGON;
 
                 //  Render the group faces.
                 gl.Begin(mode);
-                for (int i = 0; i < mesh.vertices.Length; i++ )
+                for (int i = 0; i < mesh.vertices.Length; i++)
                 {
                     gl.Vertex(mesh.vertices[i].x, mesh.vertices[i].y, mesh.vertices[i].z);
-                    if(mesh.normals != null)
+                    if (mesh.normals != null)
                         gl.Normal(mesh.normals[i].x, mesh.normals[i].y, mesh.normals[i].z);
-                    if(mesh.uvs != null)
+                    if (mesh.uvs != null)
                         gl.TexCoord(mesh.uvs[i].x, mesh.uvs[i].y);
                 }
                 gl.End();
 
-                if(texture != null)
+                if (texture != null)
                     texture.Unbind(gl);
             }
         }
@@ -127,7 +126,7 @@ namespace ObjectLoadingSample
             shaderPerPixel.SetUniformMatrix3(gl, "NormalMatrix", normalMatrix.to_array());
 
             //  Go through each mesh and render the vertex buffer array.
-            foreach(var mesh in meshes)
+            foreach (var mesh in meshes)
             {
                 //  If we have a material for the mesh, we'll use it. If we don't, we'll use the default material.
                 if (mesh.material != null)
@@ -145,7 +144,7 @@ namespace ObjectLoadingSample
                 var vertexBufferArray = meshVertexBufferArrays[mesh];
                 vertexBufferArray.Bind(gl);
 
-                //  IMPORTANT: This is interesting. If you use OpenGL 2.1, you can use quads. If you move to 3.0 or onwards, 
+                //  IMPORTANT: This is interesting. If you use OpenGL 2.1, you can use quads. If you move to 3.0 or onwards,
                 //  you can only draw the triangle types - cause 3.0 onwards deprecates other types.
                 //  see: http://stackoverflow.com/questions/8041361/simple-opengl-clarification
                 //  this shows that the OpenGL mode selection works - if I choose 2.1 I can draw quads, otherwise I can't.
@@ -159,7 +158,7 @@ namespace ObjectLoadingSample
                 else if (mesh.indicesPerFace > 4)
                     mode = OpenGL.GL_POLYGON;
 
-                gl.DrawArrays(mode, 0, mesh.vertices.Length); 
+                gl.DrawArrays(mode, 0, mesh.vertices.Length);
             }
 
             //  Unbind the shader.
@@ -171,7 +170,7 @@ namespace ObjectLoadingSample
             //  TODO: cleanup old files.
 
             //  Destroy all of the vertex buffer arrays in the meshes.
-            foreach(var vertexBufferArray in meshVertexBufferArrays.Values)
+            foreach (var vertexBufferArray in meshVertexBufferArrays.Values)
                 vertexBufferArray.Delete(gl);
             meshes.Clear();
             meshVertexBufferArrays.Clear();
@@ -190,7 +189,6 @@ namespace ObjectLoadingSample
             //  TODO: handle errors and warnings.
 
             //  TODO: cleanup
-
         }
 
         private void CreateVertexBufferArray(OpenGL gl, Mesh mesh)
@@ -233,7 +231,7 @@ namespace ObjectLoadingSample
 
         private void CreateTextures(OpenGL gl, IEnumerable<Mesh> meshes)
         {
-            foreach(var mesh in meshes.Where(m => m.material != null && m.material.TextureMapDiffuse != null))
+            foreach (var mesh in meshes.Where(m => m.material != null && m.material.TextureMapDiffuse != null))
             {
                 //  Create a new texture and bind it.
                 var texture = new Texture2D();
@@ -264,16 +262,16 @@ namespace ObjectLoadingSample
                 scaleFactor = 1.0f;
                 return scaleFactor;
             }
-            
+
             //  Find the maximum vertex value.
             var maxX = meshes.SelectMany(m => m.vertices).AsParallel().Max(v => Math.Abs(v.x));
             var maxY = meshes.SelectMany(m => m.vertices).AsParallel().Max(v => Math.Abs(v.y));
             var maxZ = meshes.SelectMany(m => m.vertices).AsParallel().Max(v => Math.Abs(v.z));
-            var max = (new[] {maxX, maxY, maxZ}).Max();
+            var max = (new[] { maxX, maxY, maxZ }).Max();
 
             //  Set the scale factor accordingly.
             //  sf = max/c
-            scaleFactor = 8.0f/max;
+            scaleFactor = 8.0f / max;
             return scaleFactor;
         }
 
@@ -297,14 +295,15 @@ namespace ObjectLoadingSample
         private readonly Material defaultMaterial;
 
         private readonly List<Mesh> meshes = new List<Mesh>();
-        private readonly Dictionary<Mesh, VertexBufferArray> meshVertexBufferArrays = new Dictionary<Mesh, VertexBufferArray>(); 
-        private readonly Dictionary<Mesh, Texture2D> meshTextures = new Dictionary<Mesh, Texture2D>(); 
+        private readonly Dictionary<Mesh, VertexBufferArray> meshVertexBufferArrays = new Dictionary<Mesh, VertexBufferArray>();
+        private readonly Dictionary<Mesh, Texture2D> meshTextures = new Dictionary<Mesh, Texture2D>();
 
         //  The shaders we use.
         private ShaderProgram shaderPerPixel;
-        
+
         //  The modelview, projection and normal matrices.
         private mat4 modelviewMatrix = mat4.identity();
+
         private mat4 projectionMatrix = mat4.identity();
         private mat3 normalMatrix = mat3.identity();
 

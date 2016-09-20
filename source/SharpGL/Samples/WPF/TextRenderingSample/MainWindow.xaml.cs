@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SharpGL;
-using SharpGL.SceneGraph.Primitives;
+﻿using SharpGL;
 using SharpGL.SceneGraph;
+using System.Windows;
 
 namespace TextRenderingSample
 {
@@ -34,18 +21,16 @@ namespace TextRenderingSample
         /// <param name="args">The <see cref="SharpGL.SceneGraph.OpenGLEventArgs"/> instance containing the event data.</param>
         private void OpenGLControl_OpenGLDraw(object sender, OpenGLEventArgs args)
         {
-            OpenGL gl = args.OpenGL;	
-            
+            OpenGL gl = args.OpenGL;
+
             // Clear The Screen And The Depth Buffer
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-            
-            // Move Left And Into The Screen
-            gl.LoadIdentity();		
 
+            // Move Left And Into The Screen
+            gl.LoadIdentity();
 
             gl.Translate(0f, 0.0f, -6.0f);
             gl.Rotate(rotation, 1.0f, 0.0f, 0.0f);
-
 
             gl.DrawText3D(viewModel.FaceName3D, viewModel.FontSize3D,
                 viewModel.Deviation3D, viewModel.Extrusion3D, viewModel.Text3D);
@@ -53,13 +38,13 @@ namespace TextRenderingSample
             rotation += 3.0f;
 
             //  Now render some text.
-            gl.DrawText(viewModel.X, viewModel.Y, viewModel.R, 
+            gl.DrawText(viewModel.X, viewModel.Y, viewModel.R,
                 viewModel.G, viewModel.B, viewModel.FaceName, viewModel.FontSize,
                 viewModel.Text);
             gl.Flush();
         }
 
-        float rotation = 0;
+        private float rotation = 0;
 
         /// <summary>
         /// Handles the OpenGLInitialized event of the OpenGLControl control.
@@ -89,7 +74,7 @@ namespace TextRenderingSample
             gl.Enable(OpenGL.GL_LIGHTING);
             gl.Enable(OpenGL.GL_LIGHT0);
 
-            gl.ShadeModel(OpenGL.GL_SMOOTH);		
+            gl.ShadeModel(OpenGL.GL_SMOOTH);
         }
     }
 }

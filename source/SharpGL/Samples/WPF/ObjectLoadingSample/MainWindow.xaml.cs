@@ -1,22 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using SharpGL;
 using SharpGL.Enumerations;
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace ObjectLoadingSample
 {
@@ -47,7 +36,7 @@ namespace ObjectLoadingSample
             axies.Render(gl, RenderMode.Design);
 
             //  Render the scene in either immediate or retained mode.
-            switch(comboBoxRenderMode.SelectedIndex)
+            switch (comboBoxRenderMode.SelectedIndex)
             {
                 case 0: scene.RenderImmediateMode(gl); break;
                 case 1: scene.RenderRetainedMode(gl); break;
@@ -85,7 +74,7 @@ namespace ObjectLoadingSample
             //  Create a file open dialog.
             var fileOpenDialog = new OpenFileDialog();
             fileOpenDialog.Filter = "Wavefront Files (*.obj)|*.obj|All Files (*.*)|*.*";
-            if(fileOpenDialog.ShowDialog(this) == true)
+            if (fileOpenDialog.ShowDialog(this) == true)
             {
                 //  Get the path.
                 var filePath = fileOpenDialog.FileName;
@@ -115,12 +104,14 @@ namespace ObjectLoadingSample
             if (openGlCtrl == null || openGlCtrl.OpenGL == null)
                 return;
 
-            switch(comboBoxPolygonMode.SelectedIndex)
+            switch (comboBoxPolygonMode.SelectedIndex)
             {
                 case 0: openGlCtrl.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Points);
                     break;
+
                 case 1: openGlCtrl.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Lines);
                     break;
+
                 case 2: openGlCtrl.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Filled);
                     break;
             }

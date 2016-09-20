@@ -5,7 +5,7 @@
         xmlns:sharpGL="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF">
     <Grid>
         <DockPanel>
-            
+
             <ToolBarPanel DockPanel.Dock="Top">
                 <ToolBar>
                     <Label Target="{Binding ElementName=comboRenderMode}">Render Mode</Label>
@@ -16,9 +16,9 @@
                     <CheckBox x:Name="checkBoxUseToonShader" Content="Use Toon Shader" />
                 </ToolBar>
             </ToolBarPanel>
-            
+
             <sharpGL:OpenGLControl x:Name="openGlCtrl"
-            OpenGLDraw="OpenGLControl_OpenGLDraw" OpenGLInitialized="OpenGLControl_OpenGLInitialized" 
+            OpenGLDraw="OpenGLControl_OpenGLDraw" OpenGLInitialized="OpenGLControl_OpenGLInitialized"
             RenderContextType="FBO" Resized="OpenGLControl_Resized" />
         </DockPanel>
     </Grid>

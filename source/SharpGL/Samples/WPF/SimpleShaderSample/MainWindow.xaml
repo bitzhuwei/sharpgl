@@ -4,7 +4,7 @@
         Title="Simple Shader Sample" Height="350" Width="525"
         xmlns:sharpGL="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF">
     <Grid>
-        <sharpGL:OpenGLControl 
+        <sharpGL:OpenGLControl
             OpenGLDraw="OpenGLControl_OpenGLDraw" OpenGLInitialized="OpenGLControl_OpenGLInitialized"
             RenderContextType="FBO" />
     </Grid>

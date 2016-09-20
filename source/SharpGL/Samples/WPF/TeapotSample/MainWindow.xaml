@@ -4,7 +4,7 @@
         Title="Teapot Sample" Height="400" Width="600"
         xmlns:sharpGL="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF" Icon="/TeapotSample;component/SharpGL.ico">
     <Grid>
-        <sharpGL:OpenGLControl 
+        <sharpGL:OpenGLControl
             OpenGLDraw="OpenGLControl_OpenGLDraw" OpenGLInitialized="OpenGLControl_OpenGLInitialized"
             RenderContextType="FBO" />
     </Grid>

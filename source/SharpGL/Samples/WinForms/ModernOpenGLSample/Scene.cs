@@ -1,8 +1,8 @@
-﻿using System;
-using GlmNet;
+﻿using GlmNet;
 using SharpGL;
 using SharpGL.Shaders;
 using SharpGL.VertexBuffers;
+using System;
 
 namespace ModernOpenGLSample
 {
@@ -16,17 +16,19 @@ namespace ModernOpenGLSample
     public class Scene
     {
         //  The projection, view and model matrices.
-        mat4 projectionMatrix;
-        mat4 viewMatrix;
-        mat4 modelMatrix;
+        private mat4 projectionMatrix;
+
+        private mat4 viewMatrix;
+        private mat4 modelMatrix;
 
         //  Constants that specify the attribute indexes.
-        const uint attributeIndexPosition = 0;
-        const uint attributeIndexColour = 1;
+        private const uint attributeIndexPosition = 0;
+
+        private const uint attributeIndexColour = 1;
 
         //  The vertex buffer array which contains the vertex and colour buffers.
-        VertexBufferArray vertexBufferArray;
-    
+        private VertexBufferArray vertexBufferArray;
+
         //  The shader program for our vertex and fragment shader.
         private ShaderProgram shaderProgram;
 
@@ -83,13 +85,13 @@ namespace ModernOpenGLSample
             vertexBufferArray.Bind(gl);
 
             //  Draw the square.
-            gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6); 
+            gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
 
             //  Unbind our vertex array and shader.
             vertexBufferArray.Unbind(gl);
             shaderProgram.Unbind(gl);
         }
-        
+
         /// <summary>
         /// Creates the geometry for the square, also creating the vertex buffer array.
         /// </summary>
@@ -97,19 +99,19 @@ namespace ModernOpenGLSample
         private void CreateVerticesForSquare(OpenGL gl)
         {
             var vertices = new float[18];
-            var colors = new float[18]; // Colors for our vertices  
-            vertices[0] = -0.5f; vertices[1] = -0.5f; vertices[2] = 0.0f; // Bottom left corner  
-            colors[0] = 1.0f; colors[1] = 1.0f; colors[2] = 1.0f; // Bottom left corner  
-            vertices[3] = -0.5f; vertices[4] = 0.5f; vertices[5] = 0.0f; // Top left corner  
-            colors[3] = 1.0f; colors[4] = 0.0f; colors[5] = 0.0f; // Top left corner  
-            vertices[6] = 0.5f; vertices[7] = 0.5f; vertices[8] = 0.0f; // Top Right corner  
-            colors[6] = 0.0f; colors[7] = 1.0f; colors[8] = 0.0f; // Top Right corner  
-            vertices[9] = 0.5f; vertices[10] = -0.5f; vertices[11] = 0.0f; // Bottom right corner  
-            colors[9] = 0.0f; colors[10] = 0.0f; colors[11] = 1.0f; // Bottom right corner  
-            vertices[12] = -0.5f; vertices[13] = -0.5f; vertices[14] = 0.0f; // Bottom left corner  
-            colors[12] = 1.0f; colors[13] = 1.0f; colors[14] = 1.0f; // Bottom left corner  
-            vertices[15] = 0.5f; vertices[16] = 0.5f; vertices[17] = 0.0f; // Top Right corner  
-            colors[15] = 0.0f; colors[16] = 1.0f; colors[17] = 0.0f; // Top Right corner  
+            var colors = new float[18]; // Colors for our vertices
+            vertices[0] = -0.5f; vertices[1] = -0.5f; vertices[2] = 0.0f; // Bottom left corner
+            colors[0] = 1.0f; colors[1] = 1.0f; colors[2] = 1.0f; // Bottom left corner
+            vertices[3] = -0.5f; vertices[4] = 0.5f; vertices[5] = 0.0f; // Top left corner
+            colors[3] = 1.0f; colors[4] = 0.0f; colors[5] = 0.0f; // Top left corner
+            vertices[6] = 0.5f; vertices[7] = 0.5f; vertices[8] = 0.0f; // Top Right corner
+            colors[6] = 0.0f; colors[7] = 1.0f; colors[8] = 0.0f; // Top Right corner
+            vertices[9] = 0.5f; vertices[10] = -0.5f; vertices[11] = 0.0f; // Bottom right corner
+            colors[9] = 0.0f; colors[10] = 0.0f; colors[11] = 1.0f; // Bottom right corner
+            vertices[12] = -0.5f; vertices[13] = -0.5f; vertices[14] = 0.0f; // Bottom left corner
+            colors[12] = 1.0f; colors[13] = 1.0f; colors[14] = 1.0f; // Bottom left corner
+            vertices[15] = 0.5f; vertices[16] = 0.5f; vertices[17] = 0.0f; // Top Right corner
+            colors[15] = 0.0f; colors[16] = 1.0f; colors[17] = 0.0f; // Top Right corner
 
             //  Create the vertex array object.
             vertexBufferArray = new VertexBufferArray();
@@ -131,6 +133,5 @@ namespace ModernOpenGLSample
             //  Unbind the vertex array, we've finished specifying data for it.
             vertexBufferArray.Unbind(gl);
         }
-
     }
 }

@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SharpGL;
-using SharpGL.Enumerations;
+﻿using SharpGL;
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Cameras;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
+using System.Windows;
 
 namespace DrawingMechanismsSample
 {
@@ -45,18 +32,18 @@ namespace DrawingMechanismsSample
             gl.Translate(0f, 0.0f, -6.0f);
 
             axies.Render(gl, RenderMode.Design);
-            
 
-            switch(this.drawingMechanismCombo.SelectedIndex)
+            switch (this.drawingMechanismCombo.SelectedIndex)
             {
                 case 0:
                     RenderVertices_Immediate(args.OpenGL);
                     break;
+
                 case 1:
                     RenderVertices_VertexArray(args.OpenGL);
                     break;
             }
-            
+
             //  Flush OpenGL.
             gl.Flush();
             /*
@@ -71,7 +58,7 @@ namespace DrawingMechanismsSample
         {
             gl.Color(1f, 0f, 0f);
             gl.Begin(OpenGL.GL_POINTS);
-            for(uint i=0;i<vertices.Length; i++)
+            for (uint i = 0; i < vertices.Length; i++)
             {
                 gl.Vertex(vertices[i]);
             }
@@ -102,7 +89,7 @@ namespace DrawingMechanismsSample
                 vertexArrayValues[counter++] = vertices[i].Y;
                 vertexArrayValues[counter++] = vertices[i].Z;
             }
-            
+
             args.OpenGL.PointSize(3.0f);
         }
 

@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 using SharpGL;
+using System.Windows.Forms;
 
 namespace SimpleDrawingSample
 {
@@ -29,10 +23,8 @@ namespace SimpleDrawingSample
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);	// Clear The Screen And The Depth Buffer
             gl.LoadIdentity();					// Reset The View
 
-           // gl.Color(1.0f, 1.0f, 1.0f);
-           // gl.FontBitmaps.DrawText(gl, 0, 0, "Arial", "Argh");
-
-            
+            // gl.Color(1.0f, 1.0f, 1.0f);
+            // gl.FontBitmaps.DrawText(gl, 0, 0, "Arial", "Argh");
 
             gl.Translate(-1.5f, 0.0f, -6.0f);				// Move Left And Into The Screen
 
@@ -82,7 +74,6 @@ namespace SimpleDrawingSample
             gl.Vertex(-1.0f, 1.0f, 1.0f);			// Bottom Left Of The Quad (Top)
             gl.Vertex(1.0f, 1.0f, 1.0f);			// Bottom Right Of The Quad (Top)
 
-
             gl.Color(1.0f, 0.5f, 0.0f);			// Set The Color To Orange
             gl.Vertex(1.0f, -1.0f, 1.0f);			// Top Right Of The Quad (Bottom)
             gl.Vertex(-1.0f, -1.0f, 1.0f);			// Top Left Of The Quad (Bottom)
@@ -113,15 +104,14 @@ namespace SimpleDrawingSample
             gl.Vertex(1.0f, -1.0f, 1.0f);			// Bottom Left Of The Quad (Right)
             gl.Vertex(1.0f, -1.0f, -1.0f);			// Bottom Right Of The Quad (Right)
             gl.End();						// Done Drawing The Q
-            
+
             gl.Flush();
 
-            rtri += 3.0f;// 0.2f;						// Increase The Rotation Variable For The Triangle 
-            rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad 
+            rtri += 3.0f;// 0.2f;						// Increase The Rotation Variable For The Triangle
+            rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad
         }
 
-
-        float rtri = 0;
-        float rquad = 0;
+        private float rtri = 0;
+        private float rquad = 0;
     }
 }

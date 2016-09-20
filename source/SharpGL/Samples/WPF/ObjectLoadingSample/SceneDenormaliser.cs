@@ -1,9 +1,7 @@
-﻿using System;
+﻿using FileFormatWavefront.Model;
+using GlmNet;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using FileFormatWavefront.Model;
-using GlmNet;
 
 namespace ObjectLoadingSample
 {
@@ -23,20 +21,20 @@ namespace ObjectLoadingSample
             int currentIndexCount = -1;
 
             //  Go through every group and denormalize it.
-            foreach(var group in scene.Groups)
+            foreach (var group in scene.Groups)
             {
                 //  Go through each face.
-                for(int i=0; i< group.Faces.Count; i++)
+                for (int i = 0; i < group.Faces.Count; i++)
                 {
                     var face = group.Faces[i];
 
                     //  If this is the first face, set the current index count.
-                    if(currentIndexCount == -1)
+                    if (currentIndexCount == -1)
                         currentIndexCount = face.Indices.Count;
-                    else if(currentIndexCount == face.Indices.Count)
+                    else if (currentIndexCount == face.Indices.Count)
                         facesWithSameIndexCount.Add(face);
                     //  If this is a new index count, or the end, complete the mesh.
-                    if(currentIndexCount != face.Indices.Count || i == group.Faces.Count - 1)
+                    if (currentIndexCount != face.Indices.Count || i == group.Faces.Count - 1)
                     {
                         var indices = facesWithSameIndexCount.SelectMany(f => f.Indices).ToList();
 

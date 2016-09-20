@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using GlmNet;
 using SharpGL;
-using GlmNet;
 using SharpGL.VertexBuffers;
+using System;
+using System.Linq;
 
 namespace CelShadingSample
 {
@@ -16,9 +16,8 @@ namespace CelShadingSample
     {
         public void GenerateGeometry(OpenGL gl, uint vertexAttributeLocation, uint normalAttributeLocation)
         {
-
             //  Create the vertex array object. This will hold the state of all of the
-            //  vertex buffer operations that follow it's binding, meaning instead of setting the 
+            //  vertex buffer operations that follow it's binding, meaning instead of setting the
             //  vertex buffer data and binding it each time, we can just bind the array and call
             //  DrawElements - much easier.
             vertexBufferArray = new VertexBufferArray();
@@ -29,9 +28,9 @@ namespace CelShadingSample
             CreateVertexNormalBuffer(gl, vertexAttributeLocation, normalAttributeLocation);
             CreateIndexBuffer(gl);
 
-
             vertexBufferArray.Unbind(gl);
         }
+
         /// <summary>
         /// Evaluates the trefoil, providing the vertex at a given coordinate.
         /// </summary>
@@ -54,19 +53,19 @@ namespace CelShadingSample
             float z = (float)(c * Math.Sin(1.5f * u));
 
             vec3 dv = new vec3();
-            dv.x = (float) (-1.5f*b*Math.Sin(1.5f*u)*Math.Cos(u) - (a + b*Math.Cos(1.5f*u))*Math.Sin(u));
-            dv.y = (float) (-1.5f*b*Math.Sin(1.5f*u)*Math.Sin(u) + (a + b*Math.Cos(1.5f*u))*Math.Cos(u)); 
-            dv.z = (float) (1.5f*c*Math.Cos(1.5f*u));
-            
+            dv.x = (float)(-1.5f * b * Math.Sin(1.5f * u) * Math.Cos(u) - (a + b * Math.Cos(1.5f * u)) * Math.Sin(u));
+            dv.y = (float)(-1.5f * b * Math.Sin(1.5f * u) * Math.Sin(u) + (a + b * Math.Cos(1.5f * u)) * Math.Cos(u));
+            dv.z = (float)(1.5f * c * Math.Cos(1.5f * u));
+
             vec3 q = glm.normalize(dv);
             vec3 qvn = glm.normalize(new vec3(q.y, -q.x, 0.0f));
-            vec3 ww =  glm.cross(q, qvn);
+            vec3 ww = glm.cross(q, qvn);
 
             vec3 range = new vec3();
-            range.x = (float) (x + d*(qvn.x*Math.Cos(v) + ww.x*Math.Sin(v)));
+            range.x = (float)(x + d * (qvn.x * Math.Cos(v) + ww.x * Math.Sin(v)));
             range.y = (float)(y + d * (qvn.y * Math.Cos(v) + ww.y * Math.Sin(v)));
             range.z = (float)(z + d * ww.z * Math.Sin(v));
-            
+
             return range;
         }
 
@@ -104,11 +103,11 @@ namespace CelShadingSample
             vertexBuffer.Create(gl);
             vertexBuffer.Bind(gl);
             vertexBuffer.SetData(gl, vertexAttributeLocation, vertices.SelectMany(v => v.to_array()).ToArray(), false, 3);
-         
+
             var normalBuffer = new VertexBuffer();
             normalBuffer.Create(gl);
             normalBuffer.Bind(gl);
-            normalBuffer.SetData(gl, normalAttributeLocation, normals.SelectMany(v => v.to_array()).ToArray(), false, 3);        
+            normalBuffer.SetData(gl, normalAttributeLocation, normals.SelectMany(v => v.to_array()).ToArray(), false, 3);
         }
 
         private void CreateIndexBuffer(OpenGL gl)
@@ -147,6 +146,7 @@ namespace CelShadingSample
 
         /// The number of slices and stacks.
         private const uint slices = 128;
+
         private const uint stacks = 32;
 
         //  The vertex buffer array that handles the state of all vertex buffers.
@@ -164,8 +164,8 @@ namespace CelShadingSample
         /// Gets the vertices.
         /// </summary>
         public vec3[] Vertices
-        { 
-            get { return vertices; } 
+        {
+            get { return vertices; }
         }
 
         /// <summary>

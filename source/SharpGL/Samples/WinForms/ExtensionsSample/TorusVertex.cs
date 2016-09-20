@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph;
+﻿using SharpGL.SceneGraph;
 
 namespace ExtensionsSample
 {
@@ -13,7 +9,7 @@ namespace ExtensionsSample
     {
         //  Offset: 0
         public Vertex position;
-        
+
         //  Offset: 12
         public float s;
 
@@ -22,13 +18,13 @@ namespace ExtensionsSample
 
         //  Offset 20
         public Vertex sTangent;
-        
+
         //  Offset 32
         public Vertex tTangent;
-        
+
         //  Offset 44
         public Vertex normal;
-        
+
         //  Offset 56
         public Vertex tangentSpaceLight;
     }

@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using SharpGL.SceneGraph;
-using SharpGL;
-
-using SharpGL.SceneGraph.Assets;
-using System.Runtime.InteropServices;
+﻿using SharpGL;
 using SharpGL.Enumerations;
+using SharpGL.SceneGraph;
+using SharpGL.SceneGraph.Assets;
+using System;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 //  See: http://www.paulsprojects.net/tutorials/simplebump/simplebump.html
 
@@ -29,7 +22,7 @@ namespace ExtensionsSample
         {
             InitializeComponent();
         }
-        
+
         /// <summary>
         /// Handles the OpenGLDraw event of the openGLControl1 control.
         /// </summary>
@@ -39,13 +32,13 @@ namespace ExtensionsSample
         {
             //  Get OpenGL.
             var gl = openGLControl1.OpenGL;
-       
+
             //  Clear and load identity.
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
             gl.LoadIdentity();
-            
-             // Use gluLookAt to look at torus.
-            gl.LookAt(0.0f,10.0f,10.0f,
+
+            // Use gluLookAt to look at torus.
+            gl.LookAt(0.0f, 10.0f, 10.0f,
               0.0f, 0.0f, 0.0f,
               0.0f, 1.0f, 0.0f);
 
@@ -67,7 +60,7 @@ namespace ExtensionsSample
             Vertex objectLightPosition = inverseModelMatrix * worldLightPosition;
 
             //  Loop through vertices
-            for(int i=0; i<torus.NumVertices; ++i)
+            for (int i = 0; i < torus.NumVertices; ++i)
             {
                 Vertex lightVector = objectLightPosition - torus.Vertices[i].position;
 
@@ -81,14 +74,14 @@ namespace ExtensionsSample
             }
 
             //  Draw bump pass
-            if(drawBumps)
+            if (drawBumps)
             {
                 //  Bind normal map to texture unit 0
                 normalMap.Bind(gl);
                 gl.Enable(OpenGL.GL_TEXTURE_2D);
 
                 //  Bind normalisation cube map to texture unit 1
-                
+
                 //  Extensions: We can use the Extension format, such as below. However in this
                 //  case we'll get a warning saying that this particular extension is deprecated
                 //  in OpenGL 3.0. However...
@@ -154,19 +147,19 @@ namespace ExtensionsSample
                 //  Return to standard modulate texenv
                 gl.TexEnv(OpenGL.GL_TEXTURE_ENV, OpenGL.GL_TEXTURE_ENV_MODE, OpenGL.GL_MODULATE);
             }
-            
+
             //  If we are drawing both passes, enable blending to multiply them together
-            if(drawBumps && drawColor)
+            if (drawBumps && drawColor)
             {
                 //  Enable multiplicative blending
                 gl.BlendFunc(OpenGL.GL_DST_COLOR, OpenGL.GL_ZERO);
                 gl.Enable(OpenGL.GL_BLEND);
             }
-            
+
             //  Perform a second pass to color the torus
-            if(drawColor)
+            if (drawColor)
             {
-                if(!drawBumps)
+                if (!drawBumps)
                 {
                     gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_POSITION, objectLightPosition);
                     gl.Light(OpenGL.GL_LIGHT1, OpenGL.GL_DIFFUSE, white);
@@ -181,7 +174,7 @@ namespace ExtensionsSample
                 //  Bind decal texture
                 decalImage.Bind(gl);
                 gl.Enable(OpenGL.GL_TEXTURE_2D);
-                
+
                 //  Set vertex arrays for torus
                 var torusVertices = GCHandle.Alloc(torus.Vertices, GCHandleType.Pinned);
                 //  Address of TorusVertex.Position
@@ -189,18 +182,18 @@ namespace ExtensionsSample
                 gl.EnableClientState(OpenGL.GL_VERTEX_ARRAY);
 
                 //  Address of TorusVertex.Normal
-                gl.NormalPointer(OpenGL.GL_FLOAT, Marshal.SizeOf(typeof(TorusVertex)), IntPtr.Add(torusVertices.AddrOfPinnedObject(), 44 ));
+                gl.NormalPointer(OpenGL.GL_FLOAT, Marshal.SizeOf(typeof(TorusVertex)), IntPtr.Add(torusVertices.AddrOfPinnedObject(), 44));
                 gl.EnableClientState(OpenGL.GL_NORMAL_ARRAY);
 
                 //  Address of TorusVertex.S
                 gl.TexCoordPointer(2, OpenGL.GL_FLOAT, Marshal.SizeOf(typeof(TorusVertex)), IntPtr.Add(torusVertices.AddrOfPinnedObject(), 12));
                 gl.EnableClientState(OpenGL.GL_TEXTURE_COORD_ARRAY);
                 torusVertices.Free();
-                
+
                 //  Draw torus
                 gl.DrawElements(OpenGL.GL_TRIANGLES, (int)torus.NumIndices, torus.Indices);
 
-                if(!drawBumps)
+                if (!drawBumps)
                     gl.Disable(OpenGL.GL_LIGHTING);
 
                 //  Disable texture
@@ -213,15 +206,14 @@ namespace ExtensionsSample
             }
 
             //  Disable blending if it is enabled
-            if(drawBumps && drawColor)
+            if (drawBumps && drawColor)
                 gl.Disable(OpenGL.GL_BLEND);
 
             gl.PopAttrib();
 
             gl.Finish();
-            
         }
-        
+
         /// <summary>
         /// Handles the OpenGLInitialized event of the openGLControl1 control.
         /// </summary>
@@ -242,7 +234,7 @@ namespace ExtensionsSample
             gl.Color(1.0f, 1.0f, 1.0f, 1.0f);
             gl.Hint(HintTarget.PerspectiveCorrection, HintMode.Nicest);
             gl.PolygonMode(OpenGL.GL_FRONT_AND_BACK, OpenGL.GL_FILL);
-            
+
             //  Depth states
             gl.ClearDepth(1.0f);
             gl.DepthFunc(DepthFunction.LessThanOrEqual);
@@ -273,7 +265,7 @@ namespace ExtensionsSample
             uint[] textures = new uint[1];
             gl.GenTextures(1, textures);
             normalisationCubeMap = textures[0];
-    
+
             //  Bind and generate the normalisation cube map.
             gl.BindTexture(OpenGL.GL_TEXTURE_CUBE_MAP, normalisationCubeMap);
             GenerateNormalisationCubeMap();
@@ -291,7 +283,7 @@ namespace ExtensionsSample
             gl.TexParameter(OpenGL.GL_TEXTURE_CUBE_MAP, OpenGL.GL_TEXTURE_WRAP_T, OpenGL.GL_CLAMP_TO_EDGE);
             gl.TexParameter(OpenGL.GL_TEXTURE_CUBE_MAP, OpenGL.GL_TEXTURE_WRAP_R, OpenGL.GL_CLAMP_TO_EDGE);
         }
-        
+
         /// <summary>
         /// Handles the Resized event of the openGLControl1 control.
         /// </summary>
@@ -311,7 +303,6 @@ namespace ExtensionsSample
             gl.MatrixMode(MatrixMode.Modelview);
         }
 
-        
         /// <summary>
         /// Generates the normalisation cube map.
         /// </summary>
@@ -412,7 +403,6 @@ namespace ExtensionsSample
                     data[byteCounter++] = (byte)(tempVector.X * 255f);
                     data[byteCounter++] = (byte)(tempVector.Y * 255f);
                     data[byteCounter++] = (byte)(tempVector.Z * 255f);
-
                 }
             }
             gl.TexImage2D(OpenGL.GL_TEXTURE_CUBE_MAP_NEGATIVE_Y,
@@ -435,7 +425,6 @@ namespace ExtensionsSample
                     data[byteCounter++] = (byte)(tempVector.X * 255f);
                     data[byteCounter++] = (byte)(tempVector.Y * 255f);
                     data[byteCounter++] = (byte)(tempVector.Z * 255f);
-
                 }
             }
             gl.TexImage2D(OpenGL.GL_TEXTURE_CUBE_MAP_POSITIVE_Z,
@@ -465,7 +454,6 @@ namespace ExtensionsSample
 
             return true;
         }
-
 
         /// <summary>
         /// The white color.

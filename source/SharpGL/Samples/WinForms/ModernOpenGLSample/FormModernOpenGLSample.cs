@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SharpGL;
+using System;
 using System.Windows.Forms;
-using SharpGL;
 
 namespace ModernOpenGLSample
 {

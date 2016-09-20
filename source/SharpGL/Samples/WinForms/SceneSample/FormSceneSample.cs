@@ -1,20 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Text;
-using System.Windows.Forms;
-
 using SharpGL;
 using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Cameras;
-using SharpGL.SceneGraph.Collections;
 using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Lighting;
 using SharpGL.SceneGraph.Effects;
+using SharpGL.SceneGraph.Lighting;
 using SharpGL.SceneGraph.Primitives;
+using System.Windows.Forms;
 
 namespace SceneSample
 {
@@ -34,7 +24,7 @@ namespace SceneSample
             //  Add some design-time primitives.
             sceneControl1.Scene.SceneContainer.AddChild(new
                 SharpGL.SceneGraph.Primitives.Grid());
-            sceneControl1.Scene.SceneContainer.AddChild(new 
+            sceneControl1.Scene.SceneContainer.AddChild(new
                 SharpGL.SceneGraph.Primitives.Axies());
 
             //  Create a light.
@@ -51,7 +41,7 @@ namespace SceneSample
             //  Create a sphere.
             Cube cube = new Cube();
             cube.AddEffect(arcBallEffect);
-            
+
             //  Add it.
             sceneControl1.Scene.SceneContainer.AddChild(cube);
 
@@ -59,12 +49,12 @@ namespace SceneSample
             AddElementToTree(sceneControl1.Scene.SceneContainer, treeView1.Nodes);
         }
 
-        void sceneControl1_MouseUp(object sender, MouseEventArgs e)
+        private void sceneControl1_MouseUp(object sender, MouseEventArgs e)
         {
             arcBallEffect.ArcBall.MouseUp(e.X, e.Y);
         }
 
-        void FormSceneSample_MouseMove(object sender, MouseEventArgs e)
+        private void FormSceneSample_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
@@ -72,12 +62,14 @@ namespace SceneSample
             }
         }
 
-        void FormSceneSample_MouseDown(object sender, MouseEventArgs e)
+        private void FormSceneSample_MouseDown(object sender, MouseEventArgs e)
         {
             arcBallEffect.ArcBall.SetBounds(sceneControl1.Width, sceneControl1.Height);
             arcBallEffect.ArcBall.MouseDown(e.X, e.Y);
         }
+
         private ArcBallEffect arcBallEffect = new ArcBallEffect();
+
         /// <summary>
         /// Adds the element to tree.
         /// </summary>
@@ -86,10 +78,10 @@ namespace SceneSample
         private void AddElementToTree(SceneElement sceneElement, TreeNodeCollection nodes)
         {
             //  Add the element.
-            TreeNode newNode = new TreeNode() 
-            { 
-                Text = sceneElement.Name, 
-                Tag = sceneElement 
+            TreeNode newNode = new TreeNode()
+            {
+                Text = sceneElement.Name,
+                Tag = sceneElement
             };
             nodes.Add(newNode);
 

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using SharpGL;
+using System;
 using System.Windows.Forms;
-using SharpGL;
 
 namespace RenderContextsSample
 {
@@ -89,7 +83,6 @@ namespace RenderContextsSample
             gl.Vertex(-1.0f, 1.0f, 1.0f);			// Bottom Left Of The Quad (Top)
             gl.Vertex(1.0f, 1.0f, 1.0f);			// Bottom Right Of The Quad (Top)
 
-
             gl.Color(1.0f, 0.5f, 0.0f);			// Set The Color To Orange
             gl.Vertex(1.0f, -1.0f, 1.0f);			// Top Right Of The Quad (Bottom)
             gl.Vertex(-1.0f, -1.0f, 1.0f);			// Top Left Of The Quad (Bottom)
@@ -123,12 +116,12 @@ namespace RenderContextsSample
 
             gl.Flush();
 
-            rtri += 1.0f;// 0.2f;						// Increase The Rotation Variable For The Triangle 
-            rquad -= 1.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad 
+            rtri += 1.0f;// 0.2f;						// Increase The Rotation Variable For The Triangle
+            rquad -= 1.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad
         }
 
-        float rtri;
-        float rquad;
+        private float rtri;
+        private float rquad;
 
         private void openGLControl3_OpenGLInitialized(object sender, EventArgs e)
         {

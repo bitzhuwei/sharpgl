@@ -9,13 +9,13 @@
         <local:MainViewModel x:Name="viewModel" />
     </Window.DataContext>
     <apexControls:ApexGrid Columns="*,Auto,3*">
-        
+
         <!-- Main Tab Control -->
         <TabControl Grid.Column="0" Margin="4">
-            
-            <TabItem Header="2D Text" >
+
+            <TabItem Header="2D Text">
                 <!-- The settings. -->
-                <apexControls:PaddedGrid 
+                <apexControls:PaddedGrid
             Grid.Column="0" Padding="2" Rows="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
             Columns="*,2*">
 
@@ -36,13 +36,12 @@
                     <Label Grid.Row="7" Grid.Column="0" Content="Text" />
                     <TextBox Grid.Row="8" Grid.ColumnSpan="2" Height="60" Text="{Binding Text}"
                      TextWrapping="Wrap" AcceptsReturn="True" />
-
                 </apexControls:PaddedGrid>
             </TabItem>
 
-            <TabItem Header="3D Text" >
+            <TabItem Header="3D Text">
                 <!-- The settings. -->
-                <apexControls:PaddedGrid 
+                <apexControls:PaddedGrid
             Grid.Column="0" Padding="2" Rows="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
             Columns="*,2*">
 
@@ -55,19 +54,16 @@
                     <Label Grid.Row="6" Grid.Column="0" Content="Font Size" />
                     <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding FontSize3D}" />
                     <Label Grid.Row="7" Grid.Column="0" Content="Text" />
-                    <TextBox Grid.Row="8" Grid.ColumnSpan="2" Height="60" 
+                    <TextBox Grid.Row="8" Grid.ColumnSpan="2" Height="60"
                              Text="{Binding Text3D}" AcceptsReturn="True"
                      TextWrapping="Wrap" />
-
                 </apexControls:PaddedGrid>
             </TabItem>
         </TabControl>
-        
-        
-        
+
         <!-- The splitter.-->
         <GridSplitter Grid.Column="1" Width="4" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" />
-        <sharpGL:OpenGLControl 
+        <sharpGL:OpenGLControl
             Grid.Column="2"
             OpenGLDraw="OpenGLControl_OpenGLDraw" OpenGLInitialized="OpenGLControl_OpenGLInitialized"
             RenderContextType="FBO" />

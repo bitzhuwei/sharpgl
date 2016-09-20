@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using SharpGL;
+using System;
 using System.Windows.Forms;
-using SharpGL;
 
 namespace RenderTriggerSample
 {
@@ -65,8 +59,8 @@ namespace RenderTriggerSample
             openGLControlManual.DoRender();
         }
 
-        float rtri;
-        float rquad;
+        private float rtri;
+        private float rquad;
 
         private void openGLControlTimerBased_OpenGLDraw(object sender, SharpGL.RenderEventArgs args)
         {
@@ -74,7 +68,7 @@ namespace RenderTriggerSample
             var gl = openGLControlTimerBased.OpenGL;
 
             gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
-         
+
             gl.LoadIdentity();
             gl.Translate(0f, 0.0f, -7.0f);				// Move Right And Into The Screen
 
@@ -87,7 +81,6 @@ namespace RenderTriggerSample
             gl.Vertex(-1.0f, 1.0f, -1.0f);			// Top Left Of The Quad (Top)
             gl.Vertex(-1.0f, 1.0f, 1.0f);			// Bottom Left Of The Quad (Top)
             gl.Vertex(1.0f, 1.0f, 1.0f);			// Bottom Right Of The Quad (Top)
-
 
             gl.Color(1.0f, 0.5f, 0.0f);			// Set The Color To Orange
             gl.Vertex(1.0f, -1.0f, 1.0f);			// Top Right Of The Quad (Bottom)
@@ -122,8 +115,8 @@ namespace RenderTriggerSample
 
             gl.Flush();
 
-            rtri += 3.0f;// 0.2f;						// Increase The Rotation Variable For The Triangle 
-            rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad 
+            rtri += 3.0f;// 0.2f;						// Increase The Rotation Variable For The Triangle
+            rquad -= 3.0f;// 0.15f;						// Decrease The Rotation Variable For The Quad
         }
 
         private void MainForm_Load(object sender, EventArgs e)

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharpGL.SceneGraph;
+﻿using SharpGL.SceneGraph;
+using System;
 
 namespace ExtensionsSample
 {
@@ -42,19 +39,19 @@ namespace ExtensionsSample
             float sinAngle = (float)Math.Sin(Math.PI * angle / 180);
             float cosAngle = (float)Math.Cos(Math.PI * angle / 180);
 
-            return new Vertex(me.X*cosAngle - me.Y*sinAngle,
-					me.X*sinAngle + me.Y*cosAngle,
-					me.Z);
+            return new Vertex(me.X * cosAngle - me.Y * sinAngle,
+                    me.X * sinAngle + me.Y * cosAngle,
+                    me.Z);
         }
 
         public static Vertex GetPackedTo01(this Vertex me)
         {
-        	Vertex temp = new Vertex(me);
+            Vertex temp = new Vertex(me);
             temp.Normalize();
-            
-            temp= (temp * 0.5f) + new Vertex(0.5f, 0.5f, 0.5f);
-	
-	        return temp;
+
+            temp = (temp * 0.5f) + new Vertex(0.5f, 0.5f, 0.5f);
+
+            return temp;
         }
     }
 }

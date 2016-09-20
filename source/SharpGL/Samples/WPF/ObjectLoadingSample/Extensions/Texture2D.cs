@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
 
 namespace SharpGL.Textures
 {
@@ -22,7 +19,7 @@ namespace SharpGL.Textures
 
         public void Delete(OpenGL gl)
         {
-            gl.DeleteTextures(1, new [] {textureObject});
+            gl.DeleteTextures(1, new[] { textureObject });
             textureObject = 0;
         }
 
@@ -67,7 +64,6 @@ namespace SharpGL.Textures
                 }
                 if (image.Width == size)
                     targetWidth = size;
-
             }
 
             for (int size = 1; size <= textureMaxSize[0]; size *= 2)
@@ -111,7 +107,7 @@ namespace SharpGL.Textures
             image.UnlockBits(bitmapData);
 
             //  Dispose of the image file if it's an intermediate we created.
-            if(destroyImage)
+            if (destroyImage)
                 image.Dispose();
         }
 

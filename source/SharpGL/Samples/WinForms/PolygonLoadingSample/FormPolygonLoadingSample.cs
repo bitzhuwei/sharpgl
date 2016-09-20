@@ -1,21 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Text;
-using System.Windows.Forms;
-using System.Linq;
-
 using SharpGL;
+using SharpGL.Enumerations;
 using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Cameras;
-using SharpGL.SceneGraph.Collections;
+using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
 using SharpGL.Serialization;
-using SharpGL.SceneGraph.Core;
-using SharpGL.Enumerations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace PolygonLoadingSample
 {
@@ -26,11 +18,10 @@ namespace PolygonLoadingSample
             InitializeComponent();
 
             //  Get the OpenGL object, for quick access.
-            OpenGL gl = this.openGLControl1.OpenGL;      
+            OpenGL gl = this.openGLControl1.OpenGL;
 
             //  A bit of extra initialisation here, we have to enable textures.
             gl.Enable(OpenGL.GL_TEXTURE_2D);
-            
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -55,7 +46,7 @@ namespace PolygonLoadingSample
 
             //  Move the objects down a bit so that they fit in the screen better.
             gl.Translate(0, 0, -1);
-            
+
             //  Draw every polygon in the collection.
             foreach (Polygon polygon in polygons)
             {
@@ -67,14 +58,13 @@ namespace PolygonLoadingSample
             rotate += 1.0f;
         }
 
-
-        float rotate = 0;
+        private float rotate = 0;
 
         //  A set of polygons to draw.
-        List<Polygon> polygons = new List<Polygon>();
+        private List<Polygon> polygons = new List<Polygon>();
 
         //  The camera.
-        SharpGL.SceneGraph.Cameras.PerspectiveCamera camera = new SharpGL.SceneGraph.Cameras.PerspectiveCamera();
+        private SharpGL.SceneGraph.Cameras.PerspectiveCamera camera = new SharpGL.SceneGraph.Cameras.PerspectiveCamera();
 
         /// <summary>
         /// Handles the Click event of the importPolygonToolStripMenuItem control.
@@ -92,7 +82,7 @@ namespace PolygonLoadingSample
                 if (scene != null)
                 {
                     foreach (var polygon in scene.SceneContainer.Traverse<Polygon>())
-                    {                        
+                    {
                         //  Get the bounds of the polygon.
                         BoundingVolume boundingVolume = polygon.BoundingVolume;
                         float[] extent = new float[3];
@@ -139,45 +129,44 @@ namespace PolygonLoadingSample
         {
             openGLControl1.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Lines);
         }
-        
-        void WireframeToolStripMenuItemClick(object sender, EventArgs e)
+
+        private void WireframeToolStripMenuItemClick(object sender, EventArgs e)
         {
-        	wireframeToolStripMenuItem.Checked = true;
-        	solidToolStripMenuItem.Checked = false;
-			lightedToolStripMenuItem.Checked = false;
-        	openGLControl1.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Lines);
-        	openGLControl1.OpenGL.Disable(OpenGL.GL_LIGHTING);
+            wireframeToolStripMenuItem.Checked = true;
+            solidToolStripMenuItem.Checked = false;
+            lightedToolStripMenuItem.Checked = false;
+            openGLControl1.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Lines);
+            openGLControl1.OpenGL.Disable(OpenGL.GL_LIGHTING);
         }
-        
-        void SolidToolStripMenuItemClick(object sender, EventArgs e)
+
+        private void SolidToolStripMenuItemClick(object sender, EventArgs e)
         {
-        	wireframeToolStripMenuItem.Checked = false;
-        	solidToolStripMenuItem.Checked = true;
-        	lightedToolStripMenuItem.Checked = false;
-        	openGLControl1.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Filled);        	
-        	openGLControl1.OpenGL.Disable(OpenGL.GL_LIGHTING);
+            wireframeToolStripMenuItem.Checked = false;
+            solidToolStripMenuItem.Checked = true;
+            lightedToolStripMenuItem.Checked = false;
+            openGLControl1.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Filled);
+            openGLControl1.OpenGL.Disable(OpenGL.GL_LIGHTING);
         }
-        
-        void LightedToolStripMenuItemClick(object sender, EventArgs e)
+
+        private void LightedToolStripMenuItemClick(object sender, EventArgs e)
         {
-        	wireframeToolStripMenuItem.Checked = false;
-        	solidToolStripMenuItem.Checked = false;
-        	lightedToolStripMenuItem.Checked = true;
-        	openGLControl1.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Filled);        	
-        	openGLControl1.OpenGL.Enable(OpenGL.GL_LIGHTING);
-        	openGLControl1.OpenGL.Enable(OpenGL.GL_LIGHT0);
-        	openGLControl1.OpenGL.Enable(OpenGL.GL_COLOR_MATERIAL);
-        	
+            wireframeToolStripMenuItem.Checked = false;
+            solidToolStripMenuItem.Checked = false;
+            lightedToolStripMenuItem.Checked = true;
+            openGLControl1.OpenGL.PolygonMode(FaceMode.FrontAndBack, PolygonMode.Filled);
+            openGLControl1.OpenGL.Enable(OpenGL.GL_LIGHTING);
+            openGLControl1.OpenGL.Enable(OpenGL.GL_LIGHT0);
+            openGLControl1.OpenGL.Enable(OpenGL.GL_COLOR_MATERIAL);
         }
-        
-        void ExitToolStripMenuItemClick(object sender, EventArgs e)
+
+        private void ExitToolStripMenuItemClick(object sender, EventArgs e)
         {
-        	Close();
+            Close();
         }
-        
-        void ClearToolStripMenuItemClick(object sender, EventArgs e)
+
+        private void ClearToolStripMenuItemClick(object sender, EventArgs e)
         {
-        	polygons.Clear();
+            polygons.Clear();
         }
     }
 }
