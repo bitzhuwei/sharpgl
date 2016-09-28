@@ -28,17 +28,21 @@ namespace SharpGL.OpenGLAttributes
         {
             if (enableAlphaTest.HasValue && alphaTestFunction.HasValue && alphaTestReferenceValue.HasValue)
             {
+                // this is integrated into CSharpGL.
                 gl.EnableIf(OpenGL.GL_ALPHA_TEST, enableAlphaTest.Value);
                 gl.AlphaFunc(alphaTestFunction.Value, alphaTestReferenceValue.Value);
             }
 
             if (enableBlend.HasValue && blendingSourceFactor.HasValue && blendingDestinationFactor.HasValue)
             {
+                // this is integrated into CSharpGL.
                 gl.EnableIf(OpenGL.GL_BLEND, enableBlend.Value);
                 gl.BlendFunc(blendingSourceFactor.Value, blendingDestinationFactor.Value);
             }
 
+            // this is integrated into CSharpGL.
             if (enableDither.HasValue) gl.EnableIf(OpenGL.GL_DITHER, enableDither.Value);
+
             if (drawBufferMode.HasValue) gl.DrawBuffer(drawBufferMode.Value);
 
             if (enableLogicOp.HasValue && logicOp.HasValue)
@@ -46,6 +50,7 @@ namespace SharpGL.OpenGLAttributes
                 gl.EnableIf(OpenGL.GL_COLOR_LOGIC_OP, enableLogicOp.Value);
                 gl.LogicOp(logicOp.Value);
             }
+            // this is integrated into CSharpGL.
             if (colorModeClearColor != null) gl.ClearColor(colorModeClearColor.R, colorModeClearColor.G, colorModeClearColor.B, colorModeClearColor.A);
             //todowritemask
         }
