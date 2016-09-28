@@ -31,6 +31,7 @@ namespace SharpGL.SceneGraph.Effects
             // accum buffer attribute already added to CSharpGL.
             attributeFlags |= accumBufferAttributes.AreAnyAttributesSet() ? accumBufferAttributes.AttributeFlags : AttributeMask.None;
 
+            // accum buffer attribute already added to CSharpGL except one.
             attributeFlags |= colorBufferAttributes.AreAnyAttributesSet() ? colorBufferAttributes.AttributeFlags : AttributeMask.None;
             attributeFlags |= currentAttributes.AreAnyAttributesSet() ? currentAttributes.AttributeFlags : AttributeMask.None;
             attributeFlags |= depthBufferAttributes.AreAnyAttributesSet() ? depthBufferAttributes.AttributeFlags : AttributeMask.None;

@@ -47,6 +47,7 @@ namespace SharpGL.OpenGLAttributes
 
             if (enableLogicOp.HasValue && logicOp.HasValue)
             {
+                // this is integrated into CSharpGL.
                 gl.EnableIf(OpenGL.GL_COLOR_LOGIC_OP, enableLogicOp.Value);
                 gl.LogicOp(logicOp.Value);
             }
